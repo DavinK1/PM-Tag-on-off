@@ -1,0 +1,44 @@
+services:
+  pm_reactjs:
+    build: .
+    container_name: pm_tag_onoff_react_app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # Realtime สำหรับการโหลดหน้าเพจอัตโนมัตืโดยไม่ต้องรัน Project ใหม่
+      - FAST_REFRESH=true
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm start
+
+  pm_postgres:
+    image: postgres:latest
+    container_name: pm_tag_onoff_postgres
+    environment:
+      POSTGRES_DB: transaction
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin@STM
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  pm_pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pm_tag_onoff_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "6082:80"
+    depends_on:
+      - pm_postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

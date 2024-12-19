@@ -1,11 +1,10 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import styles from "./Homepage.module.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { browserHistory } from "react-router-dom";
-import ReactDOM, { render } from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const Homepage = () => {
-  const navigate = Router(); // Hook สำหรับการนำทาง
+  const navigate = Router();
 
   return (
     <div className={styles.container}>

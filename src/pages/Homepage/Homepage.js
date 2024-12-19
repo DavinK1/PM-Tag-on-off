@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Homepage.module.css";
-import { BrowserRouter, Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { browserHistory } from "react-router-dom";
-import ReactDOM, {render} from 'react-dom'
+import ReactDOM, { render } from "react-dom";
 
 const Homepage = () => {
   const navigate = Router(); // Hook สำหรับการนำทาง

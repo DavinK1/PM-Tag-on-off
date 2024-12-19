@@ -1,11 +1,13 @@
 import React from "react";
-import styles from "./App.module.css";
+import FooterHomepage from "./components/footer/footer";
+import Homepage from "./pages/Homepage/Homepage";
 
 function App() {
   return (
-    <div className={styles.container}>
-      <p className={styles.headerText}>Home</p>
-    </div>
+    <>
+      <Homepage />
+      <FooterHomepage />
+    </>
   );
 }
 

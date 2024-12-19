@@ -1,18 +1,10 @@
-.container {
-  width: 100%;
-  height: 100vh;
-  background-color: #0c4a6e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+@font-face {
+  font-family: "Seed Sans TH";
+  src: url("./assets/fonts/SeedSansTH.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-.headerText {
-  color: #ffe2b9;
-  font-size: 5rem;
-  font-weight: bolder;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body {
+  font-family: "Seed Sans TH", sans-serif;
 }

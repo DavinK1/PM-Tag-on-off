@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("./assets/fonts/WOFF2/LINESeedSansTH_W_Th.woff2") format("woff2"),
+    url("./assets/fonts/WOFF/LINESeedSansTH_W_Th.woff") format("woff"),
+    url("./assets/fonts/EOT/LINESeedSansTH_W_Th.eot")
+      format("embedded-opentype");
+  font-weight: thin; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("./assets/fonts/WOFF2/LINESeedSansTH_W_Rg.woff2") format("woff2"),
+    url("./assets/fonts/WOFF/LINESeedSansTH_W_Rg.woff") format("woff"),
+    url("./assets/fonts/EOT/LINESeedSansTH_W_Rg.eot")
+      format("embedded-opentype");
+  font-weight: normal; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("./assets/fonts/WOFF2/LINESeedSansTH_W_Bd.woff2") format("woff2"),
+    url("./assets/fonts/WOFF/LINESeedSansTH_W_Bd.woff") format("woff"),
+    url("./assets/fonts/EOT/LINESeedSansTH_W_Bd.eot")
+      format("embedded-opentype");
+  font-weight: bolder; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("./assets/fonts/WOFF2/LINESeedSansTH_W_XBd.woff2") format("woff2"),
+    url("./assets/fonts/WOFF/LINESeedSansTH_W_XBd.woff") format("woff"),
+    url("./assets/fonts/EOT/LINESeedSansTH_W_XBd.eot")
+      format("embedded-opentype");
+  font-weight: bold; /* Black */
+  font-style: normal;
+}
+
+body {
+  font-family: "LINE Seed Sans TH", sans-serif;
+  font-weight: normal; /* Regular */
+}

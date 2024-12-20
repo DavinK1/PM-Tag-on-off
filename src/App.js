@@ -2,6 +2,7 @@ import React from "react";
 import FooterHomepage from "./components/footer/footer";
 import Homepage from "./pages/Homepage/Homepage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import styles from "./App.module.css";
 import G6Block from "./pages/G6-Block/G6Block";
 import G6Main from "./pages/G6-Main/G6Main";
 import G6Head from "./pages/G6-Head/G6Head";

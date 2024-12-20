@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   height: 60vh;
 }
 
@@ -18,7 +17,7 @@ body {
   background-image: url("../../assets/images/homepage/Header-Homepage.jpg");
   background-size: cover;
   background-position: center;
-  height: 60%;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,5 +108,5 @@ body {
 .gridItem {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 25px;
 }

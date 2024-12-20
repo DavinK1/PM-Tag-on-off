@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./G6Head.module.css"
+import styles from "./G6Head.module.css";
 
 const G6Head = () => {
   return (

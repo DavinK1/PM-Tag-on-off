@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const G6Block = () => {
+const G6Head = () => {
   return (
     <div>
-      <h1>Welcome to G6Block Page</h1>
+      <h1>Welcome to G6Head Page</h1>
     </div>
   );
 };
 
-export default G6Block;
+export default G6Head;

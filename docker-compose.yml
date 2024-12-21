@@ -1,6 +1,8 @@
 services:
   pm_reactjs:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.reactjs
     container_name: pm_tag_onoff_react_app
     ports:
       - "3000:3000"
@@ -42,15 +44,17 @@ services:
 
   pm_api:
     build:
-      context: .  # ที่อยู่ของโฟลเดอร์ที่มี Dockerfile สำหรับ API
+      context: .
+      dockerfile: Dockerfile.api
     container_name: pm_tag_onoff_api
     environment:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://admin:admin@STM@pm_postgres:5432/transaction
+      - PORT=4000
     ports:
-      - "5000:5000"  # พอร์ตที่ API จะใช้
+      - "4000:4000"
     depends_on:
-      - pm_postgres  # เชื่อมต่อกับ PostgreSQL
+      - pm_postgres
     volumes:
       - .:/app
     restart: unless-stopped

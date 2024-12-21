@@ -11,7 +11,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpAZ } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
-const API_URL = "https://jsonplaceholder.typicode.com/users"; // ดึงหลายรายการ
+const API_URL = "http://localhost:5000/transactions"; // ดึงหลายรายการ
 
 const G6Main = () => {
   const navigate = useNavigate();

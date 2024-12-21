@@ -1,7 +1,7 @@
 const express = require("express");
 const { Client } = require("pg");
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 
 // เชื่อมต่อกับ PostgreSQL
 const client = new Client({

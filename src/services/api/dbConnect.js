@@ -1,28 +1,24 @@
-// dbConnect.js
-const express = require("express");
-const { Pool } = require("pg");
-require("dotenv").config({ path: "../../.env.local" });
+const { Pool } = require("pg"); // ใช้ pg module สำหรับเชื่อมต่อ PostgreSQL
 
-const router = express.Router();
-
-// ตั้งค่าการเชื่อมต่อ PostgreSQL โดยใช้ค่าจาก .env
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
+  user: process.env.USER_NAME,
+  host: process.env.HOST_NAME,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  port: process.env.PORT_NUMBER,
 });
 
-// API Endpoint สำหรับดึงข้อมูลจากฐานข้อมูล
-router.get("../services/api/dbConnect", async (req, res) => {
+// ฟังก์ชันเชื่อมต่อฐานข้อมูล
+const dbConnect = async () => {
   try {
-    const result = await pool.query("SELECT * FROM transaction"); // เปลี่ยน SQL query ตามต้องการ
-    res.json(result.rows); // ส่งข้อมูลกลับในรูปแบบ JSON
+    // ทดสอบการเชื่อมต่อ
+    const client = await pool.connect();
+    console.log("Connected to PostgreSQL");
+    client.release();
   } catch (error) {
-    console.error("เกิดปัญหาในการ Query ข้อมูล", error);
-    res.status(500).send("เกิดปัญหาเกี่ยวกับเซิร์ฟเวอร์");
+    console.error("Failed to connect to PostgreSQL:", error);
+    throw error;
   }
-});
+};
 
-module.exports = router;
+module.exports = dbConnect;

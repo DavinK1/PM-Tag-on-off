@@ -1,13 +1,23 @@
-// server.js
 const express = require("express");
-const dbConnect = require("./dbConnect");
+const { Client } = require("pg");
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
-// ใช้ router ที่สร้างขึ้นใน dbConnect.js
-app.use(dbConnect);
+// เชื่อมต่อกับ PostgreSQL
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+});
 
-// เริ่มต้น API server
+client
+  .connect()
+  .then(() => console.log("Connected to PostgreSQL"))
+  .catch((err) => console.error("Connection error", err.stack));
+
+// API ตัวอย่าง
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`API is running on http://localhost:${port}`);
 });

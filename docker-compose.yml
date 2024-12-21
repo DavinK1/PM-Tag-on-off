@@ -12,7 +12,7 @@ services:
     tty: true
     volumes:
       - .:/app
-      - /app/node_modules
+      - /app/node_modules/
     command: npm start
 
   pm_postgres:
@@ -38,6 +38,21 @@ services:
       - "6082:80"
     depends_on:
       - pm_postgres
+    restart: unless-stopped
+
+  pm_api:
+    build:
+      context: .  # ที่อยู่ของโฟลเดอร์ที่มี Dockerfile สำหรับ API
+    container_name: pm_tag_onoff_api
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://admin:admin@STM@pm_postgres:5432/transaction
+    ports:
+      - "5000:5000"  # พอร์ตที่ API จะใช้
+    depends_on:
+      - pm_postgres  # เชื่อมต่อกับ PostgreSQL
+    volumes:
+      - .:/app
     restart: unless-stopped
 
 volumes:

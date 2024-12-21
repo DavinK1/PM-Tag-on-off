@@ -32,7 +32,7 @@
 }
 
 .dropdownArrowTagtype.rotated,
-.dropdownArrowStatus.rotated,
+.dropdownArrowStatusType.rotated,
 .dropdownArrowShift.rotated {
   transform: scaleY(-1);
 }

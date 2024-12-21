@@ -117,22 +117,68 @@
 }
 
 .main .card {
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-  border: 2px solid #ffffff81;
+  margin: 10px 10px;
+  width: 700px;
+  height: 100px;
   border-radius: 20px;
+  background: #ffffff60;
   padding: 10px;
-  width: 500px;
-  margin: 10px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-.main p {
-  color: #fff;
+.mainCardHeader {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  height: fit-content;
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.mainMachineId {
   font-size: 14px;
-  font-weight: normal;
+}
+
+.mainDate {
+  font-size: 12px;
+  color: gray;
+}
+
+.mainCardBody {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.mainProblem {
+  font-size: 14px;
+  color: #333;
+}
+
+.mainTagInfo {
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.mainCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f4f4f4;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.mainStatusDelay {
+  background-color: red;
+  padding: 10px;
+}
+
+.mainShift {
+  font-weight: bold;
 }

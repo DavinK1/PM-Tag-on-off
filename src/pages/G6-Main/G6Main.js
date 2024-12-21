@@ -74,10 +74,18 @@ const G6Main = () => {
       <main className={styles.main}>
         {data.map((item) => (
           <div key={item.id} className={styles.card}>
-            <p>ID: {item.id}</p>
-            <p>Name: {item.machine_no}</p>
-            <p>Username: {item.line}</p>
-            <p>Email: {item.activity}</p>
+            <div className={styles.mainCardHeader}>
+              <p className={styles.mainMachineId}>STGR-0163</p>
+              <p className={styles.mainDate}>18/12/24</p>
+            </div>
+            <div className={styles.mainCardBody}>
+              <p className={styles.mainProblem}>ปัญหา: xxxxxxxxxxxxxxxxxx</p>
+              <p className={styles.mainTagInfo}>TAG No: 166 | Tag Type: RED</p>
+            </div>
+            <div className={styles.mainCardFooter}>
+              <span className={styles.mainStatusDelay}>DELAY</span>
+              <span className={styles.mainShift}>Shift: W</span>
+            </div>
           </div>
         ))}
       </main>

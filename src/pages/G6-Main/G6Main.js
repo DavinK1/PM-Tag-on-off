@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./G6Main.module.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import DropdownsubHeader from "../../components/dropdownsubHeader/dropdownsubHeader";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +11,18 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpAZ } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
+const API_URL = "https://jsonplaceholder.typicode.com/users"; // ดึงหลายรายการ
+
 const G6Main = () => {
   const navigate = useNavigate();
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get(API_URL).then((res) => {
+      setData(res.data);
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -57,7 +69,14 @@ const G6Main = () => {
       </div>
 
       <main className={styles.main}>
-        <p>Main</p>
+        {data.map((item) => (
+          <div key={item.id} className={styles.card}>
+            <p>ID: {item.id}</p>
+            <p>Name: {item.name}</p>
+            <p>Username: {item.username}</p>
+            <p>Email: {item.email}</p>
+          </div>
+        ))}
       </main>
     </div>
   );

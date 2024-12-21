@@ -1,7 +1,7 @@
 // dbConnect.js
 const express = require("express");
 const { Pool } = require("pg");
-require("dotenv").config({ path: "../../" });
+require("dotenv").config({ path: "../../.env.local" });
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ const pool = new Pool({
 });
 
 // API Endpoint สำหรับดึงข้อมูลจากฐานข้อมูล
-router.get("/services/api/dbConnect", async (req, res) => {
+router.get("../services/api/dbConnect", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM transaction"); // เปลี่ยน SQL query ตามต้องการ
     res.json(result.rows); // ส่งข้อมูลกลับในรูปแบบ JSON

@@ -5,9 +5,25 @@ import styles from "./dropdownsubHeader.module.css";
 const DropdownsubHeader = () => {
   const [activeDropdown, setActiveDropdown] = useState(null); // ใช้เก็บ dropdown ที่เปิด
   const dropdownRefs = useRef([]); // สร้าง refs สำหรับแต่ละ dropdown
+  const [isRotatedTagType, setIsRotatedTagtype] = useState(false);
+  const [isRotatedStatusType, setIsRotatedStatusType] = useState(false);
+  const [isRotatedShift, setIsRotatedShift] = useState(false);
 
+  const handleClickArrowTagType = () => {
+    setIsRotatedTagtype((prev) => !prev);
+  };
+
+  const handleClickArrowStatusType = () => {
+    setIsRotatedStatusType((prev) => !prev);
+  };
+
+  const handleClickArrowShift = () => {
+    setIsRotatedShift((prev) => !prev);
+  };
+
+  // เปิด/ปิด dropdown
   const toggleDropdown = (index) => {
-    setActiveDropdown((prev) => (prev === index ? null : index)); // เปิด/ปิด dropdown
+    setActiveDropdown((prev) => (prev === index ? null : index));
   };
 
   // ใช้ useEffect เพื่อฟังการคลิกภายนอก
@@ -17,6 +33,9 @@ const DropdownsubHeader = () => {
         dropdownRefs.current.every((ref) => ref && !ref.contains(event.target))
       ) {
         setActiveDropdown(null); // ปิด dropdown เมื่อคลิกภายนอก
+        setIsRotatedTagtype(false);
+        setIsRotatedStatusType(false);
+        setIsRotatedShift(false);
       }
     };
 
@@ -33,8 +52,20 @@ const DropdownsubHeader = () => {
         className={styles.dropdown}
         ref={(el) => (dropdownRefs.current[0] = el)}
       >
-        <button onClick={() => toggleDropdown(0)}>
-          Tag Type <span>⮟</span>
+        <button
+          onClick={() => {
+            toggleDropdown(0);
+            handleClickArrowTagType();
+          }}
+        >
+          Tag Type{" "}
+          <span
+            className={`${styles.dropdownArrowTagtype} ${
+              isRotatedTagType ? styles.rotated : ""
+            }`}
+          >
+            ▼
+          </span>
         </button>
         {activeDropdown === 0 && (
           <div className={`${styles.dropdownContent} ${styles.show}`}>
@@ -50,8 +81,20 @@ const DropdownsubHeader = () => {
         className={styles.dropdown}
         ref={(el) => (dropdownRefs.current[1] = el)}
       >
-        <button onClick={() => toggleDropdown(1)}>
-          Status Type <span>⮟</span>
+        <button
+          onClick={() => {
+            toggleDropdown(1);
+            handleClickArrowStatusType();
+          }}
+        >
+          Status Type{" "}
+          <span
+            className={`${styles.dropdownArrowStatusType} ${
+              isRotatedStatusType ? styles.rotated : ""
+            }`}
+          >
+            ▼
+          </span>
         </button>
         {activeDropdown === 1 && (
           <div className={`${styles.dropdownContent} ${styles.show}`}>
@@ -67,8 +110,20 @@ const DropdownsubHeader = () => {
         className={styles.dropdown}
         ref={(el) => (dropdownRefs.current[2] = el)}
       >
-        <button onClick={() => toggleDropdown(2)}>
-          Shift <span>⮟</span>
+        <button
+          onClick={() => {
+            toggleDropdown(2);
+            handleClickArrowShift();
+          }}
+        >
+          Shift{" "}
+          <span
+            className={`${styles.dropdownArrowShift} ${
+              isRotatedShift ? styles.rotated : ""
+            }`}
+          >
+            ▼
+          </span>
         </button>
         {activeDropdown === 2 && (
           <div className={`${styles.dropdownContent} ${styles.show}`}>

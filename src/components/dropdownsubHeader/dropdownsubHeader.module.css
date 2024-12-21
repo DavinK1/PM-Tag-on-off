@@ -1,5 +1,5 @@
 .container {
-  height: 800px;
+  height: 8 00px;
   background-color: #001a66;
   color: #fff;
   display: flex;
@@ -20,6 +20,21 @@
 .dropdown {
   position: relative;
   display: inline-block;
+}
+
+.dropdownArrowTagtype,
+.dropdownArrowStatusType,
+.dropdownArrowShift {
+  display: inline-block;
+  padding-left: 10px;
+  transition: transform 0.2s ease;
+  color: #001a66;
+}
+
+.dropdownArrowTagtype.rotated,
+.dropdownArrowStatus.rotated,
+.dropdownArrowShift.rotated {
+  transform: scaleY(-1);
 }
 
 button {

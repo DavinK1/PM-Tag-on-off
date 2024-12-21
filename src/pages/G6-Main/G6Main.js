@@ -11,17 +11,20 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpAZ } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
-const API_URL = "http://localhost:5000/transactions"; // ดึงหลายรายการ
-
 const G6Main = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(API_URL).then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get("http://localhost:4000/transactions")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching transaction:", error);
+      });
   }, []);
 
   return (

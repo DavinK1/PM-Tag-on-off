@@ -6,7 +6,7 @@ const G6Head = () => {
 
   useEffect(() => {
     axios
-      .get("/services/api/transaction")
+      .get("http://localhost:4000/transactions")
       .then((response) => {
         setData(response.data);
       })

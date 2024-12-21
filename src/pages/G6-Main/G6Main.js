@@ -75,9 +75,9 @@ const G6Main = () => {
         {data.map((item) => (
           <div key={item.id} className={styles.card}>
             <p>ID: {item.id}</p>
-            <p>Name: {item.name}</p>
-            <p>Username: {item.username}</p>
-            <p>Email: {item.email}</p>
+            <p>Name: {item.machine_no}</p>
+            <p>Username: {item.line}</p>
+            <p>Email: {item.activity}</p>
           </div>
         ))}
       </main>

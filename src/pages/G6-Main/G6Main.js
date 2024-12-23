@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from "react";
 import styles from "./G6Main.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import DropdownsubHeader from "../../components/dropdownsubHeader/dropdownsubHeader";
+import workingImage from "../../assets/images/profile/lukehemmings.jpg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -74,17 +76,39 @@ const G6Main = () => {
       <main className={styles.main}>
         {data.map((item) => (
           <div key={item.id} className={styles.card}>
-            <div className={styles.mainCardHeader}>
-              <p className={styles.mainMachineId}>STGR-0163</p>
-              <p className={styles.mainDate}>18/12/24</p>
-            </div>
-            <div className={styles.mainCardBody}>
-              <p className={styles.mainProblem}>ปัญหา: xxxxxxxxxxxxxxxxxx</p>
-              <p className={styles.mainTagInfo}>TAG No: 166 | Tag Type: RED</p>
-            </div>
-            <div className={styles.mainCardFooter}>
-              <span className={styles.mainStatusDelay}>DELAY</span>
-              <span className={styles.mainShift}>Shift: W</span>
+            <div className={styles.mainGridCard}>
+              <div className={styles.mainLeftCard}>
+                <img
+                  className={styles.workingImage}
+                  src={workingImage}
+                  alt="Working Picture"
+                />
+              </div>
+              <div className={styles.mainCenterCard}>
+                <div className={styles.mainGridCenterCard}>
+                  <p className={styles.mainMachineId}>STGR-0163</p>
+                  <p className={styles.mainProblemText}>
+                    ปัญหา : <span>xxxxxxxxxx</span>
+                  </p>
+                  <div className={styles.mainGridTagInfo}>
+                    <p className={styles.mainTextTagNumber}>
+                      TAG No : <span>166</span>
+                    </p>
+                    <p className={styles.mainTextTagType}>
+                      Tag Type : <span>RED</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.mainRightCard}>
+                <div className={styles.mainGridRightCard}>
+                  <p className={styles.mainTextDate}>23/12/2024</p>
+                  <p className={styles.mainTextTest}>OFF</p>
+                  <p className={styles.mainTextShift}>
+                    Shift : <span>RED</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         ))}

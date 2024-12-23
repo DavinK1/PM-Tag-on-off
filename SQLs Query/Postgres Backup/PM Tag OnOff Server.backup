@@ -1,0 +1,897 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2024-12-23 03:07:23 UTC
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE admin;
+ALTER ROLE admin WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:jtU0py+dPk7AYv8aIctwCw==$wUF98NjZL/VRiE0QFdrmo2vPH1XErzY8S3VAOLD+Shk=:pijlh/MmyzG89a0RDoVpbn0c7Ozwmti9R+SQ0z06rik=';
+
+--
+-- User Configurations
+--
+
+
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
+-- Dumped by pg_dump version 17.2
+
+-- Started on 2024-12-23 03:07:23 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- Completed on 2024-12-23 03:07:24 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
+-- Dumped by pg_dump version 17.2
+
+-- Started on 2024-12-23 03:07:24 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- Completed on 2024-12-23 03:07:24 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "transaction" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
+-- Dumped by pg_dump version 17.2
+
+-- Started on 2024-12-23 03:07:24 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3406 (class 1262 OID 16384)
+-- Name: transaction; Type: DATABASE; Schema: -; Owner: admin
+--
+
+CREATE DATABASE transaction WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE transaction OWNER TO admin;
+
+\connect transaction
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 220 (class 1259 OID 16414)
+-- Name: linename_g6; Type: TABLE; Schema: public; Owner: admin
+--
+
+CREATE TABLE public.linename_g6 (
+    id integer NOT NULL,
+    line_name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.linename_g6 OWNER TO admin;
+
+--
+-- TOC entry 219 (class 1259 OID 16413)
+-- Name: linename_g6_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE public.linename_g6_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.linename_g6_id_seq OWNER TO admin;
+
+--
+-- TOC entry 3407 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: linename_g6_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE public.linename_g6_id_seq OWNED BY public.linename_g6.id;
+
+
+--
+-- TOC entry 222 (class 1259 OID 16429)
+-- Name: machine_list; Type: TABLE; Schema: public; Owner: admin
+--
+
+CREATE TABLE public.machine_list (
+    id integer NOT NULL,
+    machine_no character varying(50) NOT NULL,
+    plant character varying(50) NOT NULL,
+    line character varying(50) NOT NULL,
+    subline character varying(50) NOT NULL,
+    op_no character varying(50)
+);
+
+
+ALTER TABLE public.machine_list OWNER TO admin;
+
+--
+-- TOC entry 221 (class 1259 OID 16428)
+-- Name: machine_list_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE public.machine_list_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.machine_list_id_seq OWNER TO admin;
+
+--
+-- TOC entry 3408 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: machine_list_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE public.machine_list_id_seq OWNED BY public.machine_list.id;
+
+
+--
+-- TOC entry 224 (class 1259 OID 16436)
+-- Name: master_mc_g6m; Type: TABLE; Schema: public; Owner: admin
+--
+
+CREATE TABLE public.master_mc_g6m (
+    id integer NOT NULL,
+    link_title character varying(255) NOT NULL,
+    line_name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.master_mc_g6m OWNER TO admin;
+
+--
+-- TOC entry 223 (class 1259 OID 16435)
+-- Name: master_mc_g6m_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE public.master_mc_g6m_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.master_mc_g6m_id_seq OWNER TO admin;
+
+--
+-- TOC entry 3409 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: master_mc_g6m_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE public.master_mc_g6m_id_seq OWNED BY public.master_mc_g6m.id;
+
+
+--
+-- TOC entry 226 (class 1259 OID 16445)
+-- Name: mc_list_model; Type: TABLE; Schema: public; Owner: admin
+--
+
+CREATE TABLE public.mc_list_model (
+    id integer NOT NULL,
+    id_list integer,
+    zone character varying(255),
+    line character varying(255),
+    op_no character varying(255),
+    op_part character varying(255),
+    unique_opno character varying(255),
+    mapping_layout character varying(255),
+    machine_no character varying(255),
+    mc_part character varying(255),
+    unique_mcno character varying(255),
+    "j/l" character varying(255),
+    operation_name character varying(255),
+    machine_maker character varying(255),
+    machine_name character varying(255),
+    model character varying(255),
+    serial_no character varying(255),
+    date_of_mfg date
+);
+
+
+ALTER TABLE public.mc_list_model OWNER TO admin;
+
+--
+-- TOC entry 225 (class 1259 OID 16444)
+-- Name: mc_list_model_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE public.mc_list_model_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.mc_list_model_id_seq OWNER TO admin;
+
+--
+-- TOC entry 3410 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: mc_list_model_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE public.mc_list_model_id_seq OWNED BY public.mc_list_model.id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 16390)
+-- Name: transaction; Type: TABLE; Schema: public; Owner: admin
+--
+
+CREATE TABLE public.transaction (
+    id integer NOT NULL,
+    machine_no character varying,
+    operation_no character varying,
+    line character varying,
+    activity character varying,
+    tag_type character varying,
+    ctag_level character varying,
+    problem_type character varying,
+    komarigoto character varying,
+    problem_topic character varying,
+    counter_measure character varying,
+    shift character varying,
+    group_pic character varying,
+    editor_pic character varying,
+    receive_date date,
+    start_date date,
+    finish_date date,
+    end_date date,
+    gl_mt2 character varying,
+    gl_prod2 character varying,
+    attachment character varying,
+    test character varying,
+    cal_status character varying,
+    date_mtsign date,
+    date_prosign date,
+    created_by character varying,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.transaction OWNER TO admin;
+
+--
+-- TOC entry 217 (class 1259 OID 16389)
+-- Name: transactionon_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE public.transactionon_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.transactionon_id_seq OWNER TO admin;
+
+--
+-- TOC entry 3411 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: transactionon_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin
+--
+
+ALTER SEQUENCE public.transactionon_id_seq OWNED BY public.transaction.id;
+
+
+--
+-- TOC entry 3232 (class 2604 OID 16417)
+-- Name: linename_g6 id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.linename_g6 ALTER COLUMN id SET DEFAULT nextval('public.linename_g6_id_seq'::regclass);
+
+
+--
+-- TOC entry 3233 (class 2604 OID 16432)
+-- Name: machine_list id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.machine_list ALTER COLUMN id SET DEFAULT nextval('public.machine_list_id_seq'::regclass);
+
+
+--
+-- TOC entry 3234 (class 2604 OID 16439)
+-- Name: master_mc_g6m id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.master_mc_g6m ALTER COLUMN id SET DEFAULT nextval('public.master_mc_g6m_id_seq'::regclass);
+
+
+--
+-- TOC entry 3235 (class 2604 OID 16448)
+-- Name: mc_list_model id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.mc_list_model ALTER COLUMN id SET DEFAULT nextval('public.mc_list_model_id_seq'::regclass);
+
+
+--
+-- TOC entry 3230 (class 2604 OID 16393)
+-- Name: transaction id; Type: DEFAULT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.transaction ALTER COLUMN id SET DEFAULT nextval('public.transactionon_id_seq'::regclass);
+
+
+--
+-- TOC entry 3394 (class 0 OID 16414)
+-- Dependencies: 220
+-- Data for Name: linename_g6; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+COPY public.linename_g6 (id, line_name) FROM stdin;
+1	G6-Main
+2	G6-Head
+3	G6-Sub,T/B
+4	G6-Block
+5	G6-Crank
+6	G6-Camshaft
+7	G6-Tool Set
+\.
+
+
+--
+-- TOC entry 3396 (class 0 OID 16429)
+-- Dependencies: 222
+-- Data for Name: machine_list; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+COPY public.machine_list (id, machine_no, plant, line, subline, op_no) FROM stdin;
+1	STSC-0033	3	BLOCK : D3	BLOCK	\N
+2	STCK-0098	3	BLOCK : D3	BLOCK	OP900-1
+3	STTR-0026	3	BLOCK : D3	BLOCK	OP10
+4	STCK-0098	3	BLOCK : D3	BLOCK	OP900-2
+5	STZY-0337	3	BLOCK : D3	BLOCK	OP930-2
+6	STTR-0027	3	BLOCK : D3	BLOCK	OP20
+7	STSC-0038	3	BLOCK : D3	BLOCK	\N
+8	STCK-0098	3	BLOCK : D3	BLOCK	OP900-3
+9	STZY-0337	3	BLOCK : D3	BLOCK	OP930-5
+10	STTR-0028	3	BLOCK : D3	BLOCK	OP30
+11	STSC-0045	3	BLOCK : D3	BLOCK	\N
+12	STCK-0098	3	BLOCK : D3	BLOCK	OP900-4
+13	STBR-0032	3	BLOCK : D3	BLOCK	OP40
+14	STCK-0098	3	BLOCK : D3	BLOCK	OP900-5A
+15	STCK-0098	3	BLOCK : D3	BLOCK	OP900-5B
+16	STSC-0048	3	BLOCK : D3	BLOCK	\N
+17	STZY-0326	3	BLOCK : D3	BLOCK	OP50-1
+18	STSP-0667	3	BLOCK : D3	BLOCK	OP50-2
+19	STSP-0668	3	BLOCK : D3	BLOCK	OP50-3
+20	STSP-0669	3	BLOCK : D3	BLOCK	OP50-4
+21	STSP-0670	3	BLOCK : D3	BLOCK	OP50-5
+22	STSP-0671	3	BLOCK : D3	BLOCK	OP50-6
+23	STZY-0327	3	BLOCK : D3	BLOCK	OP50-7
+24	STCK-0098	3	BLOCK : D3	BLOCK	OP900-6
+25	STSC-0046	3	BLOCK : D3	BLOCK	\N
+26	STZY-0337	3	BLOCK : D3	BLOCK	OP930-3
+27	STTR-0029	3	BLOCK : D3	BLOCK	OP60-1
+28	STCK-0098	3	BLOCK : D3	BLOCK	OP900-7
+29	STTR-0030	3	BLOCK : D3	BLOCK	OP70
+30	STZY-0337	3	BLOCK : D3	BLOCK	OP930
+31	STCK-0098	3	BLOCK : D3	BLOCK	OP900-8
+32	STSP-0672	3	BLOCK : D3	BLOCK	OP80
+33	STSP-0673	3	BLOCK : D3	BLOCK	OP90
+34	STSP-0674	3	BLOCK : D3	BLOCK	OP100
+35	STSP-0675	3	BLOCK : D3	BLOCK	OP110
+36	STSP-0676	3	BLOCK : D3	BLOCK	OP120
+37	STSP-0677	3	BLOCK : D3	BLOCK	OP130
+38	STSP-0678	3	BLOCK : D3	BLOCK	OP140
+39	STSP-0679	3	BLOCK : D3	BLOCK	OP150
+40	STSP-0680	3	BLOCK : D3	BLOCK	OP160
+41	STSP-0681	3	BLOCK : D3	BLOCK	OP170
+42	STCK-0098	3	BLOCK : D3	BLOCK	OP900-9
+43	STSP-0682	3	BLOCK : D3	BLOCK	OP180
+44	STSP-0683	3	BLOCK : D3	BLOCK	OP190
+45	STSP-0684	3	BLOCK : D3	BLOCK	OP200
+46	STCK-0098	3	BLOCK : D3	BLOCK	OP900-10
+47	STSP-0685	3	BLOCK : D3	BLOCK	OP210
+48	STMI-0076	3	BLOCK : D3	BLOCK	OP215
+49	STCK-0098	3	BLOCK : D3	BLOCK	OP900-11A
+50	STSP-0686	3	BLOCK : D3	BLOCK	OP220
+\.
+
+
+--
+-- TOC entry 3398 (class 0 OID 16436)
+-- Dependencies: 224
+-- Data for Name: master_mc_g6m; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+COPY public.master_mc_g6m (id, link_title, line_name) FROM stdin;
+1	G6-Block	STGR-0163
+2	G6-Block	STAT-0065
+3	G6-Block	STBR-0034
+4	G6-Block	STCK-0122
+5	G6-Block	STCK-0125
+6	G6-Block	STMM-0062
+7	G6-Block	STMM-0063
+8	G6-Block	STMM-0064
+9	G6-Block	STSP-0759
+10	G6-Block	STSP-0760
+11	G6-Block	STSP-0761
+12	G6-Block	STSP-0762
+13	G6-Block	STSP-0763
+14	G6-Block	STSP-0766
+15	G6-Block	STSP-0767
+16	G6-Block	STSP-0768
+17	G6-Block	STSP-0769
+18	G6-Block	STSP-0770
+19	G6-Block	STSP-0771
+20	G6-Block	STSP-0772
+21	G6-Block	STSP-0773
+22	G6-Block	STSP-0774
+23	G6-Block	STSP-0775
+24	G6-Block	STSP-0776
+25	G6-Block	STTS-0295
+26	G6-Block	STTS-0296
+27	G6-Block	STTS-0297
+28	G6-Block	STTS-0299
+29	G6-Block	STTS-0300
+30	G6-Block	STTS-0301
+31	G6-Block	STWB-0137
+32	G6-Block	STWB-0138
+33	G6-Block	STWB-0139
+34	G6-Block	STZK-0220
+35	G6-Block	STZK-0233
+36	G6-Block	STZK-L001
+37	G6-Block	STZK-L002
+38	G6-Block	STZK-L003
+39	G6-Block	STCK-0098-170
+40	G6-Block	STCK-0098-189
+41	G6-Block	STCK-0098-191
+42	G6-Camshaft	STAT-0010
+43	G6-Camshaft	STGR-0118
+44	G6-Camshaft	STGR-0119
+45	G6-Camshaft	STGR-0170
+46	G6-Camshaft	STGR-0173
+47	G6-Camshaft	STLA-0039
+48	G6-Camshaft	STLA-0061
+49	G6-Camshaft	STLP-0013
+50	G6-Camshaft	STSP-0410
+51	G6-Camshaft	STSP-0411
+52	G6-Camshaft	STSP-0519
+53	G6-Camshaft	STSP-0520
+54	G6-Camshaft	STSP-0521
+55	G6-Camshaft	STSP-0522
+56	G6-Camshaft	STSP-L001
+57	G6-Camshaft	STTS-0350
+58	G6-Camshaft	STZY-0415-2
+59	G6-Camshaft	STZY-0415-3
+60	G6-Camshaft	STZY-0415-5
+61	G6-Camshaft	STZY-0415-6
+62	G6-Camshaft	STZY-0415-7
+63	G6-Camshaft	STZY-0415-8
+64	G6-Crank	STAT-0052
+65	G6-Crank	STAT-0055
+66	G6-Crank	STCK-0130-1
+67	G6-Crank	STCK-0130-3
+68	G6-Crank	STCK-0130-5
+69	G6-Crank	STGR-0074
+70	G6-Crank	STIH-0025
+71	G6-Crank	STLA-0058
+72	G6-Crank	STLA-0059
+73	G6-Crank	STLP-0019
+74	G6-Crank	STSP-0452
+75	G6-Crank	STSP-0485
+76	G6-Crank	STSP-0804
+77	G6-Crank	STSP-0805
+78	G6-Crank	STSP-0807
+79	G6-Crank	STSP-0810
+80	G6-Crank	STSP-0812
+81	G6-Crank	STTS-0304
+82	G6-Crank	STTS-0305
+83	G6-Crank	STZY-0387
+84	G6-Crank	STZY-0388
+85	G6-Crank	STZY-0390
+86	G6-Crank	TGR-051
+87	G6-Head	STAT-0051
+88	G6-Head	STAT-L001
+89	G6-Head	STCK-0126
+90	G6-Head	STSP-0777
+91	G6-Head	STSP-0779
+92	G6-Head	STSP-0780
+93	G6-Head	STSP-0781
+94	G6-Head	STSP-0782
+95	G6-Head	STSP-0783
+96	G6-Head	STSP-0784
+97	G6-Head	STSP-0786
+98	G6-Head	STSP-0787
+99	G6-Head	STSP-0788
+100	G6-Head	STSP-0789
+101	G6-Head	STSP-0790
+102	G6-Head	STSP-0793
+103	G6-Head	STSP-0794
+104	G6-Head	STSP-0795
+105	G6-Head	STSP-0796
+106	G6-Head	STTS-0302
+107	G6-Head	STWB-0142
+108	G6-Head	STZK-0221
+109	G6-Head	STZK-0231
+110	G6-Head	STZK-0232
+111	G6-Head	TMI-049
+112	G6-Head	TSP-146
+113	G6-Head	TSP-147
+114	G6-Head	TSP-148
+115	G6-Head	TSP-149
+116	G6-Head	TSP-195
+117	G6-Head	TSP-196
+118	G6-Head	Auto Load
+119	G6-Main	STCK-0120-1
+120	G6-Main	STZY-0379
+121	G6-Main	STZY-0378
+122	G6-Main	STCK-0118
+123	G6-Main	STTS-0289
+124	G6-Main	STAM-0180
+125	G6-Main	STZY-0374
+126	G6-Main	STCK-0117
+127	G6-Main	STZY-0371
+128	G6-Main	STAM-0168
+129	G6-Main	STZY-0082
+130	G6-Main	STAM-0112
+131	G6-Main	STZY-0375
+132	G6-Main	STAM-0057
+133	G6-Main	STCK-0120-2
+134	G6-Main	STAM-0206
+135	G6-Main	STTS-0290
+136	G6-Main	STTS-0337
+137	G6-Main	STTS-0325
+138	G6-Main	STZY-0377
+139	G6-Main	STAM-L005
+140	G6-Main	STZY-0189
+141	G6-Main	STMH-011
+\.
+
+
+--
+-- TOC entry 3400 (class 0 OID 16445)
+-- Dependencies: 226
+-- Data for Name: mc_list_model; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+COPY public.mc_list_model (id, id_list, zone, line, op_no, op_part, unique_opno, mapping_layout, machine_no, mc_part, unique_mcno, "j/l", operation_name, machine_maker, machine_name, model, serial_no, date_of_mfg) FROM stdin;
+139	13	BLOCK : D3	BLOCK	40	-	OP40	D3Block_4	STBR-0032	-	STBR-0032	JAPAN	ROUGH BORING (1#,2#,3#,4#) (5st)	JTEKT	MULTI SPINDLE M/C	-	T-8299	2014-05-01
+140	14	BLOCK : D3	BLOCK	900	5A	OP900-5A	D3Block_70	STCK-0098	1-พ.ค.	STCK-0098-5-1	LOCAL	CONVEYOR M/C TO M/C & TRANVERSER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+141	15	BLOCK : D3	BLOCK	900	5B	OP900-5B	D3Block_71	STCK-0098	2-พ.ค.	STCK-0098-5-2	LOCAL	CONVEYOR M/C TO M/C & STOCK CONVEYOR	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+142	16	BLOCK : D3	BLOCK	-	-			STSC-0048	n	STSC-0048	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+143	17	BLOCK : D3	BLOCK	50	1	OP50-1	D3Block_5	STZY-0326	-	STZY-0326	JAPAN	LOADING & POSTURE CONV.	SHINMEI INDUSTRY	LOADING	-	M-8300A	2014-06-01
+144	18	BLOCK : D3	BLOCK	50	2	OP50-2	D3Block_6	STSP-0667	-	STSP-0667	JAPAN	ROUGH BORING RH. FACE OIL RETURN & WATER PLUG	JTEKT	MULTI SPINDLE M/C	DS006C	M-8300	2014-06-01
+145	19	BLOCK : D3	BLOCK	50	3	OP50-3	D3Block_7	STSP-0668	-	STSP-0668	JAPAN	MILLING EX. MANIFOLD STAY FIXING FACE RH. FACE	JTEKT	1 SP NC M/C	TH555G5	MH-4897	2014-06-01
+146	2	BLOCK : D3	BLOCK	900	1	OP900-1	D3Block_66	STCK-0098	1	STCK-0098-1	LOCAL	CONVEYOR RAW MAT.	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+147	20	BLOCK : D3	BLOCK	50	4	OP50-4	D3Block_8	STSP-0669	-	STSP-0669	JAPAN	DRILLING LINE IDENTIFICATION HOLE	JTEKT	1 SP NC M/C	TH555G5	MH-4880	2014-06-01
+148	21	BLOCK : D3	BLOCK	50	5	OP50-5	D3Block_9	STSP-0670	-	STSP-0670	JAPAN	MILLING MOUNTING BRACKET & SUPPLY PUMP LH. FACE	JTEKT	1 SP NC M/C	TH555G5	MH-4881	2014-06-01
+149	22	BLOCK : D3	BLOCK	50	6	OP50-6	D3Block_10	STSP-0671	-	STSP-0671	JAPAN	MILLING LH. EGR COOLER FIXING FACE & REAR AND PLATE	JTEKT	1 SP NC M/C	TH555G5	MH-4882	2014-06-01
+150	23	BLOCK : D3	BLOCK	50	7	OP50-7	D3Block_11	STZY-0327	-	STZY-0327	JAPAN	UNLOADING & POSTURE CONV.	SHINMEI INDUSTRY	UNLOADING	-	-	2014-06-01
+151	24	BLOCK : D3	BLOCK	900	6	OP900-6		STCK-0098	6	STCK-0098-6	LOCAL	CONVEYOR M/C TO M/C	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+152	25	BLOCK : D3	BLOCK	-	-			STSC-0046	n	STSC-0046	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+153	26	BLOCK : D3	BLOCK	930	3	OP930-3		STZY-0337	3	STZY-0337-3	LOCAL	ANDON BOX No.3	MEIWA e	ANDON	-	-	2014-10-01
+154	27	BLOCK : D3	BLOCK	60	1	OP60-1	D3Block_12	STTR-0029	-	STTR-0029	JAPAN	LOADING & POSTURE CONV. (1st)	JTEKT (SHINMEI )	LOADING	-	M-8301A	2014-06-01
+155	28	BLOCK : D3	BLOCK	60	2	OP60-2			-		JAPAN	GROOVING OIL SUPPLY OF CRANK SHAFT (2st)	JTEKT	MILLING  M/C	-	M-8301B	2014-06-01
+156	29	BLOCK : D3	BLOCK	60	3	OP60-3			-		JAPAN	GROOVING OIL SUPPLY OF CRANK SHAFT (3st)	JTEKT	MILLING  M/C	-	M-8302	2014-06-01
+157	3	BLOCK : D3	BLOCK	10	-	OP10	D3Block_1	STTR-0026	-	STTR-0026	JAPAN	MILLING MACHINE DATUM FACE (4st)	JTEKT	TRANFER MACNINE	-	T-8296	2014-05-01
+158	30	BLOCK : D3	BLOCK	60	4	OP60-4			-		JAPAN	GROOVING OIL SUPPLY OF CRANK SHAFT (4st)	JTEKT	MILLING  M/C	-	M-8303	2014-06-01
+159	31	BLOCK : D3	BLOCK	60	5	OP60-5			-		JAPAN	UNLOADING & POSTURE CONV. (5st)	JTEKT (SHINMEI )	UNLOADING	-	-	2014-06-01
+160	32	BLOCK : D3	BLOCK	900	7	OP900-7	D3Block_72	STCK-0098	7	STCK-0098-7	LOCAL	CONVEYOR M/C TO M/C	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+161	33	BLOCK : D3	BLOCK	70	-	OP70	D3Block_13	STTR-0030	-	STTR-0030	JAPAN	DRILLING SUB & MAIN OIL HOLE (8st)	JTEKT	MULTI SPINDLE M/C	STR-84 / TYG-8256	TYG-8304	2014-06-01
+162	34	BLOCK : D3	BLOCK	930	-	OP930		STZY-0337	-	STZY-0337	LOCAL	ANDON MAIN	MEIWA e	ANDON	-	-	2014-10-01
+163	35	BLOCK : D3	BLOCK	900	8	OP900-8	D3Block_73	STCK-0098	8	STCK-0098-8	LOCAL	CONVEYOR STOCK AUTO1 TO AUTO2	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+164	36	BLOCK : D3	BLOCK	80	-	OP80	D3Block_14	STSP-0672	-	STSP-0672	JAPAN	ROUGH FACING SURFACE OIL HOLE & SUB OIL HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4883	2014-06-01
+165	37	BLOCK : D3	BLOCK	90	-	OP90	D3Block_15	STSP-0673	-	STSP-0673	JAPAN	DRILLING MAIN & SUB OIL HOLE PLUG	JTEKT	1 SP NC M/C	TH555G4	MH-4884	2014-06-01
+166	38	BLOCK : D3	BLOCK	100	-	OP100	D3Block_16	STSP-0674	-	STSP-0674	JAPAN	REAMING WATER PLUG HOLE FR. FACE	JTEKT	1 SP NC M/C	TH555G4	MH-4885	2014-06-01
+167	39	BLOCK : D3	BLOCK	110	-	OP110	D3Block_17	STSP-0675	-	STSP-0675	JAPAN	DRILLING OIL FILTER OIL SUPPLY HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4886	2014-06-01
+168	4	BLOCK : D3	BLOCK	900	2	OP900-2	D3Block_67	STCK-0098	2	STCK-0098-2	LOCAL	CONVEYOR M/C TO M/C	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+169	40	BLOCK : D3	BLOCK	120	-	OP120	D3Block_18	STSP-0676	-	STSP-0676	JAPAN	DRILLING OIL COOLER & OIL FILTER FIXING HOLE	JTEKT	MULTI SPINDLE M/C	DH506C	M-8305	2014-06-01
+170	41	BLOCK : D3	BLOCK	130	-	OP130	D3Block_19	STSP-0677	-	STSP-0677	JAPAN	REAMING PLUG HOLE FOR MAIN OIL HOLE FR. FACE	JTEKT	1 SP NC M/C	TH555G4	MH-4887	2014-06-01
+171	42	BLOCK : D3	BLOCK	140	-	OP140	D3Block_20	STSP-0678	-	STSP-0678	JAPAN	TAPPING TURBO SUPPLY OIL HOLE FIXING HOLE	JTEKT	MULTI SPINDLE M/C	DH506C	M-8306	2014-06-01
+172	43	BLOCK : D3	BLOCK	150	-	OP150	D3Block_21	STSP-0679	-	STSP-0679	JAPAN	REAMING WATER PLUG RH. FACE	JTEKT	MULTI SPINDLE M/C	DH506C	M-8307	2014-06-01
+173	44	BLOCK : D3	BLOCK	160	-	OP160	D3Block_22	STSP-0680	-	STSP-0680	JAPAN	ROUGH BORING WATER PLUG & BLOWBY HOLE LH. FACE	JTEKT	MULTI SPINDLE M/C	DH506C	M-8308	2014-06-01
+174	45	BLOCK : D3	BLOCK	170	-	OP170	D3Block_23	STSP-0681	-	STSP-0681	JAPAN	DRILLING FIXING HOLE LH.	JTEKT	MULTI SPINDLE M/C	DH506C	M-8309	2014-06-01
+175	46	BLOCK : D3	BLOCK	900	9	OP900-9	D3Block_74	STCK-0098	9	STCK-0098-9	LOCAL	CONVEYOR M/C TO M/C	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+176	47	BLOCK : D3	BLOCK	180	-	OP180	D3Block_24	STSP-0682	-	STSP-0682	JAPAN	TAPPING LH. FACE	JTEKT	MULTI SPINDLE M/C	DH506C	M-8310	2014-06-01
+204	72	BLOCK : D3	BLOCK	390	-	OP390	D3Block_44	STSP-0701	-	STSP-0701	JAPAN	DRILLING HEAD BOLT HOLE DIA. 15 AND 14	JTEKT	MULTI SPINDLE M/C	DS006C	M-8331	2014-06-01
+205	73	BLOCK : D3	BLOCK	400	-	OP400	D3Block_45	STSP-0702	-	STSP-0702	JAPAN	DRILLING HEAD BOLT HOLE DIA. 12.5 AND 14	JTEKT	MULTI SPINDLE M/C	DS006C	M-8332	2014-06-01
+206	74	BLOCK : D3	BLOCK	410	-	OP410	D3Block_46	STSP-0703	-	STSP-0703	JAPAN	DRILLING HEAD BOLT HOLE DIA.10.8	JTEKT	1 SP NC M/C	TH555G4	MH-4918	2014-06-01
+207	75	BLOCK : D3	BLOCK	420	-	OP420	D3Block_47	STSP-0704	-	STSP-0704	JAPAN	TAPPING HEAD BOLT HOLE M12 AND M14	JTEKT	MULTI SPINDLE M/C	DS006C	M-8333	2014-06-01
+208	76	BLOCK : D3	BLOCK	900	11B	OP900-11B	D3Block_77	STCK-0098	2-พ.ย.	STCK-0098-11-2	LOCAL	CONVEYOR M/C TO M/C & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+209	77	BLOCK : D3	BLOCK	430	-	OP430	D3Block_48	STSP-0705	-	STSP-0705	JAPAN	REAMING CHAIN SLIPPER FIXING PIN HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4919	2014-06-01
+210	78	BLOCK : D3	BLOCK	900	13	OP900-13		STCK-0098	13	STCK-0098-13	LOCAL	CONVEYOR M/C TO M/C & TRANVERSER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+211	79	BLOCK : D3	BLOCK	440	-	OP440	D3Block_49	STSP-0706	-	STSP-0706	JAPAN	REAMING PLUG HOLE (35) AND MAIN & SUB OIL HOLE PLUG RR.	JTEKT	MULTIPLE SP NC M/C	DH406C	M-8834	2014-06-01
+177	48	BLOCK : D3	BLOCK	190	-	OP190	D3Block_25	STSP-0683	-	STSP-0683	JAPAN	DRILLING FIXING HOLE RR.	JTEKT	MULTI SPINDLE M/C	DH506C	M-8311	2014-06-01
+178	49	BLOCK : D3	BLOCK	200	-	OP200	D3Block_26	STSP-0684	-	STSP-0684	JAPAN	CHAMFERING CHAIN SLIPPER FIXING HOLE FR. FACE	JTEKT	MULTI SPINDLE M/C	DH406C	M-8312	2014-06-01
+179	5	BLOCK : D3	BLOCK	930	2	OP930-2		STZY-0337	2	STZY-0337-2	LOCAL	ANDON BOX No.2	MEIWA e	ANDON	-	-	2014-10-01
+180	50	BLOCK : D3	BLOCK	900	10	OP900-10	D3Block_75	STCK-0098	10	STCK-0098-10	LOCAL	CONVEYOR M/C TO M/C & TRANVERSER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+181	51	BLOCK : D3	BLOCK	210	-	OP210	D3Block_27	STSP-0685	-	STSP-0685	JAPAN	TAPPUNG EACH HOLE FR. FACE	JTEKT	MULTI SPINDLE M/C	DH506C	M-8313	2014-06-01
+182	52	BLOCK : D3	BLOCK	215	-	OP215	D3Block_28	STMI-0076	-	STMI-0076	JAPAN	FINE MILLING FR. AND RR.	JTEKT	MULTI SPINDLE M/C	-	M-8323	2014-06-01
+183	53	BLOCK : D3	BLOCK	900	11A	OP900-11A	D3Block_76	STCK-0098	1-พ.ย.	STCK-0098-11-1	LOCAL	CONVEYOR M/C TO M/C & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+184	54	BLOCK : D3	BLOCK	220	-	OP220	D3Block_29	STSP-0686	-	STSP-0686	JAPAN	CHAMFERING BOTTOM CYLINDER BORES	JTEKT	1 SP NC M/C	TH555G5	MH-4910	2014-06-01
+185	55	BLOCK : D3	BLOCK	230	-	OP230	D3Block_30	STSP-0687	-	STSP-0687	JAPAN	MILLING OILJET FITTING FACE	JTEKT	1 SP NC M/C	TH555G5	MH-4911	2014-06-01
+186	56	BLOCK : D3	BLOCK	240	-	OP240	D3Block_31	STSP-0688	-	STSP-0688	JAPAN	REAMER INSERTINON HOLE FOR POSTON OIL JET	JTEKT	MULTI SPINDLE M/C	DH406C	M-8324	2014-06-01
+187	57	BLOCK : D3	BLOCK	250	-	OP250	D3Block_32	STSP-0689	-	STSP-0689	JAPAN	TAPPING POSTON OIL JET FIXING HOLE	JTEKT	MULTI SPINDLE M/C	DH406C	M-8325	2014-06-01
+188	58	BLOCK : D3	BLOCK	260	-	OP260	D3Block_33	STSP-0690	-	STSP-0690	JAPAN	DRILLING CHAIN OILJET OIL SUPPLY HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4912	2014-06-01
+189	59	BLOCK : D3	BLOCK	270	-	OP270	D3Block_34	STSP-0691	-	STSP-0691	JAPAN	DRILLING WATER BYPASS HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4913	2014-06-01
+190	6	BLOCK : D3	BLOCK	20	-	OP20	D3Block_2	STTR-0027	-	STTR-0027	JAPAN	DRILLING DATUM HOLE ON OILPAN FACE (11st)	JTEKT	TRANFER MACNINE	-	T-8297	2014-05-01
+191	60	BLOCK : D3	BLOCK	280	-	OP280	D3Block_35	STSP-0692	-	STSP-0692	JAPAN	DRILLING OIL SUPPLY HOLE FOR CYLINDER HEAD	JTEKT	1 SP NC M/C	TH555G4	MH-4914	2014-06-01
+192	61	BLOCK : D3	BLOCK	290	-	OP290	D3Block_36	STSP-0693	-	STSP-0693	JAPAN	DRILLING & TAPPING OIL SRTAINER FIXING HOLE	JTEKT	MULTI SPINDLE M/C	DH406C	M-8326	2014-06-01
+193	62	BLOCK : D3	BLOCK	300	-	OP300	D3Block_37	STSP-0694	-	STSP-0694	JAPAN	DRILLING & CHAMFERING CRANK CAP FIXING BOLT HOLE	JTEKT	MULTI SPINDLE M/C	DH406C	M-8327	2014-06-01
+194	63	BLOCK : D3	BLOCK	900	12A	OP900-12A		STCK-0098	1-ธ.ค.	STCK-0098-12-1	LOCAL	CONVEYOR M/C TO M/C & TRANVERSER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+195	64	BLOCK : D3	BLOCK	900	12B	OP900-12B		STCK-0098	2-ธ.ค.	STCK-0098-12-2	LOCAL	CONVEYOR M/C TO M/C & STOCK CONVEYOR	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+120	1	BLOCK : D3	BLOCK	-	-			STSC-0033	n	STSC-0033	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+121	10	BLOCK : D3	BLOCK	30	-	OP30	D3Block_3	STTR-0028	-	STTR-0028	JAPAN	MILLING ALL JOURNAL JOINT FACE (9st)	JTEKT	TRANFER MACNINE	-	T-8298	2014-05-01
+122	100	BLOCK : D3	BLOCK	580	-	OP580	D3Block_62	STGR-0066	-	STGR-0066	JAPAN	ROUGH FINE PLATEAU CYLINDER BORE	JTEKT	HORNING M/C	-	M-8153	2014-05-01
+123	101	BLOCK : D3	BLOCK	-	-			STSC-0057	n	STSC-0057	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+124	102	BLOCK : D3	BLOCK	900	20	OP900-20		STCK-0098	20	STCK-0098-20	LOCAL	CONVEYOR M/C TO M/C & TURN TABLE	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+125	103	BLOCK : D3	BLOCK	590	-	OP590	D3Block_63	STTS-0267	-	STTS-0267	LOCAL	STAMP NO. BORE	TOSEI ENGINEERING	MEASURING M/C	45709TH	08 มี.ค. 2553	2014-08-01
+126	104	BLOCK : D3	BLOCK	900	21	OP900-21		STCK-0098	21	STCK-0098-21	LOCAL	CONVEYOR M/C TO M/C & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+127	105	BLOCK : D3	BLOCK	600	-	OP600	D3Block_64	STWB-0126	-	STWB-0126	LOCAL	FINAL WASHING	KITO	WASHING M/C	-	RI-3090	2014-06-01
+128	106	BLOCK : D3	BLOCK	900	22	OP900-22		STCK-0098	22	STCK-0098-22	LOCAL	CONVEYOR M/C TO M/C & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+129	107	BLOCK : D3	BLOCK	610	-	OP610	D3Block_65	STTS-0268	-	STTS-0268	JAPAN	PERSS FITTING TIGHT PLUG & TEST LEAK W/J AND O/H	YASUNAGA	LEAK TESTER	-	M-4297	2014-07-01
+130	108	BLOCK : D3	BLOCK	-	-			STSC-0047	n	STSC-0047	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+131	109	BLOCK : D3	BLOCK	930	6	OP930-6		STZY-0337	6	STZY-0337-6	LOCAL	ANDON BOX No.6	MEIWA e	ANDON	-	-	2014-10-01
+132	11	BLOCK : D3	BLOCK	-	-			STSC-0045	n	STSC-0045	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+133	110	BLOCK : D3	BLOCK	930	7	OP930-7		STZY-0337	7	STZY-0337-7	LOCAL	ANDON BOX No.7	MEIWA e	ANDON	-	-	2014-10-01
+134	111	BLOCK : D3	BLOCK	900	23	OP900-23		STCK-0098	23	STCK-0098-23	LOCAL	CONVEYOR M/C TO M/C & LIFTER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+135	112	BLOCK : D3	BLOCK	900	24A	OP900-24A		STCK-0098	24-1	STCK-0098-24-1	LOCAL	CONVEYOR M/C TO M/C & TRANVERSER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+136	113	BLOCK : D3	BLOCK	900	24B	OP900-24B		STCK-0098	24-2	STCK-0098-24-2	LOCAL	CONVEYOR M/C TO M/C & STOCK CONV. FINISH	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+137	114	BLOCK : D3	BLOCK	940	-	OP940		-	-		LOCAL	SETTING GAUGE (Q-GATE)	-	MEASURING M/C (CMM)	-	-	\N
+138	12	BLOCK : D3	BLOCK	900	4	OP900-4	D3Block_69	STCK-0098	4	STCK-0098-4	LOCAL	CONVEYOR M/C TO M/C	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+196	65	BLOCK : D3	BLOCK	330	-	OP330	D3Block_38	STSP-0695	-	STSP-0695	JAPAN	TAPPING OILPAN FIXING HOLE	JTEKT	MULTI SPINDLE M/C	DH406C	M-8328	2014-06-01
+197	66	BLOCK : D3	BLOCK	340	-	OP340	D3Block_39	STSP-0696	-	STSP-0696	JAPAN	DRILLING & CHAMFER OIL PASSAGE HOLE OF CRANK	JTEKT	MULTI SPINDLE M/C	DH406C	M-8329	2014-06-01
+198	67	BLOCK : D3	BLOCK	350	-	OP350	D3Block_40	STSP-0697	-	STSP-0697	JAPAN	MILLING SURFACE FOR SERIAL STAMP ENGING NO.	JTEKT	MULTI SPINDLE M/C	DH406C	M-8330	2014-06-01
+199	68	BLOCK : D3	BLOCK	360	-	OP360	D3Block_41	STSP-0698	-	STSP-0698	JAPAN	DRILLING & REAMING OIL LEVEL GAUGE FIXING HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4915	2014-06-01
+200	69	BLOCK : D3	BLOCK	370	-	OP370	D3Block_42	STSP-0699	-	STSP-0699	JAPAN	DRILLING SUPPLY OIL HOLE FOR MAIL OIL HOLE RH. FACE	JTEKT	1 SP NC M/C	TH555G4	MH-4916	2014-06-01
+201	7	BLOCK : D3	BLOCK	-	-			STSC-0038	n	STSC-0038	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+202	70	BLOCK : D3	BLOCK	930	4	OP930-4		STZY-0337	1	STZY-0337-1	LOCAL	ANDON BOX No.1	MEIWA e	ANDON	-	-	2014-10-01
+203	71	BLOCK : D3	BLOCK	380	-	OP380	D3Block_43	STSP-0700	-	STSP-0700	JAPAN	GROOVING O RING RH. FACE DAI. 26.3 AND 34	JTEKT	1 SP NC M/C	TH555G4	MH-4917	2014-06-01
+212	8	BLOCK : D3	BLOCK	900	3	OP900-3	D3Block_68	STCK-0098	3	STCK-0098-3	LOCAL	CONVEYOR M/C TO M/C & TRANVERSER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+213	80	BLOCK : D3	BLOCK	460	-	OP460	D3Block_50	STSP-0707	-	STSP-0707	JAPAN	GROOVING GASKET FR. FACE	JTEKT	1 SP NC M/C	TH555G4	MH-4920	2014-06-01
+214	81	BLOCK : D3	BLOCK	470	-	OP470	D3Block_51	STSP-0708	-	STSP-0708	JAPAN	FACING SURFACE FOR OIL SUPPLY HOLE	JTEKT	1 SP NC M/C	TH555G4	MH-4921	2014-06-01
+215	82	BLOCK : D3	BLOCK	900	14	OP900-14		STCK-0098	14	STCK-0098-14	LOCAL	CONVEYOR M/C TO M/C & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+216	83	BLOCK : D3	BLOCK	480	-	OP480	D3Block_52	STMM-0044	-	STMM-0044	LOCAL	DEBURRING EACH OIL PASSAGE HOLE	KRUZE	DEBURRING M/C	-	TA-0127	2014-07-01
+217	84	BLOCK : D3	BLOCK	490	-	OP490	D3Block_53	STWB-0125	-	STWB-0125	JAPAN	MIDDLE WASHING	KITO	WASHING M/C	-	RC-0198	2014-05-01
+218	85	BLOCK : D3	BLOCK	500	-	OP500	D3Block_54	STZK-0195	-	STZK-0195	LOCAL	CHECKING HOLE OF LOWER FACE	TATEYAMA	CHECKING HOLE M/C	-	TF2755-96	2014-08-01
+219	86	BLOCK : D3	BLOCK	510	-	OP510	D3Block_55	STTS-0266	-	STTS-0266	JAPAN	LEAK TEST W/J	YASUNAGA	LEAK TESTER	-	M-4296	2014-07-01
+220	87	BLOCK : D3	BLOCK	-	-			-	-		LOCAL	CONVEYOR SUPPLY CRANK CAP	-	CONVEYOR SUPPLY PART	-	-	\N
+221	88	BLOCK : D3	BLOCK	520	-	OP520	D3Block_56	STAT-0038	-	STAT-0038	LOCAL	PRESS FITTING CRANK SHAFT BEARING	GIKEN	PRESS FITTING M/C	-	14-MGSR-9MU	2014-08-01
+222	89	BLOCK : D3	BLOCK	-	-			-	-		LOCAL	CONVEYOR SUPPLY CRANK CAP	-	CONVEYOR SUPPLY PART	-	-	\N
+223	9	BLOCK : D3	BLOCK	930	5	OP930-5		STZY-0337	5	STZY-0337-5	LOCAL	ANDON BOX No.5	MEIWA e	ANDON	-	-	2014-10-01
+224	90	BLOCK : D3	BLOCK	530	-	OP530	D3Block_57	STAM-0163	-	STAM-0163	LOCAL	STAMPING CRANK SHAFT CAP NO.	GIKEN	TIGHTING M/C	-	14-MGSR-10MU	2014-08-01
+225	91	BLOCK : D3	BLOCK	900	16	OP900-16		STCK-0098	16	STCK-0098-16	LOCAL	CONVEYOR M/C TO M/C & STOCK CONVEYOR	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+226	92	BLOCK : D3	BLOCK	540	-	OP540	D3Block_58	STBR-0033	-	STBR-0033	JAPAN	FING BORING CRANK SHAFT HOLE (7st)	JTEKT	COMPOUND SPECIAL MACHINE	-	T-8336	2014-06-01
+227	93	BLOCK : D3	BLOCK	900	17	OP900-17		STCK-0098	17	STCK-0098-17	LOCAL	CONVEYOR M/C TO M/C & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+228	94	BLOCK : D3	BLOCK	-	-			STSC-0056	n	STSC-0056	LOCAL	OIL MIST COLLECTOR	AREE ENGINEERING SUPPLY	MIST COLLECTOR	-	-	2014-11-01
+229	95	BLOCK : D3	BLOCK	550	-	OP550	D3Block_59	STMI-0077	-	STMI-0077	JAPAN	FINE MILLING HEAD JOINT FACE	JTEKT	MILLING  M/C	-	M-8335	2014-06-01
+230	96	BLOCK : D3	BLOCK	900	18	OP900-18		STCK-0098	18	STCK-0098-18	LOCAL	CONVEYOR M/C TO M/C	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+231	97	BLOCK : D3	BLOCK	560	-	OP560	D3Block_60	STMM-0045	-	STMM-0045	LOCAL	DEBURRING HEAD JOINT FACE	KRUZE	DEBURRING M/C	-	TA-0128	2014-07-01
+232	98	BLOCK : D3	BLOCK	570	-	OP570	D3Block_61	STBR-0015	-	STBR-0015	JAPAN	FINE BORING CYLINDER BLOCK (4st)	JTEKT	BORING M/C	-	M-8130	2014-02-01
+233	99	BLOCK : D3	BLOCK	900	19	OP900-19		STCK-0098	19	STCK-0098-19	LOCAL	CONVEYOR M/C TO M/C & STOCK CONVEYOR & TURN OVER	AUTO - CS (SHINMEI)	CONVEYOR	-	-	2014-04-01
+\.
+
+
+--
+-- TOC entry 3392 (class 0 OID 16390)
+-- Dependencies: 218
+-- Data for Name: transaction; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+COPY public.transaction (id, machine_no, operation_no, line, activity, tag_type, ctag_level, problem_type, komarigoto, problem_topic, counter_measure, shift, group_pic, editor_pic, receive_date, start_date, finish_date, end_date, gl_mt2, gl_prod2, attachment, test, cal_status, date_mtsign, date_prosign, created_by, created_at) FROM stdin;
+1	M001	OP01	G6-Head	ตรวจพบปัญหาในขั้นตอน 1	Red	Level 1	เครื่องจักร	ต้องเปลี่ยนสายพาน	สายพานชำรุด	เปลี่ยนสายพานใหม่	กะเช้า	ช่างซ่อม	นาย A	2024-12-01	2024-12-01	2024-12-03	2024-12-04	url_image_mt2_1.jpg	url_image_prod2_1.jpg	url_attachment_1.jpg	Pass	Completed	2024-12-03	2024-12-04	นาย B	2024-12-01 08:00:00
+2	M002	OP02	G6-Line	ตรวจพบปัญหาในขั้นตอน 2	Yellow	Level 2	ไฟฟ้า	ระบบไฟฟ้าเสีย	สายไฟขาด	เปลี่ยนสายไฟใหม่	กะบ่าย	ช่างไฟฟ้า	นาย C	2024-12-02	2024-12-02	2024-12-04	2024-12-05	url_image_mt2_2.jpg	url_image_prod2_2.jpg	url_attachment_2.jpg	Pending	In Progress	\N	\N	นาย D	2024-12-02 13:00:00
+3	M003	OP03	G6-Crank	ตรวจพบปัญหาในขั้นตอน 3	Green	Level 1	เครื่องจักร	เสียงดังผิดปกติ	มอเตอร์เสีย	เปลี่ยนมอเตอร์	กะดึก	ช่างเครื่องจักร	นาย E	2024-12-03	2024-12-03	2024-12-05	2024-12-06	url_image_mt2_3.jpg	url_image_prod2_3.jpg	url_attachment_3.jpg	Pass	Completed	2024-12-05	2024-12-06	นาย F	2024-12-03 22:00:00
+4	M004	OP04	G6-Camshaft	ตรวจพบปัญหาในขั้นตอน 4	Blue	Level 3	อุปกรณ์	หน้าจอแตก	หน้าจอเครื่องจักรเสีย	เปลี่ยนหน้าจอใหม่	กะเช้า	ช่างซ่อม	นาย G	2024-12-04	2024-12-04	2024-12-06	2024-12-07	url_image_mt2_4.jpg	url_image_prod2_4.jpg	url_attachment_4.jpg	Pass	Completed	2024-12-06	2024-12-07	นาย H	2024-12-04 09:00:00
+5	M005	OP05	G6-Main	ตรวจพบปัญหาในขั้นตอน 5	Red	Level 2	ระบบควบคุม	เซ็นเซอร์ไม่ทำงาน	เซ็นเซอร์ขัดข้อง	เปลี่ยนเซ็นเซอร์ใหม่	กะบ่าย	ช่างควบคุม	นาย I	2024-12-05	2024-12-05	2024-12-07	2024-12-08	url_image_mt2_5.jpg	url_image_prod2_5.jpg	url_attachment_5.jpg	Pending	In Progress	\N	\N	นาย J	2024-12-05 14:00:00
+\.
+
+
+--
+-- TOC entry 3412 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: linename_g6_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('public.linename_g6_id_seq', 7, true);
+
+
+--
+-- TOC entry 3413 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: machine_list_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('public.machine_list_id_seq', 50, true);
+
+
+--
+-- TOC entry 3414 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: master_mc_g6m_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('public.master_mc_g6m_id_seq', 141, true);
+
+
+--
+-- TOC entry 3415 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: mc_list_model_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('public.mc_list_model_id_seq', 233, true);
+
+
+--
+-- TOC entry 3416 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: transactionon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('public.transactionon_id_seq', 5, true);
+
+
+--
+-- TOC entry 3239 (class 2606 OID 16419)
+-- Name: linename_g6 linename_g6_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.linename_g6
+    ADD CONSTRAINT linename_g6_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3241 (class 2606 OID 16434)
+-- Name: machine_list machine_list_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.machine_list
+    ADD CONSTRAINT machine_list_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3243 (class 2606 OID 16443)
+-- Name: master_mc_g6m master_mc_g6m_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.master_mc_g6m
+    ADD CONSTRAINT master_mc_g6m_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3245 (class 2606 OID 16452)
+-- Name: mc_list_model mc_list_model_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.mc_list_model
+    ADD CONSTRAINT mc_list_model_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3237 (class 2606 OID 16398)
+-- Name: transaction transactionon_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
+--
+
+ALTER TABLE ONLY public.transaction
+    ADD CONSTRAINT transactionon_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2024-12-23 03:07:24 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- Completed on 2024-12-23 03:07:24 UTC
+
+--
+-- PostgreSQL database cluster dump complete
+--
+

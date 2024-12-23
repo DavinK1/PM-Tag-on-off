@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   color: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* สำหรับ header */
@@ -114,71 +113,111 @@
   align-items: center;
   justify-content: center;
   height: fit-content;
+  padding: 10px;
 }
 
 .main .card {
-  margin: 10px 10px;
+  margin: 5px 5px;
   width: 700px;
-  height: 100px;
-  border-radius: 20px;
-  background: #ffffff60;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  height: 100%;
+  border-radius: 10px;
+  background: #5a5a5a60;
+  padding: 10px 15px;
 }
 
-.mainCardHeader {
+.mainGridCard {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.mainLeftCard {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #f4f4f4;
-  padding: 10px;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.workingImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
-  font-weight: bold;
+  border: 3px solid #ffffff;
+  font-size: 14px;
+}
+
+.mainCenterCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.mainGridCenterCard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto-fit, 1fr));
+  gap: 10px;
+  font-size: 14px;
+  width: 100%;
 }
 
 .mainMachineId {
-  font-size: 14px;
+  font-size: 1.4rem;
+}
+.mainProblemText .mainTextTagNumber .mainTextTagType {
+  font-weight: normal !important;
 }
 
-.mainDate {
-  font-size: 12px;
-  color: gray;
-}
-
-.mainCardBody {
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-}
-
-.mainProblem {
-  font-size: 14px;
-  color: #333;
-}
-
-.mainTagInfo {
-  font-size: 12px;
-  color: #555;
-  margin-top: 5px;
-}
-
-.mainCardFooter {
+.mainGridTagInfo {
   display: flex;
-  justify-content: space-between;
+  gap: 30px;
+}
+
+.mainTextTagNumber span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+}
+
+.mainTextTagType span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
+}
+
+.mainRightCard {
+  display: flex;
   align-items: center;
-  background: #f4f4f4;
-  padding: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.mainGridRightCard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
   font-size: 14px;
-  border-radius: 10px;
+  width: 100%;
+}
+.mainTextDate {
+  font-size: 16px;
+  text-align: center;
+}
+.mainTextTest {
+  padding: 5px;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: crimson;
 }
 
-.mainStatusDelay {
-  background-color: red;
-  padding: 10px;
-}
-
-.mainShift {
-  font-weight: bold;
+.mainTextShift span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
 }

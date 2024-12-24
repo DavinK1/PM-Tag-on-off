@@ -13,10 +13,10 @@ const dbConnect = async () => {
   try {
     // ทดสอบการเชื่อมต่อ
     const client = await pool.connect();
-    console.log("Connected to PostgreSQL");
+    console.log("เชื่อมต่อฐานข้อมูล Postgres สำเร็จ");
     client.release();
   } catch (error) {
-    console.error("Failed to connect to PostgreSQL:", error);
+    console.error("เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล Postgres : ", error);
     throw error;
   }
 };

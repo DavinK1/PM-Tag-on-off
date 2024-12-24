@@ -1,8 +1,15 @@
 const express = require("express");
 const { Client } = require("pg");
 const cors = require("cors");
-const app = express();
+const router = express();
 const port = process.env.PORT;
+
+// Import routes
+const transactions_logs = require("./transaction_logs");
+const linename_g6 = require("./linename_g6");
+const machine_list = require("./machine_list");
+const master_mc_g6m = require("./master_mc_g6m");
+const mc_list_model = require("./mc_list_model");
 
 // เชื่อมต่อกับ PostgreSQL
 const client = new Client({
@@ -11,28 +18,26 @@ const client = new Client({
 
 client
   .connect()
-  .then(() => console.log("Connected to PostgreSQL"))
-  .catch((err) => console.error("Connection error", err.stack));
+  .then(() => console.log("เชื่อมต่อฐานข้อมูล Postgres สำเร็จ!"))
+  .catch((err) => console.error("เกิดเชื่อมต่อเกิดข้อผิดพลาด", err.stack));
 
 // ใช้ CORS เพื่อให้สามารถใช้ API ข้าม Ports ได้
-app.use(cors());
+router.use(cors());
+router.use(express.json());
 
-// API ตัวอย่าง
-app.get("/", (req, res) => {
+// หน้า Hello เอาไว้ TEST ตัว API
+router.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// API สำหรับดึงข้อมูลจากฐานข้อมูล
-app.get("/transactions", async (req, res) => {
-  try {
-    const result = await client.query("SELECT * FROM transaction");
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
-});
+// ใช้ routes
+router.use("/transaction_logs", transactions_logs);
+router.use("/linename_g6", linename_g6);
+router.use("/machine_list", machine_list);
+router.use("/master_mc_g6m", master_mc_g6m);
+router.use("/mc_list_model", mc_list_model);
 
-app.listen(port, () => {
+// เริ่มเซิร์ฟเวอร์
+router.listen(port, () => {
   console.log(`API is running on http://localhost:${port}`);
 });

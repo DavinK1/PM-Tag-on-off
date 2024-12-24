@@ -12,6 +12,7 @@ import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpAZ } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const G6Main = () => {
   const navigate = useNavigate();
@@ -20,12 +21,12 @@ const G6Main = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/transactions")
+      .get("http://localhost:4000/transaction_logs")
       .then((response) => {
         setData(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching transaction:", error);
+        console.error("เกิดปัญในการเรียกใช้ข้อมูล:", error);
       });
   }, []);
 
@@ -57,7 +58,7 @@ const G6Main = () => {
             </button>
             <button
               className={styles.gridHeaderButton}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/AddData")}
             >
               <FontAwesomeIcon icon={faPlus} size="2x" />
             </button>
@@ -86,28 +87,58 @@ const G6Main = () => {
               </div>
               <div className={styles.mainCenterCard}>
                 <div className={styles.mainGridCenterCard}>
-                  <p className={styles.mainMachineId}>STGR-0163</p>
+                  <p className={styles.mainMachineId}>{item.machine_no}</p>
                   <p className={styles.mainProblemText}>
-                    ปัญหา : <span>xxxxxxxxxx</span>
+                    ปัญหา : <span>{item.problem_topic}</span>
                   </p>
                   <div className={styles.mainGridTagInfo}>
                     <p className={styles.mainTextTagNumber}>
-                      TAG No : <span>166</span>
+                      TAG No : <span>{item.id}</span>
                     </p>
                     <p className={styles.mainTextTagType}>
-                      Tag Type : <span>RED</span>
+                      Tag Type : <span>{item.tag_type}</span>
                     </p>
                   </div>
                 </div>
               </div>
               <div className={styles.mainRightCard}>
                 <div className={styles.mainGridRightCard}>
-                  <p className={styles.mainTextDate}>23/12/2024</p>
-                  <p className={styles.mainTextTest}>OFF</p>
+                  <p className={styles.mainTextDate}>{item.receive_date}</p>
+                  <p
+                    className={styles.mainTextTest}
+                    style={{
+                      backgroundColor:
+                        item.test === "OFF"
+                          ? "#16a34a" // เขียว
+                          : item.test === "ON"
+                          ? "#facc15" // เหลือง
+                          : item.test === "DELAY"
+                          ? "#dc2626" // แดง
+                          : "#ffffff", // ขาว (default)
+                      color:
+                        item.test === "OFF"
+                          ? "#ffffff" // ขาว
+                          : item.test === "ON"
+                          ? "#000000" // ดำ
+                          : item.test === "DELAY"
+                          ? "#ffffff" // ขาว
+                          : "#000000", // ดำ (default)
+                    }}
+                  >
+                    {item.test}
+                  </p>
                   <p className={styles.mainTextShift}>
-                    Shift : <span>RED</span>
+                    Shift : <span>{item.shift}</span>
                   </p>
                 </div>
+              </div>
+              <div className={styles.mainForDetail}>
+                <FontAwesomeIcon
+                  className={styles.faAngleRight}
+                  icon={faAngleRight}
+                  size="2x"
+                  onClick={() => navigate("/")}
+                />
               </div>
             </div>
           </div>

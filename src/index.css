@@ -8,7 +8,7 @@
     url("./assets/fonts/WOFF/LINESeedSansTH_W_Th.woff") format("woff"),
     url("./assets/fonts/EOT/LINESeedSansTH_W_Th.eot")
       format("embedded-opentype");
-  font-weight: thin; /* Light */
+  font-weight: 100; /* Thin */
   font-style: normal;
 }
 
@@ -18,7 +18,7 @@
     url("./assets/fonts/WOFF/LINESeedSansTH_W_Rg.woff") format("woff"),
     url("./assets/fonts/EOT/LINESeedSansTH_W_Rg.eot")
       format("embedded-opentype");
-  font-weight: normal; /* Regular */
+  font-weight: 400; /* Regular */
   font-style: normal;
 }
 
@@ -28,7 +28,7 @@
     url("./assets/fonts/WOFF/LINESeedSansTH_W_Bd.woff") format("woff"),
     url("./assets/fonts/EOT/LINESeedSansTH_W_Bd.eot")
       format("embedded-opentype");
-  font-weight: bolder; /* Bold */
+  font-weight: 700; /* Bold */
   font-style: normal;
 }
 
@@ -38,11 +38,10 @@
     url("./assets/fonts/WOFF/LINESeedSansTH_W_XBd.woff") format("woff"),
     url("./assets/fonts/EOT/LINESeedSansTH_W_XBd.eot")
       format("embedded-opentype");
-  font-weight: bold; /* Black */
+  font-weight: 900; /* Black */
   font-style: normal;
 }
 
 body {
   font-family: "LINE Seed Sans TH", sans-serif;
-  font-weight: normal; /* Regular */
 }

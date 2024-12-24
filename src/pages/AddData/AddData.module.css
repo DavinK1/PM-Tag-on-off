@@ -1,0 +1,213 @@
+/* Form container */
+.container {
+  height: fit-content;
+  flex-direction: column;
+  background-color: #000737;
+  justify-content: center;
+}
+
+/* สำหรับ header */
+.header {
+  background-color: #1a2574;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px 30px;
+}
+
+.gridHeader {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.gridHeaderItem1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  gap: 40px;
+}
+
+.gridHeaderItem2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  gap: 20px;
+}
+
+.gridHeaderItem3 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  color: white;
+  gap: 30px;
+}
+
+.gridHeaderButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffea00;
+  color: #001a66;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gridHeaderButton:hover {
+  background-color: #ffd633;
+}
+
+.gridHeaderItem1 p,
+.gridHeaderItem2 p,
+.gridHeaderItem3 p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+}
+
+.gridHeaderItem1 p:hover,
+.gridHeaderItem3 p:hover {
+  color: #ffd633;
+}
+
+.main {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  padding: 30px;
+}
+
+.formContainer {
+  max-width: 900px;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+  background-color: #000737;
+  border-radius: 20px;
+}
+
+/* Grid layout */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  background-color: #e2f2ff;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+/* Form group */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form label */
+.formLabel {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Form input */
+.formInput,
+.formSelect,
+.formTextarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #00283742;
+  border-radius: 4px;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: #006eff8d;
+  box-shadow: 0 0 0 2px #007bff40;
+}
+
+.formSelect {
+  height: 100%;
+  max-height: 200px;
+}
+
+/* Textarea */
+.formTextarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.signStarLine,
+.signStarReporter {
+  color: crimson;
+}
+
+.labelSelectShift,
+.labelSelectKomarigotoDetail,
+.labelSelectProblemType,
+.labelSelectTagLevelDetail,
+.labelSelectTagType,
+.labelSelectActivity,
+.labelSelectMachineNo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00073899;
+}
+
+.labelOption {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000738;
+}
+
+.placeholderOption {
+  color: #00073899; /* Placeholder color */
+}
+
+/* Image info */
+.imageInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #404040;
+  gap: 10px;
+}
+
+.cameraIcon {
+  font-size: 50px;
+  color: #ffd900;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}

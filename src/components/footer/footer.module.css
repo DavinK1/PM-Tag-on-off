@@ -6,6 +6,16 @@
   display: flex;
   align-items: center;
   justify-content: end;
-  font-size: 1em;
   text-align: right;
+}
+
+.footer span {
+  font-size: 1em;
+  font-weight: 400;
+  transition: all 0.4s ease;
+}
+
+.footer span:hover {
+  color: #ffd633;
+  
 }

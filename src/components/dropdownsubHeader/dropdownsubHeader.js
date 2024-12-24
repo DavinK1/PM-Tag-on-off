@@ -64,14 +64,14 @@ const DropdownsubHeader = () => {
               isRotatedTagType ? styles.rotated : ""
             }`}
           >
-            ▼
+            ▲
           </span>
         </button>
         {activeDropdown === 0 && (
           <div className={`${styles.dropdownContent} ${styles.show}`}>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="#">WHITE</a>
+            <a href="#">RED</a>
+            <a href="#">Challenge</a>
           </div>
         )}
       </div>
@@ -93,14 +93,14 @@ const DropdownsubHeader = () => {
               isRotatedStatusType ? styles.rotated : ""
             }`}
           >
-            ▼
+            ▲
           </span>
         </button>
         {activeDropdown === 1 && (
           <div className={`${styles.dropdownContent} ${styles.show}`}>
-            <a href="#">Link A</a>
-            <a href="#">Link B</a>
-            <a href="#">Link C</a>
+            <a href="#">ON</a>
+            <a href="#">OFF</a>
+            <a href="#">DELAY</a>
           </div>
         )}
       </div>
@@ -122,14 +122,13 @@ const DropdownsubHeader = () => {
               isRotatedShift ? styles.rotated : ""
             }`}
           >
-            ▼
+            ▲
           </span>
         </button>
         {activeDropdown === 2 && (
           <div className={`${styles.dropdownContent} ${styles.show}`}>
-            <a href="#">Item 1</a>
-            <a href="#">Item 2</a>
-            <a href="#">Item 3</a>
+            <a href="#">W</a>
+            <a href="#">Y</a>
           </div>
         )}
       </div>

@@ -94,6 +94,7 @@
   align-items: center;
   position: relative;
   padding: 20px 10px;
+  font-weight: 900;
 }
 
 .gridsubHeaderItem {
@@ -127,7 +128,7 @@
 
 .mainGridCard {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr 0.2fr;
   gap: 1rem;
   width: 100%;
   height: 100%;
@@ -147,7 +148,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 3px solid #ffffff;
   font-size: 14px;
 }
@@ -162,16 +163,20 @@
 .mainGridCenterCard {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(auto-fit, 1fr));
-  gap: 10px;
+  gap: 5px;
   font-size: 14px;
   width: 100%;
+  height: 100%;
 }
 
 .mainMachineId {
   font-size: 1.4rem;
+  font-weight: 900;
 }
-.mainProblemText .mainTextTagNumber .mainTextTagType {
-  font-weight: normal !important;
+.mainProblemText,
+.mainTextTagNumber,
+.mainTextTagType {
+  font-weight: 700;
 }
 
 .mainGridTagInfo {
@@ -182,13 +187,19 @@
 .mainTextTagNumber span {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 400;
+}
+
+.mainProblemText span {
+  font-weight: 400;
 }
 
 .mainTextTagType span {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 400;
 }
 
 .mainRightCard {
@@ -201,23 +212,49 @@
 .mainGridRightCard {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 10px;
+  gap: 3px;
   font-size: 14px;
+  height: 100%;
   width: 100%;
 }
 .mainTextDate {
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
+  font-weight: 400;
 }
 .mainTextTest {
   padding: 5px;
   font-size: 1.5rem;
   text-align: center;
-  background-color: crimson;
+  border-radius: 3px;
+  background-color: #dc143c;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.mainTextShift {
+  font-weight: 700;
+}
 .mainTextShift span {
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 2px;
+  font-weight: 400;
+}
+
+.mainForDetail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.mainForDetail .faAngleRight {
+  transition: all 0.3s ease;
+}
+.mainForDetail .faAngleRight:hover {
+  transform: translateX(2px);
+  background-color: #ffd633;
 }

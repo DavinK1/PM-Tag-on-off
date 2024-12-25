@@ -125,6 +125,7 @@
 .formGroupSection1 {
   display: grid;
   grid-template-rows: 1fr;
+  flex-direction: row;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   border: 5px solid #00073779;
@@ -185,14 +186,19 @@
 .formSubGroup2Section1Row2,
 .formSubGroup3Section1Row1,
 .formSubGroup3Section1Row2,
-.formSubGroup4Section1Row1,
-.formSubGroup5Section1Row1 {
+.formSubGroup4Section1Row1 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
   padding: 0.5rem;
   border: 2px solid #00175c3a;
-  flex-direction: column;
+  flex-direction: row;
 }
 .formSubGroup5Section1Row1 {
-  flex-direction: column;
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: auto 1fr;
+  align-items: center;
   padding: 0.5rem;
   height: 100%;
   min-height: 150px;
@@ -205,8 +211,9 @@
   height: fit-content;
   color: #fff;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
+  margin: 0px 10px 0px 0px;
 }
 
 .textData {
@@ -260,9 +267,12 @@
 .formSubGroup2Section2Row2,
 .formSubGroup3Section2Row1,
 .formSubGroup3Section2Row2 {
-  background-color: #ffa0b3;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
   padding: 0.5rem;
-  border-radius: 10px;
+  border: 2px solid #00175c3a;
+  flex-direction: row;
 }
 
 /* Horizontal */

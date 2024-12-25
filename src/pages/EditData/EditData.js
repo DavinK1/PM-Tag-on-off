@@ -56,33 +56,33 @@ const EditData = () => {
               </div>
               <div className={styles.formSubGroup2Section1}>
                 <div className={styles.formSubGroup2Section1Row1}>
-                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textLabel}>วันที่พบ : </p>
                   <p className={styles.textData}>Sample</p>
                 </div>
                 <div className={styles.formSubGroup2Section1Row2}>
-                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textLabel}>Line : </p>
                   <p className={styles.textData}>Sample</p>
                 </div>
               </div>
               <div className={styles.formSubGroup3Section1}>
                 <div className={styles.formSubGroup3Section1Row1}>
-                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textLabel}>ชื่อผู้แจ้ง : </p>
                   <p className={styles.textData}>Sample</p>
                 </div>
                 <div className={styles.formSubGroup3Section1Row2}>
-                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textLabel}>ประเภท : </p>
                   <p className={styles.textData}>Sample</p>
                 </div>
               </div>
               <div className={styles.formSubGroup4Section1}>
                 <div className={styles.formSubGroup4Section1Row1}>
-                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textLabel}>รายละเอียด : </p>
                   <p className={styles.textData}>Sample</p>
                 </div>
               </div>
               <div className={styles.formSubGroup5Section1}>
                 <div className={styles.formSubGroup5Section1Row1}>
-                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textLabel}>รูปภาพปัญหา : </p>
                   <p className={styles.textData}>Sample</p>
                 </div>
               </div>
@@ -91,15 +91,30 @@ const EditData = () => {
             {/* Section 2 */}
             <div className={styles.formGroupSection2}>
               <div className={styles.formSubGroup1Section2}>
-                <div className={styles.formSubGroup1Section2Row1}>row1</div>
+                <div className={styles.formSubGroup1Section2Row1}>
+                  <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
               </div>
               <div className={styles.formSubGroup2Section2}>
-                <div className={styles.formSubGroup2Section2Row1}>row1</div>
-                <div className={styles.formSubGroup2Section2Row2}>row2</div>
+                <div className={styles.formSubGroup2Section2Row1}>
+                  <p className={styles.textLabel}>แผนการแก้ไข : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup2Section2Row2}>
+                  <p className={styles.textLabel}>วันที่เสร็จสิ้น : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
               </div>
               <div className={styles.formSubGroup3Section2}>
-                <div className={styles.formSubGroup3Section2Row1}>row1</div>
-                <div className={styles.formSubGroup3Section2Row2}>row2</div>
+                <div className={styles.formSubGroup3Section2Row1}>
+                  <p className={styles.textLabel}>ผู้แก้ไข : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup3Section2Row2}>
+                  <p className={styles.textLabel}>รูปภาพปัญหา : </p>
+                  <p className={styles.textData}>--------</p>
+                </div>
               </div>
             </div>
 

@@ -3,91 +3,116 @@ import styles from "./EditData.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+
 const EditData = () => {
+  const navigate = useNavigate();
   return (
-    <div className={styles.container}>
-      {/* Section 1 */}
-      <div className={styles.section}>
-        <h5 className={styles.title}>ส่วนที่ 1: รายละเอียดปัญหา</h5>
-        <div className={styles.row}>
-          <div className={styles.col}>
-            <p>
-              <strong>Tag แจ้งปัญหา:</strong> ตัวอย่าง
-            </p>
-            <p>
-              <strong>No.:</strong> 12345
-            </p>
-            <p>
-              <strong>วันที่พบ:</strong> 2024-12-25
-            </p>
-            <p>
-              <strong>Line:</strong> Line 1
-            </p>
+    <>
+      {/* Header */}
+      <header className={styles.header}>
+        <div className={styles.gridHeader}>
+          <div className={styles.gridHeaderItem1}>
+            <button
+              className={styles.gridHeaderButton}
+              onClick={() => navigate(-1)}
+              aria-label="Go back to the previous page"
+            >
+              <FontAwesomeIcon icon={faCircleLeft} size="2x" />
+            </button>
           </div>
-          <div className={styles.col}>
-            <p>
-              <strong>ชื่อผู้แจ้ง:</strong> นายสมชาย
-            </p>
-            <p>
-              <strong>ประเภท:</strong> ความปลอดภัย
-            </p>
-            <p>
-              <strong>รายละเอียด:</strong> มีปัญหาเกิดขึ้น...
-            </p>
-            <p>
-              <strong>รูปภาพปัญหา:</strong>{" "}
-              <span className={styles.imagePlaceholder}>[รูปภาพ]</span>
-            </p>
-          </div>
-        </div>
-      </div>
 
-      {/* Section 2 */}
-      <div className={styles.section}>
-        <h5 className={styles.title}>ส่วนที่ 2: การจัดการปัญหา</h5>
-        <div className={styles.row}>
-          <div className={styles.col}>
-            <p>
-              <strong>วันที่รับเรื่อง:</strong> 2024-12-26
-            </p>
-            <p>
-              <strong>แผนการแก้ไข:</strong> ตรวจสอบและแก้ไข
-            </p>
+          <div className={styles.gridHeaderItem2}>
+            <p>แจ้งปัญหาและปรับปรุงเครื่องจักร</p>
           </div>
-          <div className={styles.col}>
-            <p>
-              <strong>เสร็จ:</strong> ไม่
-            </p>
-            <p>
-              <strong>ผู้แก้ไข:</strong> นาย A
-            </p>
-          </div>
-        </div>
-      </div>
 
-      {/* Section 3 */}
-      <div className={`${styles.section} ${styles.section3}`}>
-        <div className={styles.block}>
-          <p>
-            <strong>GL Prod</strong>
-          </p>
-          <div className={styles.imagePlaceholder}>[รูปภาพ]</div>
-          <p>วันที่: 2024-12-25</p>
+          <div className={styles.gridHeaderItem3}>
+            <button
+              className={styles.gridHeaderButton}
+              onClick={() => navigate("/")}
+            >
+              <FontAwesomeIcon icon={faSave} size="2x" />
+            </button>
+          </div>
         </div>
-        <div className={styles.block}>
-          <p>
-            <strong>GL MT</strong>
-          </p>
-          <div className={styles.imagePlaceholder}>[รูปภาพ]</div>
-          <p>วันที่: 2024-12-26</p>
+      </header>
+
+      <main className={styles.main}>
+        <div className={styles.formContainer}>
+          <form className={styles.gridContainer}>
+            {/* Section 1 */}
+            <div className={styles.formGroupSection1}>
+              <div className={styles.formSubGroup1Section1}>
+                <div className={styles.formSubGroup1Section1Row1}>
+                  <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup1Section1Row2}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup2Section1}>
+                <div className={styles.formSubGroup2Section1Row1}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup2Section1Row2}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup3Section1}>
+                <div className={styles.formSubGroup3Section1Row1}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup3Section1Row2}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup4Section1}>
+                <div className={styles.formSubGroup4Section1Row1}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup5Section1}>
+                <div className={styles.formSubGroup5Section1Row1}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 2 */}
+            <div className={styles.formGroupSection2}>
+              <div className={styles.formSubGroup1Section2}>
+                <div className={styles.formSubGroup1Section2Row1}>row1</div>
+              </div>
+              <div className={styles.formSubGroup2Section2}>
+                <div className={styles.formSubGroup2Section2Row1}>row1</div>
+                <div className={styles.formSubGroup2Section2Row2}>row2</div>
+              </div>
+              <div className={styles.formSubGroup3Section2}>
+                <div className={styles.formSubGroup3Section2Row1}>row1</div>
+                <div className={styles.formSubGroup3Section2Row2}>row2</div>
+              </div>
+            </div>
+
+            <hr className={styles.LineHrSection1_2} />
+
+            {/* Section 3 */}
+            <div className={styles.formGroupSection3}>
+              <h1 className={styles.textSection3}>Section 3</h1>
+            </div>
+          </form>
         </div>
-        <div className={styles.block}>
-          <p>
-            <strong>Text แสดง</strong>
-          </p>
-        </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 

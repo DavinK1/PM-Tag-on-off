@@ -20,8 +20,8 @@ function App() {
       <Route path="/g6head" element={<G6Head />} />
       <Route path="/g6crank" element={<G6Crank />} />
       <Route path="/g6camshaft" element={<G6Camshaft />} />
-      <Route path="/AddData" element={<AddData />} />
-      <Route path="/EditData" element={<EditData />} />
+      <Route path="/adddata" element={<AddData />} />
+      <Route path="/editdata" element={<EditData />} />
     </Routes>
   );
 }

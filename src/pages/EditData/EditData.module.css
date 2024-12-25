@@ -1,0 +1,284 @@
+/* สำหรับ header */
+.header {
+  background-color: #1a2574;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px 30px;
+}
+
+.gridHeader {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.gridHeaderItem1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  gap: 40px;
+}
+
+.gridHeaderItem2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  gap: 20px;
+}
+
+.gridHeaderItem3 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  color: white;
+  gap: 30px;
+}
+
+.gridHeaderButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffea00;
+  color: #001a66;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gridHeaderButton:hover {
+  background-color: #ffd633;
+}
+
+.gridHeaderItem1 p,
+.gridHeaderItem2 p,
+.gridHeaderItem3 p {
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.gridHeaderItem1 p:hover,
+.gridHeaderItem3 p:hover {
+  color: #ffd633;
+}
+
+/* Main */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  padding: 30px;
+  background-color: #ffffff;
+}
+
+/* Main */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  padding: 30px;
+  background-color: #ffffff;
+}
+
+.formContainer {
+  max-width: 600px;
+  width: 100%;
+  justify-content: center;
+  padding: 10px;
+  background-color: #000737;
+  border-radius: 25px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
+  gap: 20px;
+  background-color: #ebf6ff;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+/* Section 1 */
+.formGroupSection1 {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  border: 5px solid #00073779;
+  background-color: #dbdbdb;
+  padding: 15px;
+  gap: 5px;
+  width: auto;
+}
+
+.formSubGroup1Section1 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 3fr 1.2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+
+.formSubGroup2Section1 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+.formSubGroup3Section1 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+.formSubGroup4Section1 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 3fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+
+.formSubGroup5Section1 {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 3fr;
+  gap: 5px;
+}
+
+.formSubGroup1Section1Row1,
+.formSubGroup1Section1Row2,
+.formSubGroup2Section1Row1,
+.formSubGroup2Section1Row2,
+.formSubGroup3Section1Row1,
+.formSubGroup3Section1Row2,
+.formSubGroup4Section1Row1,
+.formSubGroup5Section1Row1 {
+  padding: 0.5rem;
+  border: 2px solid #00175c3a;
+  flex-direction: column;
+}
+.formSubGroup5Section1Row1 {
+  flex-direction: column;
+  padding: 0.5rem;
+  height: 100%;
+  min-height: 150px;
+  border: 2px solid #00175c3a;
+}
+
+.textLabel {
+  background-color: #1a2574;
+  width: fit-content;
+  height: fit-content;
+  color: #fff;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.textData {
+}
+
+/* section 2 */
+.formGroupSection2 {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  border: 5px solid #00073779;
+  background-color: #dbdbdb;
+  padding: 15px;
+  gap: 5px;
+  width: auto;
+}
+
+.formSubGroup1Section2 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+.formSubGroup2Section2 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+
+.formSubGroup3Section2 {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 2fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+
+.formSubGroup1Section2Row1,
+.formSubGroup1Section2Row2,
+.formSubGroup2Section2Row1,
+.formSubGroup2Section2Row2,
+.formSubGroup3Section2Row1,
+.formSubGroup3Section2Row2 {
+  background-color: #ffa0b3;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+/* Horizontal */
+.LineHrSection1_2 {
+  border: 2px solid #000737;
+  border-radius: 15px;
+  margin: 0px 10px;
+}
+
+/* section 3 */
+.formGroupSection3 {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  border: 5px solid #00073779;
+  background-color: #dbdbdb;
+  padding: 15px;
+}

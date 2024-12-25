@@ -137,7 +137,7 @@ const G6Main = () => {
                   className={styles.faAngleRight}
                   icon={faAngleRight}
                   size="2x"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/editdata")}
                 />
               </div>
             </div>

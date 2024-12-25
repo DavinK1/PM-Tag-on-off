@@ -52,8 +52,59 @@ router.get("/", async (req, res) => {
   }
 });
 
+// SELECT: เรียกข้อมูลด้วย ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params; // รับค่า id จาก URL
+  try {
+    const result = await client.query(
+      `
+      SELECT 
+        id,
+        machine_no,
+        operation_no,
+        line,
+        activity,
+        tag_type,
+        ctag_level,
+        problem_type,
+        komarigoto,
+        problem_topic,
+        counter_measure,
+        shift,
+        group_pic,
+        editor_pic,
+        TO_CHAR(receive_Date, 'DD/MM/YY') AS receive_date,
+        start_date,
+        finish_date,
+        end_date,
+        gl_mt2,
+        gl_prod2,
+        attachment,
+        test,
+        cal_status,
+        date_mtsign,
+        date_prosign,
+        created_by
+      FROM transaction_logs
+      WHERE id = $1; -- ใช้ parameterized query เพื่อป้องกัน SQL Injection
+      `,
+      [id] // ส่งค่า id เป็นพารามิเตอร์
+    );
+
+    if (result.rows.length === 0) {
+      // ถ้าไม่มีข้อมูลตรงกับ id
+      return res.status(404).json({ message: "ไม่พบข้อมูลที่ต้องการ" });
+    }
+
+    res.json(result.rows[0]); // ส่งข้อมูลแถวเดียวกลับไป
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("เซิร์ฟเวอร์เกิดข้อผิดพลาด!");
+  }
+});
+
 // INSERT: เพิ่มข้อมูลใหม่
-router.post("/", async (req, res) => {
+router.post("/InsertTransaction", async (req, res) => {
   const {
     machine_no,
     operation_no,

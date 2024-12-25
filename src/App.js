@@ -21,7 +21,7 @@ function App() {
       <Route path="/g6crank" element={<G6Crank />} />
       <Route path="/g6camshaft" element={<G6Camshaft />} />
       <Route path="/adddata" element={<AddData />} />
-      <Route path="/editdata" element={<EditData />} />
+      <Route path="/editdata/:id" element={<EditData />} />
     </Routes>
   );
 }

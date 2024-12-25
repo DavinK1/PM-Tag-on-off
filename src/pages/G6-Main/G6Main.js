@@ -14,7 +14,7 @@ import { faArrowUpAZ } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-const G6Main = () => {
+const G6Main = ({ id }) => {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
@@ -137,7 +137,7 @@ const G6Main = () => {
                   className={styles.faAngleRight}
                   icon={faAngleRight}
                   size="2x"
-                  onClick={() => navigate("/editdata")}
+                  onClick={() => navigate(`/editdata/${id}`)}
                 />
               </div>
             </div>

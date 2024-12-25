@@ -12,43 +12,39 @@ const EditData = () => {
   const navigate = useNavigate();
 
   // ใช้สำหรับเรียกข้อมูลจาก DATABASE ด้วย id ที่มาจากหน้า Main
-  const { id } = useParams();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { id } = useParams(); // ดึง id จาก URL params
+  const [data, setData] = useState(null); // สถานะเพื่อเก็บข้อมูลที่ดึงมา
+  const [loading, setLoading] = useState(true); // สถานะการโหลด
 
   useEffect(() => {
+    // ดึงข้อมูลจาก server ด้วย fetch
     const fetchData = async () => {
       try {
-        const response = await fetch(`/transaction_logs/${id}`);
+        const response = await fetch(`/api/editdata/${id}`);
         if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.status}`);
+          throw new Error("ไม่พบข้อมูล");
         }
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const result = await response.json();
-          setData(result);
-        } else {
-          throw new Error("Unexpected response type. Expected JSON.");
-        }
-      } catch (err) {
-        setError(err.message);
+        const result = await response.json();
+        setData(result); // เก็บข้อมูลใน state
+      } catch (error) {
+        console.error(error);
       } finally {
-        setLoading(false);
+        setLoading(false); // การโหลดเสร็จสิ้น
       }
     };
 
-    fetchData();
-  }, [id]);
+    fetchData(); // เรียกใช้ฟังก์ชัน
+  }, [id]); // จะทำงานใหม่เมื่อ id เปลี่ยน
 
+  // ถ้ายังโหลดข้อมูลอยู่
   if (loading) {
-    return <p>Loading...</p>;
+    return <div>กำลังโหลดข้อมูล...</div>;
   }
 
-  if (error) {
-    return <p>Error: {error}</p>;
+  // ถ้าไม่มีข้อมูล
+  if (!data) {
+    return <div>ไม่พบข้อมูล</div>;
   }
-
   return (
     <>
       {/* Header */}
@@ -80,98 +76,92 @@ const EditData = () => {
       </header>
 
       <main className={styles.main}>
-        {loading ? (
-          <p>Loading...</p>
-        ) : data ? (
-          <div className={styles.formContainer}>
-            <form className={styles.gridContainer}>
-              {/* Section 1 */}
-              <div className={styles.formGroupSection1}>
-                <div className={styles.formSubGroup1Section1}>
-                  <div className={styles.formSubGroup1Section1Row1}>
-                    <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                  <div className={styles.formSubGroup1Section1Row2}>
-                    <p className={styles.textLabel}>No. : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
+        <div className={styles.formContainer}>
+          <form className={styles.gridContainer}>
+            {/* Section 1 */}
+            <div className={styles.formGroupSection1}>
+              <div className={styles.formSubGroup1Section1}>
+                <div className={styles.formSubGroup1Section1Row1}>
+                  <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
+                  <p className={styles.textData}>Sample</p>
                 </div>
-                <div className={styles.formSubGroup2Section1}>
-                  <div className={styles.formSubGroup2Section1Row1}>
-                    <p className={styles.textLabel}>วันที่พบ : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                  <div className={styles.formSubGroup2Section1Row2}>
-                    <p className={styles.textLabel}>Line : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                </div>
-                <div className={styles.formSubGroup3Section1}>
-                  <div className={styles.formSubGroup3Section1Row1}>
-                    <p className={styles.textLabel}>ชื่อผู้แจ้ง : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                  <div className={styles.formSubGroup3Section1Row2}>
-                    <p className={styles.textLabel}>ประเภท : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                </div>
-                <div className={styles.formSubGroup4Section1}>
-                  <div className={styles.formSubGroup4Section1Row1}>
-                    <p className={styles.textLabel}>รายละเอียด : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                </div>
-                <div className={styles.formSubGroup5Section1}>
-                  <div className={styles.formSubGroup5Section1Row1}>
-                    <p className={styles.textLabel}>รูปภาพปัญหา : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
+                <div className={styles.formSubGroup1Section1Row2}>
+                  <p className={styles.textLabel}>No. : </p>
+                  <p className={styles.textData}>Sample</p>
                 </div>
               </div>
-
-              {/* Section 2 */}
-              <div className={styles.formGroupSection2}>
-                <div className={styles.formSubGroup1Section2}>
-                  <div className={styles.formSubGroup1Section2Row1}>
-                    <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
+              <div className={styles.formSubGroup2Section1}>
+                <div className={styles.formSubGroup2Section1Row1}>
+                  <p className={styles.textLabel}>วันที่พบ : </p>
+                  <p className={styles.textData}>Sample</p>
                 </div>
-                <div className={styles.formSubGroup2Section2}>
-                  <div className={styles.formSubGroup2Section2Row1}>
-                    <p className={styles.textLabel}>แผนการแก้ไข : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                  <div className={styles.formSubGroup2Section2Row2}>
-                    <p className={styles.textLabel}>วันที่เสร็จสิ้น : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                </div>
-                <div className={styles.formSubGroup3Section2}>
-                  <div className={styles.formSubGroup3Section2Row1}>
-                    <p className={styles.textLabel}>ผู้แก้ไข : </p>
-                    <p className={styles.textData}>Sample</p>
-                  </div>
-                  <div className={styles.formSubGroup3Section2Row2}>
-                    <p className={styles.textLabel}>รูปภาพปัญหา : </p>
-                    <p className={styles.textData}>--------</p>
-                  </div>
+                <div className={styles.formSubGroup2Section1Row2}>
+                  <p className={styles.textLabel}>Line : </p>
+                  <p className={styles.textData}>Sample</p>
                 </div>
               </div>
-
-              <hr className={styles.LineHrSection1_2} />
-
-              {/* Section 3 */}
-              <div className={styles.formGroupSection3}>
-                <h1 className={styles.textSection3}>Section 3</h1>
+              <div className={styles.formSubGroup3Section1}>
+                <div className={styles.formSubGroup3Section1Row1}>
+                  <p className={styles.textLabel}>ชื่อผู้แจ้ง : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup3Section1Row2}>
+                  <p className={styles.textLabel}>ประเภท : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
               </div>
-            </form>
-          </div>
-        ) : (
-          <p>ไม่พบข้อมูล</p>
-        )}
+              <div className={styles.formSubGroup4Section1}>
+                <div className={styles.formSubGroup4Section1Row1}>
+                  <p className={styles.textLabel}>รายละเอียด : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup5Section1}>
+                <div className={styles.formSubGroup5Section1Row1}>
+                  <p className={styles.textLabel}>รูปภาพปัญหา : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 2 */}
+            <div className={styles.formGroupSection2}>
+              <div className={styles.formSubGroup1Section2}>
+                <div className={styles.formSubGroup1Section2Row1}>
+                  <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup2Section2}>
+                <div className={styles.formSubGroup2Section2Row1}>
+                  <p className={styles.textLabel}>แผนการแก้ไข : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup2Section2Row2}>
+                  <p className={styles.textLabel}>วันที่เสร็จสิ้น : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+              </div>
+              <div className={styles.formSubGroup3Section2}>
+                <div className={styles.formSubGroup3Section2Row1}>
+                  <p className={styles.textLabel}>ผู้แก้ไข : </p>
+                  <p className={styles.textData}>Sample</p>
+                </div>
+                <div className={styles.formSubGroup3Section2Row2}>
+                  <p className={styles.textLabel}>รูปภาพปัญหา : </p>
+                  <p className={styles.textData}>--------</p>
+                </div>
+              </div>
+            </div>
+
+            <hr className={styles.LineHrSection1_2} />
+
+            {/* Section 3 */}
+            <div className={styles.formGroupSection3}>
+              <h1 className={styles.textSection3}>Section 3</h1>
+            </div>
+          </form>
+        </div>
       </main>
     </>
   );

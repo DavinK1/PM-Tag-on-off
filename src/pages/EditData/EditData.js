@@ -15,18 +15,24 @@ const EditData = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/transaction_logs/${id}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error(`Failed to fetch data: ${response.status}`);
         }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const result = await response.json();
+          setData(result);
+        } else {
+          throw new Error("Unexpected response type. Expected JSON.");
+        }
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -34,6 +40,14 @@ const EditData = () => {
 
     fetchData();
   }, [id]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <>

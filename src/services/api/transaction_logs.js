@@ -86,7 +86,7 @@ router.get("/:id", async (req, res) => {
         date_prosign,
         created_by
       FROM transaction_logs
-      WHERE id = $1; -- ใช้ parameterized query เพื่อป้องกัน SQL Injection
+      WHERE id = $1;
       `,
       [id] // ส่งค่า id เป็นพารามิเตอร์
     );

@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// ใช้ routes
+// ใช้ routes ตัว API ต่างๆ
 router.use("/transaction_logs", transactions_logs);
 router.use("/linename_g6", linename_g6);
 router.use("/machine_list", machine_list);

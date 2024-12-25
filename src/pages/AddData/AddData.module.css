@@ -106,7 +106,7 @@
   justify-content: center;
   padding: 10px;
   background-color: #000737;
-  border-radius: 20px;
+  border-radius: 25px;
 }
 
 /* Grid layout */
@@ -114,7 +114,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  background-color: #e2f2ff;
+  background-color: #ebf6ff;
   border-radius: 15px;
   padding: 30px;
 }
@@ -123,6 +123,8 @@
 .formGroup {
   display: flex;
   flex-direction: column;
+  max-height: 250;
+  height: 100%;
 }
 
 /* Form label */
@@ -142,6 +144,9 @@
   background-color: #fff;
   outline: none;
   transition: border-color 0.2s;
+  line-height: 1.5;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .formInput:focus,
@@ -152,8 +157,14 @@
 }
 
 .formSelect {
-  height: 100%;
-  max-height: 200px;
+  height: auto;
+  max-height: none;
+  line-height: 1.5;
+}
+
+.formSelect,
+.formInput {
+  box-sizing: border-box;
 }
 
 /* Textarea */
@@ -186,7 +197,7 @@
 }
 
 .placeholderOption {
-  color: #00073899; /* Placeholder color */
+  color: #00073899;
 }
 
 /* Image info */

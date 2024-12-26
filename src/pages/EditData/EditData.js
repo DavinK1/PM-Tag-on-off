@@ -15,26 +15,36 @@ const EditData = () => {
   const { id } = useParams(); // ดึง id จาก URL params
   const [data, setData] = useState(null); // สถานะเพื่อเก็บข้อมูลที่ดึงมา
   const [loading, setLoading] = useState(true); // สถานะการโหลด
+  const [error, setError] = useState(true); // สถานะการโหลด
 
   useEffect(() => {
-    // ดึงข้อมูลจาก server ด้วย fetch
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/editdata/${id}`);
-        if (!response.ok) {
-          throw new Error("ไม่พบข้อมูล");
+        const response = await axios.get(
+          `http://localhost:4000/transaction_logs/${id}`
+        );
+        console.log("Response Data:", response.data);
+
+        // ถ้าข้อมูลที่ได้มาไม่ใช่ Array ให้แปลงหรือจัดการตามที่ต้องการ
+        if (Array.isArray(response.data)) {
+          setData(response.data);
+        } else {
+          setData([response.data]); // แปลงเป็น Array ถ้าเป็น Object
         }
-        const result = await response.json();
-        setData(result); // เก็บข้อมูลใน state
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        setError(err.message);
       } finally {
-        setLoading(false); // การโหลดเสร็จสิ้น
+        setLoading(false);
       }
     };
 
-    fetchData(); // เรียกใช้ฟังก์ชัน
-  }, [id]); // จะทำงานใหม่เมื่อ id เปลี่ยน
+    fetchData();
+  }, [id]);
+
+  // ตรวจสอบว่า data เป็น Array หรือไม่
+  if (!Array.isArray(data)) {
+    return <div>ข้อมูลไม่ถูกต้อง</div>;
+  }
 
   // ถ้ายังโหลดข้อมูลอยู่
   if (loading) {
@@ -42,9 +52,10 @@ const EditData = () => {
   }
 
   // ถ้าไม่มีข้อมูล
-  if (!data) {
+  if (!data || data.length === 0) {
     return <div>ไม่พบข้อมูล</div>;
   }
+
   return (
     <>
       {/* Header */}
@@ -76,92 +87,127 @@ const EditData = () => {
       </header>
 
       <main className={styles.main}>
-        <div className={styles.formContainer}>
-          <form className={styles.gridContainer}>
-            {/* Section 1 */}
-            <div className={styles.formGroupSection1}>
-              <div className={styles.formSubGroup1Section1}>
-                <div className={styles.formSubGroup1Section1Row1}>
-                  <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
-                  <p className={styles.textData}>Sample</p>
+        {Object.entries(data).map(([key, item], index) => (
+          <div key={index} className={styles.formContainer}>
+            <form className={styles.gridContainer}>
+              {/* Section 1 */}
+              <div className={styles.formGroupSection1}>
+                <div className={styles.formSubGroup1Section1}>
+                  <div className={styles.formSubGroup1Section1Row1}>
+                    <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
+                    <p className={styles.textData}>
+                      {item.tag_type || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                  <div className={styles.formSubGroup1Section1Row2}>
+                    <p className={styles.textLabel}>No. : </p>
+                    <p className={styles.textData}>
+                      {item.id || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
                 </div>
-                <div className={styles.formSubGroup1Section1Row2}>
-                  <p className={styles.textLabel}>No. : </p>
-                  <p className={styles.textData}>Sample</p>
+                <div className={styles.formSubGroup2Section1}>
+                  <div className={styles.formSubGroup2Section1Row1}>
+                    <p className={styles.textLabel}>วันที่พบ : </p>
+                    <p className={styles.textData}>
+                      {item.receive_date || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                  <div className={styles.formSubGroup2Section1Row2}>
+                    <p className={styles.textLabel}>Line : </p>
+                    <p className={styles.textData}>
+                      {item.line || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.formSubGroup3Section1}>
+                  <div className={styles.formSubGroup3Section1Row1}>
+                    <p className={styles.textLabel}>ชื่อผู้แจ้ง : </p>
+                    <p className={styles.textData}>
+                      {item.created_by || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                  <div className={styles.formSubGroup3Section1Row2}>
+                    <p className={styles.textLabel}>ประเภท : </p>
+                    <p className={styles.textData}>
+                      {item.group_pic || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.formSubGroup4Section1}>
+                  <div className={styles.formSubGroup4Section1Row1}>
+                    <p className={styles.textLabel}>รายละเอียด : </p>
+                    <p className={styles.textData}>
+                      <span
+                        style={{
+                          fontWeight: "900",
+                          textDecoration: "underline",
+                          textUnderlineOffset: "1px",
+                        }}
+                      >
+                        {item.machine_no || "ไม่มีข้อมูล"}
+                      </span>{" "}
+                      {item.problem_topic || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.formSubGroup5Section1}>
+                  <div className={styles.formSubGroup5Section1Row1}>
+                    <p className={styles.textLabel}>รูปภาพปัญหา : </p>
+                    <p className={styles.textData}>
+                      {item.attachment || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className={styles.formSubGroup2Section1}>
-                <div className={styles.formSubGroup2Section1Row1}>
-                  <p className={styles.textLabel}>วันที่พบ : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-                <div className={styles.formSubGroup2Section1Row2}>
-                  <p className={styles.textLabel}>Line : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-              </div>
-              <div className={styles.formSubGroup3Section1}>
-                <div className={styles.formSubGroup3Section1Row1}>
-                  <p className={styles.textLabel}>ชื่อผู้แจ้ง : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-                <div className={styles.formSubGroup3Section1Row2}>
-                  <p className={styles.textLabel}>ประเภท : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-              </div>
-              <div className={styles.formSubGroup4Section1}>
-                <div className={styles.formSubGroup4Section1Row1}>
-                  <p className={styles.textLabel}>รายละเอียด : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-              </div>
-              <div className={styles.formSubGroup5Section1}>
-                <div className={styles.formSubGroup5Section1Row1}>
-                  <p className={styles.textLabel}>รูปภาพปัญหา : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-              </div>
-            </div>
 
-            {/* Section 2 */}
-            <div className={styles.formGroupSection2}>
-              <div className={styles.formSubGroup1Section2}>
-                <div className={styles.formSubGroup1Section2Row1}>
-                  <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
-                  <p className={styles.textData}>Sample</p>
+              {/* Section 2 */}
+              <div className={styles.formGroupSection2}>
+                <div className={styles.formSubGroup1Section2}>
+                  <div className={styles.formSubGroup1Section2Row1}>
+                    <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
+                    <p className={styles.textData}>
+                      {item.tag_type || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.formSubGroup2Section2}>
+                  <div className={styles.formSubGroup2Section2Row1}>
+                    <p className={styles.textLabel}>แผนการแก้ไข : </p>
+                    <p className={styles.textData}>
+                      {item.tag_type || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                  <div className={styles.formSubGroup2Section2Row2}>
+                    <p className={styles.textLabel}>วันที่เสร็จสิ้น : </p>
+                    <p className={styles.textData}>
+                      {item.tag_type || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.formSubGroup3Section2}>
+                  <div className={styles.formSubGroup3Section2Row1}>
+                    <p className={styles.textLabel}>ผู้แก้ไข : </p>
+                    <p className={styles.textData}>
+                      {item.tag_type || "ไม่มีข้อมูล"}
+                    </p>
+                  </div>
+                  <div className={styles.formSubGroup3Section2Row2}>
+                    <p className={styles.textLabel}>รูปภาพปัญหา : </p>
+                    <p className={styles.textData}>--------</p>
+                  </div>
                 </div>
               </div>
-              <div className={styles.formSubGroup2Section2}>
-                <div className={styles.formSubGroup2Section2Row1}>
-                  <p className={styles.textLabel}>แผนการแก้ไข : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-                <div className={styles.formSubGroup2Section2Row2}>
-                  <p className={styles.textLabel}>วันที่เสร็จสิ้น : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-              </div>
-              <div className={styles.formSubGroup3Section2}>
-                <div className={styles.formSubGroup3Section2Row1}>
-                  <p className={styles.textLabel}>ผู้แก้ไข : </p>
-                  <p className={styles.textData}>Sample</p>
-                </div>
-                <div className={styles.formSubGroup3Section2Row2}>
-                  <p className={styles.textLabel}>รูปภาพปัญหา : </p>
-                  <p className={styles.textData}>--------</p>
-                </div>
-              </div>
-            </div>
 
-            <hr className={styles.LineHrSection1_2} />
+              <hr className={styles.LineHrSection1_2} />
 
-            {/* Section 3 */}
-            <div className={styles.formGroupSection3}>
-              <h1 className={styles.textSection3}>Section 3</h1>
-            </div>
-          </form>
-        </div>
+              {/* Section 3 */}
+              <div className={styles.formGroupSection3}>
+                <h1 className={styles.textSection3}>Section 3</h1>
+              </div>
+            </form>
+          </div>
+        ))}
       </main>
     </>
   );

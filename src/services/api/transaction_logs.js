@@ -53,18 +53,47 @@ router.get("/", async (req, res) => {
 });
 
 // SELECT: เรียกข้อมูลด้วย ID
-// Route สำหรับดึงข้อมูลด้วย id
 router.get("/:id", async (req, res) => {
-  const { id } = req.params; // รับค่า id จาก URL
+  const { id } = req.params;
   try {
     const result = await client.query(
-      `SELECT * FROM transaction_logs WHERE id = $1`,
-      [id] // ส่งค่า id เป็นพารามิเตอร์
+      `
+      SELECT 
+        id,
+        machine_no,
+        operation_no,
+        line,
+        activity,
+        tag_type,
+        ctag_level,
+        problem_type,
+        komarigoto,
+        problem_topic,
+        counter_measure,
+        shift,
+        group_pic,
+        editor_pic,
+        TO_CHAR(receive_Date, 'DD/MM/YY') AS receive_date,
+        TO_CHAR(start_Date, 'DD/MM/YY') AS start_date,
+        TO_CHAR(finish_Date, 'DD/MM/YY') AS finish_date,
+        TO_CHAR(end_Date, 'DD/MM/YY') AS end_date,
+        gl_mt2,
+        gl_prod2,
+        attachment,
+        test,
+        cal_status,
+        TO_CHAR(date_mtsign, 'DD/MM/YY') AS date_mtsign,
+        TO_CHAR(date_prosign, 'DD/MM/YY') AS date_prosign,
+        created_by
+      FROM transaction_logs
+      WHERE id = $1;
+    `,
+      [id]
     );
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "ไม่พบข้อมูลที่ต้องการ" });
+      return res.status(404).json({ message: "ไม่พบข้อมูล" });
     }
-    res.json(result.rows[0]); // ส่งข้อมูลแถวเดียวกลับไป
+    res.json(result.rows[0]); // ส่งข้อมูลเป็นอาร์เรย์
   } catch (err) {
     console.error(err);
     res.status(500).send("เซิร์ฟเวอร์เกิดข้อผิดพลาด!");

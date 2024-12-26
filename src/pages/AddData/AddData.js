@@ -97,6 +97,10 @@ const AddData = () => {
 
   // เมื่อเลือก machineNo ให้ทำการตรวจสอบว่า line_title ตรงกับเครื่องที่เลือกหรือไม่
   useEffect(() => {
+    if (getMachineNo === "") {
+      setGetLine("");
+    }
+
     if (getMachineNo) {
       const lineData = getlineTitleData.find(
         (item) => item.line_name === getMachineNo
@@ -110,7 +114,7 @@ const AddData = () => {
   }, [getMachineNo, getlineTitleData]);
 
   const handleMachineNoChange = (e) => {
-    setGetMachineNo(e.target.value); // เมื่อเลือก machineNo ใหม่
+    setGetMachineNo(e.target.value);
   };
 
   return (
@@ -161,6 +165,7 @@ const AddData = () => {
                 className={styles.formInput}
                 value={getLine}
                 onChange={(e) => setGetLine(e.target.value)}
+                required
               />
             </div>
 
@@ -380,7 +385,12 @@ const AddData = () => {
               <label htmlFor="reporter" className={styles.formLabel}>
                 <span className={styles.signStarReporter}>*</span> ผู้แจ้งปัญหา
               </label>
-              <input type="text" id="reporter" className={styles.formInput} />
+              <input
+                type="text"
+                id="reporter"
+                className={styles.formInput}
+                required
+              />
             </div>
 
             {/* กะทำงาน */}

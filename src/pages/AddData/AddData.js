@@ -26,23 +26,23 @@ const AddData = () => {
   // State สำหรับ form
   const [formData, setFormData] = useState({
     line: "",
-    machineNo: "",
-    opNo: "",
+    machine_no: "",
+    operation_no: "",
     activity: "",
-    tagType: "",
-    cTagType: "",
-    problemType: "",
-    korimagoto: "",
-    problemTopic: "",
-    counterMeasure: "",
-    createdBy: "",
+    tag_type: "",
+    ctag_level: "",
+    problem_type: "",
+    komarigoto: "",
+    problem_topic: "",
+    counter_measure: "",
+    created_by: "",
     shift: "",
-    groupPIC: "",
-    editorPIC: "",
-    receiveDate: "",
-    startDate: "",
-    finishDate: "",
-    endDate: "",
+    group_pic: "",
+    editor_pic: "",
+    receive_date: "",
+    start_date: "",
+    finish_date: "",
+    end_date: "",
   });
 
   // ฟังก์ชันสำหรับ handle การเปลี่ยนแปลงใน form
@@ -71,23 +71,23 @@ const AddData = () => {
       alert("ข้อมูลถูกเพิ่มเรียบร้อย!");
       setFormData({
         line: "",
-        machineNo: "",
-        opNo: "",
+        machine_no: "",
+        operation_no: "",
         activity: "",
-        tagType: "",
-        cTagType: "",
-        problemType: "",
-        korimagoto: "",
-        problemTopic: "",
-        counterMeasure: "",
-        createdBy: "",
+        tag_type: "",
+        ctag_level: "",
+        problem_type: "",
+        komarigoto: "",
+        problem_topic: "",
+        counter_measure: "",
+        created_by: "",
         shift: "",
-        groupPIC: "",
-        editorPIC: "",
-        receiveDate: "",
-        startDate: "",
-        finishDate: "",
-        endDate: "",
+        group_pic: "",
+        editor_pic: "",
+        receive_date: "",
+        start_date: "",
+        finish_date: "",
+        end_date: "",
       });
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -111,19 +111,19 @@ const AddData = () => {
 
   // ทำให้ receiveDate มีค่าเท่ากับ startDate
   useEffect(() => {
-    if (formData.startDate) {
+    if (formData.start_date) {
       setFormData((prevData) => ({
         ...prevData,
-        receiveDate: prevData.startDate,
+        receiveDate: prevData.start_date,
       }));
     }
-  }, [formData.startDate]);
+  }, [formData.start_date]);
 
   // เมื่อเลือก machineNo ให้ทำการตรวจสอบว่า line_title ตรงกับเครื่องที่เลือกหรือไม่
   useEffect(() => {
-    if (formData.machineNo) {
+    if (formData.machine_no) {
       const lineData = getlineTitleData.find(
-        (item) => item.line_name === formData.machineNo
+        (item) => item.line_name === formData.machine_no
       );
       setFormData((prevData) => ({
         ...prevData,
@@ -132,7 +132,7 @@ const AddData = () => {
     } else {
       setFormData((prevData) => ({ ...prevData, line: "" }));
     }
-  }, [formData.machineNo, getlineTitleData]);
+  }, [formData.machine_no, getlineTitleData]);
 
   return (
     <div className={styles.container}>
@@ -195,7 +195,7 @@ const AddData = () => {
               <select
                 id="machineNo"
                 className={`${styles.formSelect} ${styles.labelSelectMachineNo}`}
-                value={formData.machineNo}
+                value={formData.machine_no}
                 onChange={handleChange}
               >
                 <option
@@ -233,7 +233,7 @@ const AddData = () => {
                 type="text"
                 id="opNo"
                 className={styles.formInput}
-                value={formData.opNo}
+                value={formData.operation_no}
                 onChange={handleChange}
                 required
               />
@@ -273,7 +273,7 @@ const AddData = () => {
               <select
                 id="tagType"
                 className={`${styles.formSelect} ${styles.labelSelectTagType}`}
-                value={formData.tagType}
+                value={formData.tag_type}
                 onChange={handleChange}
               >
                 <option
@@ -305,7 +305,7 @@ const AddData = () => {
                 <select
                   id="tagLevelDetail"
                   className={`${styles.formSelect} ${styles.labelSelectTagLevelDetail}`}
-                  value={formData.cTagType}
+                  value={formData.ctag_level}
                   onChange={handleChange}
                 >
                   <option
@@ -337,7 +337,7 @@ const AddData = () => {
               <select
                 id="problemType"
                 className={`${styles.formSelect} ${styles.labelSelectProblemType}`}
-                value={formData.problemType}
+                value={formData.problem_type}
                 onChange={handleChange}
               >
                 <option
@@ -398,7 +398,7 @@ const AddData = () => {
               <textarea
                 id="problemTopic"
                 className={styles.formTextarea}
-                value={formData.problemTopic}
+                value={formData.problem_topic}
                 onChange={handleChange}
               />
             </div>
@@ -411,7 +411,7 @@ const AddData = () => {
               <textarea
                 id="counterMeasure"
                 className={styles.formTextarea}
-                value={formData.counterMeasure}
+                value={formData.counter_measure}
                 onChange={handleChange}
               />
             </div>
@@ -425,7 +425,7 @@ const AddData = () => {
                 type="text"
                 id="createdBy"
                 className={styles.formInput}
-                value={formData.createdBy}
+                value={formData.created_by}
                 onChange={handleChange}
                 required
               />
@@ -468,7 +468,7 @@ const AddData = () => {
                 type="text"
                 id="groupPIC"
                 className={styles.formInput}
-                value={formData.groupPIC}
+                value={formData.group_pic}
                 onChange={handleChange}
               />
             </div>
@@ -482,7 +482,7 @@ const AddData = () => {
                 type="text"
                 id="editorPIC"
                 className={styles.formInput}
-                value={formData.editorPIC}
+                value={formData.editor_pic}
                 onChange={handleChange}
               />
             </div>
@@ -496,7 +496,7 @@ const AddData = () => {
                 type="date"
                 id="endDate"
                 className={styles.formInput}
-                value={formData.endDate}
+                value={formData.end_date}
                 onChange={handleChange}
               />
             </div>
@@ -512,7 +512,7 @@ const AddData = () => {
                 type="date"
                 id="startDate"
                 className={styles.formInput}
-                value={formData.startDate}
+                value={formData.start_date}
                 onChange={handleChange}
               />
             </div>
@@ -528,7 +528,7 @@ const AddData = () => {
                 type="date"
                 id="finishDate"
                 className={styles.formInput}
-                value={formData.finishDate}
+                value={formData.finish_date}
                 onChange={handleChange}
               />
             </div>

@@ -189,11 +189,11 @@ const AddData = () => {
 
             {/* Machine No. */}
             <div className={`${styles.formGroupMachineNo} ${styles.formGroup}`}>
-              <label htmlFor="machineNo" className={styles.formLabel}>
+              <label htmlFor="machine_no" className={styles.formLabel}>
                 Machine No.
               </label>
               <select
-                id="machineNo"
+                id="machine_no"
                 className={`${styles.formSelect} ${styles.labelSelectMachineNo}`}
                 value={formData.machine_no}
                 onChange={handleChange}
@@ -226,12 +226,12 @@ const AddData = () => {
 
             {/* OP No. */}
             <div className={`${styles.formGroupOpNo} ${styles.formGroup}`}>
-              <label htmlFor="opNo" className={styles.formLabel}>
+              <label htmlFor="operation_no" className={styles.formLabel}>
                 OP No.
               </label>
               <input
                 type="text"
-                id="opNo"
+                id="operation_no"
                 className={styles.formInput}
                 value={formData.operation_no}
                 onChange={handleChange}
@@ -267,11 +267,11 @@ const AddData = () => {
 
             {/* ประเภท Tag */}
             <div className={`${styles.formGroupTagType} ${styles.formGroup}`}>
-              <label htmlFor="tagType" className={styles.formLabel}>
+              <label htmlFor="tag_type" className={styles.formLabel}>
                 ประเภท Tag
               </label>
               <select
-                id="tagType"
+                id="tag_type"
                 className={`${styles.formSelect} ${styles.labelSelectTagType}`}
                 value={formData.tag_type}
                 onChange={handleChange}
@@ -299,11 +299,11 @@ const AddData = () => {
               <div
                 className={`${styles.formGroupChallenge} ${styles.formGroup}`}
               >
-                <label htmlFor="tagLevelDetail" className={styles.formLabel}>
+                <label htmlFor="ctag_level" className={styles.formLabel}>
                   Tag Level
                 </label>
                 <select
-                  id="tagLevelDetail"
+                  id="ctag_level"
                   className={`${styles.formSelect} ${styles.labelSelectTagLevelDetail}`}
                   value={formData.ctag_level}
                   onChange={handleChange}
@@ -331,11 +331,11 @@ const AddData = () => {
             <div
               className={`${styles.formGroupProblemType} ${styles.formGroup}`}
             >
-              <label htmlFor="problemType" className={styles.formLabel}>
+              <label htmlFor="problem_type" className={styles.formLabel}>
                 ประเภทปัญหา
               </label>
               <select
-                id="problemType"
+                id="problem_type"
                 className={`${styles.formSelect} ${styles.labelSelectProblemType}`}
                 value={formData.problem_type}
                 onChange={handleChange}
@@ -360,11 +360,11 @@ const AddData = () => {
               <div
                 className={`${styles.formGroupKomarigotoDetail} ${styles.formGroup}`}
               >
-                <label htmlFor="komarigotoDetail" className={styles.formLabel}>
+                <label htmlFor="komarigoto" className={styles.formLabel}>
                   Komarikoto
                 </label>
                 <select
-                  id="komarigotoDetail"
+                  id="komarigoto"
                   className={`${styles.formSelect} ${styles.labelSelectKomarigotoDetail}`}
                   value={formData.komarigoto}
                   onChange={handleChange}
@@ -392,11 +392,11 @@ const AddData = () => {
             <div
               className={`${styles.formGroupProblemTitle} ${styles.formGroup}`}
             >
-              <label htmlFor="problemTopic" className={styles.formLabel}>
+              <label htmlFor="problem_topic" className={styles.formLabel}>
                 หัวข้อปัญหา
               </label>
               <textarea
-                id="problemTopic"
+                id="problem_topic"
                 className={styles.formTextarea}
                 value={formData.problem_topic}
                 onChange={handleChange}
@@ -405,11 +405,11 @@ const AddData = () => {
 
             {/* แนวทางการแก้ปัญหา */}
             <div className={`${styles.formGroupSolution} ${styles.formGroup}`}>
-              <label htmlFor="counterMeasure" className={styles.formLabel}>
+              <label htmlFor="counter_measure" className={styles.formLabel}>
                 แนวทางการแก้ปัญหา
               </label>
               <textarea
-                id="counterMeasure"
+                id="counter_measure"
                 className={styles.formTextarea}
                 value={formData.counter_measure}
                 onChange={handleChange}
@@ -418,12 +418,12 @@ const AddData = () => {
 
             {/* ผู้แจ้งปัญหา */}
             <div className={`${styles.formGroupReporter} ${styles.formGroup}`}>
-              <label htmlFor="createdBy" className={styles.formLabel}>
+              <label htmlFor="created_by" className={styles.formLabel}>
                 <span className={styles.signStarReporter}>*</span> ผู้แจ้งปัญหา
               </label>
               <input
                 type="text"
-                id="createdBy"
+                id="created_by"
                 className={styles.formInput}
                 value={formData.created_by}
                 onChange={handleChange}
@@ -461,12 +461,12 @@ const AddData = () => {
             <div
               className={`${styles.formGroupResponsibleType} ${styles.formGroup}`}
             >
-              <label htmlFor="groupPIC" className={styles.formLabel}>
+              <label htmlFor="group_pic" className={styles.formLabel}>
                 ประเภทผู้รับผิดชอบ
               </label>
               <input
                 type="text"
-                id="groupPIC"
+                id="group_pic"
                 className={styles.formInput}
                 value={formData.group_pic}
                 onChange={handleChange}
@@ -475,12 +475,12 @@ const AddData = () => {
 
             {/* ผู้แก้ไขปัญหา */}
             <div className={`${styles.formGroupResolver} ${styles.formGroup}`}>
-              <label htmlFor="editorPIC" className={styles.formLabel}>
+              <label htmlFor="editor_pic" className={styles.formLabel}>
                 ผู้แก้ไขปัญหา
               </label>
               <input
                 type="text"
-                id="editorPIC"
+                id="editor_pic"
                 className={styles.formInput}
                 value={formData.editor_pic}
                 onChange={handleChange}
@@ -489,12 +489,12 @@ const AddData = () => {
 
             {/* วันที่กำหนดเสร็จ */}
             <div className={`${styles.formaGroupEndDate} ${styles.formGroup}`}>
-              <label htmlFor="endDate" className={styles.formLabel}>
+              <label htmlFor="end_date" className={styles.formLabel}>
                 วันที่กำหนดเสร็จ
               </label>
               <input
                 type="date"
-                id="endDate"
+                id="end_date"
                 className={styles.formInput}
                 value={formData.end_date}
                 onChange={handleChange}
@@ -505,12 +505,12 @@ const AddData = () => {
             <div
               className={`${styles.formGroupReceiveDate} ${styles.formGroup}`}
             >
-              <label htmlFor="startDate" className={styles.formLabel}>
+              <label htmlFor="start_date" className={styles.formLabel}>
                 วันที่แจ้งปัญหา
               </label>
               <input
                 type="date"
-                id="startDate"
+                id="start_date"
                 className={styles.formInput}
                 value={formData.start_date}
                 onChange={handleChange}
@@ -521,12 +521,12 @@ const AddData = () => {
             <div
               className={`${styles.formGroupFinishDate} ${styles.formGroup}`}
             >
-              <label htmlFor="finishDate" className={styles.formLabel}>
+              <label htmlFor="finish_date" className={styles.formLabel}>
                 วันที่เสร็จ
               </label>
               <input
                 type="date"
-                id="finishDate"
+                id="finish_date"
                 className={styles.formInput}
                 value={formData.finish_date}
                 onChange={handleChange}

@@ -221,7 +221,7 @@ const EditData = () => {
                   <div className={styles.formSubGroup1Section3Row3}>
                     <div className={styles.formSubGroup1Section3Row3SubRow1}>
                       <p className={styles.formLabelTestText}>TAG</p>
-                      <p className={styles.formLabelTestDisplay}>TEXT</p>
+                      <p className={styles.formLabelTestDisplay}>{item.test || "ไม่มีข้อมูล"}</p>
                     </div>
                   </div>
                 </div>

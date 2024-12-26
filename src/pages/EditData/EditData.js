@@ -147,7 +147,7 @@ const EditData = () => {
                       >
                         {item.machine_no || "ไม่มีข้อมูล"}
                       </span>{" "}
-                      {item.problem_topic || "ไม่มีข้อมูล"}
+                      <span>{item.problem_topic || "ไม่มีข้อมูล"}</span>
                     </p>
                   </div>
                 </div>
@@ -167,7 +167,7 @@ const EditData = () => {
                   <div className={styles.formSubGroup1Section2Row1}>
                     <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
                     <p className={styles.textData}>
-                      {item.tag_type || "ไม่มีข้อมูล"}
+                      {item.receive_date || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                 </div>
@@ -175,13 +175,13 @@ const EditData = () => {
                   <div className={styles.formSubGroup2Section2Row1}>
                     <p className={styles.textLabel}>แผนการแก้ไข : </p>
                     <p className={styles.textData}>
-                      {item.tag_type || "ไม่มีข้อมูล"}
+                      {item.end_date || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                   <div className={styles.formSubGroup2Section2Row2}>
                     <p className={styles.textLabel}>วันที่เสร็จสิ้น : </p>
                     <p className={styles.textData}>
-                      {item.tag_type || "ไม่มีข้อมูล"}
+                      {item.finish_date || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                 </div>
@@ -203,7 +203,29 @@ const EditData = () => {
 
               {/* Section 3 */}
               <div className={styles.formGroupSection3}>
-                <h1 className={styles.textSection3}>Section 3</h1>
+                <div className={styles.formSubGroup1Section3}>
+                  <div className={styles.formSubGroup1Section3Row1}>
+                    <table>
+                      <tr>
+                        <th>GL Prod</th>
+                        <th>GL M/T</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class={styles.signatureBox}>✍️</div>
+                        </td>
+                        <td>
+                          <div class={styles.signatureBox}>✍️</div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Date: 25/12/2024</td>
+                        <td>Date: 25/12/2024</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div className={styles.formSubGroup1Section3Row2}></div>
+                </div>
               </div>
             </form>
           </div>

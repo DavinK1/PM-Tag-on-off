@@ -93,16 +93,6 @@
   background-color: #ffffff;
 }
 
-/* Main */
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: fit-content;
-  padding: 30px;
-  background-color: #ffffff;
-}
-
 .formContainer {
   max-width: 800px;
   width: 100%;
@@ -128,7 +118,7 @@
   flex-direction: row;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  border: 5px solid #00073779;
+  border: 5px solid #00175c15;
   background-color: #dbdbdb;
   padding: 15px;
   gap: 5px;
@@ -191,7 +181,7 @@
   grid-template-columns: auto 1fr;
   align-items: center;
   padding: 0.5rem;
-  border: 2px solid #00175c3a;
+  border: 2px solid #00175c15;
   flex-direction: row;
 }
 .formSubGroup5Section1Row1 {
@@ -201,8 +191,8 @@
   align-items: center;
   padding: 0.5rem;
   height: 100%;
-  min-height: 150px;
-  border: 2px solid #00175c3a;
+  min-height: auto;
+  border: 2px solid #00175c15;
 }
 
 .textLabel {
@@ -216,7 +206,13 @@
   margin: 0px 10px 0px 0px;
 }
 
-.textData {
+.textData p {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0px 10px 0px 0px;
 }
 
 /* section 2 */
@@ -225,7 +221,7 @@
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  border: 5px solid #00073779;
+  border: 5px solid #00175c15;
   background-color: #dbdbdb;
   padding: 15px;
   gap: 5px;
@@ -271,13 +267,13 @@
   grid-template-columns: auto 1fr;
   align-items: center;
   padding: 0.5rem;
-  border: 2px solid #00175c3a;
+  border: 2px solid #00175c15;
   flex-direction: row;
 }
 
 /* Horizontal */
 .LineHrSection1_2 {
-  border: 2px solid #000737;
+  border: 2px solid #00175c15;
   border-radius: 15px;
   margin: 0px 10px;
 }
@@ -288,7 +284,22 @@
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  border: 5px solid #00073779;
+  border: 5px solid #00175c15;
   background-color: #dbdbdb;
   padding: 15px;
+}
+
+.formSubGroup1Section3 {
+  display: grid;
+  flex-direction: row;
+  justify-content: center;
+  grid-template-columns: 2fr 2fr 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 0px;
+}
+
+.formSubGroup1Section3Row1 table .signatureBox {
+  
 }

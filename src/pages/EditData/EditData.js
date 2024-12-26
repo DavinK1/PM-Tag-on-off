@@ -205,26 +205,25 @@ const EditData = () => {
               <div className={styles.formGroupSection3}>
                 <div className={styles.formSubGroup1Section3}>
                   <div className={styles.formSubGroup1Section3Row1}>
-                    <table>
-                      <tr>
-                        <th>GL Prod</th>
-                        <th>GL M/T</th>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class={styles.signatureBox}>✍️</div>
-                        </td>
-                        <td>
-                          <div class={styles.signatureBox}>✍️</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Date: 25/12/2024</td>
-                        <td>Date: 25/12/2024</td>
-                      </tr>
-                    </table>
+                    <div className={styles.formSubGroup1Section3Row1SubRow1}>
+                      <div className={styles.formGlProdLabel}></div>
+                      <div className={styles.formGlProdSign}></div>
+                      <div className={styles.formGlmtDate}></div>
+                    </div>
                   </div>
-                  <div className={styles.formSubGroup1Section3Row2}></div>
+                  <div className={styles.formSubGroup1Section3Row2}>
+                    <div className={styles.formSubGroup1Section3Row2SubRow1}>
+                      <div className={styles.formGlmtLabel}></div>
+                      <div className={styles.formGlmtSign}></div>
+                      <div className={styles.formGlmtDate}></div>
+                    </div>
+                  </div>
+                  <div className={styles.formSubGroup1Section3Row3}>
+                    <div className={styles.formSubGroup1Section3Row3SubRow1}>
+                      <p>TEXT</p>
+                      <p>TEXT</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>

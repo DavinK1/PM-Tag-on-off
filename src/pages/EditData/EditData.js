@@ -6,7 +6,9 @@ import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+
+import SignPic from "../../assets/images/sign/sign-example.png";
 
 const EditData = () => {
   const navigate = useNavigate();
@@ -80,7 +82,7 @@ const EditData = () => {
               className={styles.gridHeaderButton}
               onClick={() => navigate("/")}
             >
-              <FontAwesomeIcon icon={faSave} size="2x" />
+              <FontAwesomeIcon icon={faEdit} size="2x" />
             </button>
           </div>
         </div>
@@ -89,7 +91,11 @@ const EditData = () => {
       <main className={styles.main}>
         {Object.entries(data).map(([key, item], index) => (
           <div key={index} className={styles.formContainer}>
-            <form className={styles.gridContainer}>
+            <form
+              className={`${styles.gridContainer} ${
+                item.tag_type === "RED" ? styles.forRedBackgroundColor : ""
+              }`}
+            >
               {/* Section 1 */}
               <div className={styles.formGroupSection1}>
                 <div className={styles.formSubGroup1Section1}>
@@ -142,7 +148,7 @@ const EditData = () => {
                         style={{
                           fontWeight: "900",
                           textDecoration: "underline",
-                          textUnderlineOffset: "1px",
+                          textUnderlineOffset: "2px",
                         }}
                       >
                         {item.machine_no || "ไม่มีข้อมูล"}
@@ -163,14 +169,16 @@ const EditData = () => {
 
               {/* Section 2 */}
               <div className={styles.formGroupSection2}>
-                <div className={styles.formSubGroup1Section2}>
-                  <div className={styles.formSubGroup1Section2Row1}>
-                    <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
-                    <p className={styles.textData}>
-                      {item.receive_date || "ไม่มีข้อมูล"}
-                    </p>
+                {item.tag_type === "RED" && (
+                  <div className={styles.formSubGroup1Section2}>
+                    <div className={styles.formSubGroup1Section2Row1}>
+                      <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
+                      <p className={styles.textData}>
+                        {item.receive_date || "ไม่มีข้อมูล"}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className={styles.formSubGroup2Section2}>
                   <div className={styles.formSubGroup2Section2Row1}>
                     <p className={styles.textLabel}>แผนการแก้ไข : </p>
@@ -206,22 +214,60 @@ const EditData = () => {
                 <div className={styles.formSubGroup1Section3}>
                   <div className={styles.formSubGroup1Section3Row1}>
                     <div className={styles.formSubGroup1Section3Row1SubRow1}>
-                      <div className={styles.formGlProdLabel}></div>
-                      <div className={styles.formGlProdSign}></div>
-                      <div className={styles.formGlmtDate}></div>
+                      <div className={styles.formGlProdLabel}>GL Prod</div>
+                      <div className={styles.formGlProdSign}>
+                        <img
+                          className={styles.imgGlProdSign}
+                          src={SignPic}
+                          alt={SignPic}
+                        />
+                      </div>
+                      <div className={styles.formGlProdDate}>
+                        {item.date_prosign || "ไม่มีข้อมูล"}
+                      </div>
                     </div>
                   </div>
                   <div className={styles.formSubGroup1Section3Row2}>
                     <div className={styles.formSubGroup1Section3Row2SubRow1}>
-                      <div className={styles.formGlmtLabel}></div>
-                      <div className={styles.formGlmtSign}></div>
-                      <div className={styles.formGlmtDate}></div>
+                      <div className={styles.formGlmtLabel}>GL M/T Sign</div>
+                      <div className={styles.formGlmtSign}>
+                        <img
+                          className={styles.imgGlmtSign}
+                          src={SignPic}
+                          alt={SignPic}
+                        />
+                      </div>
+                      <div className={styles.formGlmtDate}>
+                        {item.date_mtsign || "ไม่มีข้อมูล"}
+                      </div>
                     </div>
                   </div>
                   <div className={styles.formSubGroup1Section3Row3}>
                     <div className={styles.formSubGroup1Section3Row3SubRow1}>
                       <p className={styles.formLabelTestText}>TAG</p>
-                      <p className={styles.formLabelTestDisplay}>{item.test || "ไม่มีข้อมูล"}</p>
+                      <p
+                        className={styles.formLabelTestDisplay}
+                        style={{
+                          backgroundColor:
+                            item.test === "OFF"
+                              ? "#16a34a" // เขียว
+                              : item.test === "ON"
+                              ? "#facc15" // เหลือง
+                              : item.test === "DELAY"
+                              ? "#dc2626" // แดง
+                              : "#ffffff", // ขาว (default)
+                          color:
+                            item.test === "OFF"
+                              ? "#ffffff" // ขาว
+                              : item.test === "ON"
+                              ? "#000000" // ดำ
+                              : item.test === "DELAY"
+                              ? "#ffffff" // ขาว
+                              : "#000000", // ดำ (default)
+                        }}
+                      >
+                        {item.test || "ไม่มีข้อมูล"}
+                      </p>
                     </div>
                   </div>
                 </div>

@@ -22,64 +22,77 @@ const AddData = () => {
   const [getlineTitleData, setLineTitleData] = useState([]);
 
   // ใช้สำหรับการเก็บข้อมูลใน INPUT เพื่อนำไป Insert ใน DATABASE POSTGRES
-  const [getLine, setGetLine] = useState("");
-  const [getMachineNo, setGetMachineNo] = useState("");
-  const [getOpNo, setGetOpNo] = useState("");
-  const [getActivity, setGetActivity] = useState("");
-  const [getTagType, setGetTagType] = useState("");
-  const [getCTagType, setGetCTagType] = useState("");
-  const [getProblemType, setGetProblemType] = useState("");
-  const [getKorimagoto, setGetKorimagoto] = useState("");
-  const [getProblemTopic, setGetProblemTopic] = useState("");
-  const [getCouterMeasure, setGetCouterMeasure] = useState("");
-  const [getShift, setGetShift] = useState("");
-  const [getGroupPIC, setGetGroupPIC] = useState("");
-  const [geteditorPIC, setGeteditorPIC] = useState("");
-  const [getReceiveDate, setGetReceiveDate] = useState("");
-  const [getStartDate, setGetStartDate] = useState("");
-  const [getFinishDate, setGetFinishDate] = useState("");
-  const [getEndDate, setGetEndDate] = useState("");
-  const [getGlMT2, setGetGlMT2] = useState("");
-  const [getglProd2, setGetglProd2] = useState("");
-  const [getAttachment, setGetAttachment] = useState("");
-  const [getTest, setGetTest] = useState("");
-  const [getCalStatus, setGetCalStatus] = useState("");
-  const [getDateMTsign, setGetDateMTsign] = useState("");
-  const [getDatePROsign, setGetDatePROsign] = useState("");
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  // State สำหรับ form
+  const [formData, setFormData] = useState({
+    line: "",
+    machineNo: "",
+    opNo: "",
+    activity: "",
+    tagType: "",
+    cTagType: "",
+    problemType: "",
+    korimagoto: "",
+    problemTopic: "",
+    counterMeasure: "",
+    createdBy: "",
+    shift: "",
+    groupPIC: "",
+    editorPIC: "",
+    receiveDate: "",
+    startDate: "",
+    finishDate: "",
+    endDate: "",
+  });
 
-  //   const formData = {
-  //     line,
-  //     machineNo,
-  //     opNo,
-  //     activity,
-  //     tagType,
-  //     problemType,
-  //     problemTitle,
-  //     solution,
-  //     reporter,
-  //     shift,
-  //     responsibleType,
-  //     resolver,
-  //     endDate,
-  //     receiveDate,
-  //     finishDate,
-  //   };
+  // ฟังก์ชันสำหรับ handle การเปลี่ยนแปลงใน form
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
 
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:4000/insertData",
-  //       formData
-  //     );
-  //     alert("Data submitted successfully");
-  //     // Handle success response (clear form or navigate)
-  //   } catch (error) {
-  //     console.error("Error submitting data:", error);
-  //     alert("Error submitting data");
-  //   }
-  // };
+  // ตรวจสอบค่า formData ก่อนส่ง
+  console.log("FormData: ", formData);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/transaction_logs/inserttransaction_logs",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      alert("ข้อมูลถูกเพิ่มเรียบร้อย!");
+      setFormData({
+        line: "",
+        machineNo: "",
+        opNo: "",
+        activity: "",
+        tagType: "",
+        cTagType: "",
+        problemType: "",
+        korimagoto: "",
+        problemTopic: "",
+        counterMeasure: "",
+        shift: "",
+        groupPIC: "",
+        editorPIC: "",
+        receiveDate: "",
+        startDate: "",
+        finishDate: "",
+        endDate: "",
+      });
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("Error submitting data");
+    }
+  };
 
   // เรียกข้อมูล API ของ master_mc_g6m
   useEffect(() => {
@@ -95,27 +108,30 @@ const AddData = () => {
       });
   }, []);
 
+  // ทำให้ receiveDate มีค่าเท่ากับ startDate
+  useEffect(() => {
+    if (formData.startDate) {
+      setFormData((prevData) => ({
+        ...prevData,
+        receiveDate: prevData.startDate,
+      }));
+    }
+  }, [formData.startDate]);
+
   // เมื่อเลือก machineNo ให้ทำการตรวจสอบว่า line_title ตรงกับเครื่องที่เลือกหรือไม่
   useEffect(() => {
-    if (getMachineNo === "") {
-      setGetLine("");
-    }
-
-    if (getMachineNo) {
+    if (formData.machineNo) {
       const lineData = getlineTitleData.find(
-        (item) => item.line_name === getMachineNo
+        (item) => item.line_name === formData.machineNo
       );
-      if (lineData) {
-        setGetLine(lineData.line_title); // ตั้งค่า Line title จาก machineNo ที่เลือก
-      } else {
-        setGetLine(""); // รีเซ็ตหากไม่พบข้อมูลที่ตรงกัน
-      }
+      setFormData((prevData) => ({
+        ...prevData,
+        line: lineData ? lineData.line_title : "",
+      }));
+    } else {
+      setFormData((prevData) => ({ ...prevData, line: "" }));
     }
-  }, [getMachineNo, getlineTitleData]);
-
-  const handleMachineNoChange = (e) => {
-    setGetMachineNo(e.target.value);
-  };
+  }, [formData.machineNo, getlineTitleData]);
 
   return (
     <div className={styles.container}>
@@ -139,7 +155,8 @@ const AddData = () => {
           <div className={styles.gridHeaderItem3}>
             <button
               className={styles.gridHeaderButton}
-              onClick={() => navigate("/")}
+              onClick={handleSubmit}
+              type="button"
             >
               <FontAwesomeIcon icon={faSave} size="2x" />
             </button>
@@ -163,8 +180,8 @@ const AddData = () => {
                 type="text"
                 id="line"
                 className={styles.formInput}
-                value={getLine}
-                onChange={(e) => setGetLine(e.target.value)}
+                value={formData.line}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -177,8 +194,8 @@ const AddData = () => {
               <select
                 id="machineNo"
                 className={`${styles.formSelect} ${styles.labelSelectMachineNo}`}
-                value={getMachineNo}
-                onChange={handleMachineNoChange}
+                value={formData.machineNo}
+                onChange={handleChange}
               >
                 <option
                   className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -211,7 +228,14 @@ const AddData = () => {
               <label htmlFor="opNo" className={styles.formLabel}>
                 OP No.
               </label>
-              <input type="text" id="opNo" className={styles.formInput} />
+              <input
+                type="text"
+                id="opNo"
+                className={styles.formInput}
+                value={formData.opNo}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             {/* Activity */}
@@ -222,6 +246,8 @@ const AddData = () => {
               <select
                 id="activity"
                 className={`${styles.formSelect} ${styles.labelSelectActivity}`}
+                value={formData.activity}
+                onChange={handleChange}
               >
                 <option
                   className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -229,10 +255,10 @@ const AddData = () => {
                 >
                   เลือก Activity
                 </option>
-                <option className={styles.labelOption} value="1">
+                <option className={styles.labelOption} value="Daily Check">
                   Daily Check
                 </option>
-                <option className={styles.labelOption} value="2">
+                <option className={styles.labelOption} value="Deep Cleaning">
                   Deep Cleaning
                 </option>
               </select>
@@ -246,8 +272,8 @@ const AddData = () => {
               <select
                 id="tagType"
                 className={`${styles.formSelect} ${styles.labelSelectTagType}`}
-                value={ShowTagLevel}
-                onChange={(e) => setShowTagLevel(e.target.value)}
+                value={formData.tagType}
+                onChange={handleChange}
               >
                 <option
                   className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -255,20 +281,20 @@ const AddData = () => {
                 >
                   เลือก Tag
                 </option>
-                <option className={styles.labelOption} value="1">
+                <option className={styles.labelOption} value="WHITE">
                   WHITE
                 </option>
-                <option className={styles.labelOption} value="2">
+                <option className={styles.labelOption} value="RED">
                   RED
                 </option>
-                <option className={styles.labelOption} value="3">
+                <option className={styles.labelOption} value="Challenge">
                   Challenge
                 </option>
               </select>
             </div>
 
-            {/* แสดงฟอร์ม Challenge */}
-            {ShowTagLevel === "3" && (
+            {/* C Tag */}
+            {ShowTagLevel === "Challenge" && (
               <div
                 className={`${styles.formGroupChallenge} ${styles.formGroup}`}
               >
@@ -278,6 +304,8 @@ const AddData = () => {
                 <select
                   id="tagLevelDetail"
                   className={`${styles.formSelect} ${styles.labelSelectTagLevelDetail}`}
+                  value={formData.cTagType}
+                  onChange={handleChange}
                 >
                   <option
                     className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -285,13 +313,13 @@ const AddData = () => {
                   >
                     เลือก Tag Level
                   </option>
-                  <option className={styles.labelOption} value="1">
+                  <option className={styles.labelOption} value="A">
                     A
                   </option>
-                  <option className={styles.labelOption} value="2">
+                  <option className={styles.labelOption} value="B">
                     B
                   </option>
-                  <option className={styles.labelOption} value="3">
+                  <option className={styles.labelOption} value="C">
                     C
                   </option>
                 </select>
@@ -308,8 +336,8 @@ const AddData = () => {
               <select
                 id="problemType"
                 className={`${styles.formSelect} ${styles.labelSelectProblemType}`}
-                value={ShowKomarigoto}
-                onChange={(e) => setShowKomarigoto(e.target.value)}
+                value={formData.problemType}
+                onChange={handleChange}
               >
                 <option
                   className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -317,17 +345,17 @@ const AddData = () => {
                 >
                   เลือกประเภทปัญหา
                 </option>
-                <option className={styles.labelOption} value="1">
+                <option className={styles.labelOption} value="Fault item">
                   Fault item
                 </option>
-                <option className={styles.labelOption} value="2">
+                <option className={styles.labelOption} value="Komarigoto">
                   Komarigoto
                 </option>
               </select>
             </div>
 
             {/* แสดงฟอร์ม Komarigoto */}
-            {ShowKomarigoto === "2" && (
+            {ShowKomarigoto === "Komarigoto" && (
               <div
                 className={`${styles.formGroupKomarigotoDetail} ${styles.formGroup}`}
               >
@@ -337,6 +365,8 @@ const AddData = () => {
                 <select
                   id="komarigotoDetail"
                   className={`${styles.formSelect} ${styles.labelSelectKomarigotoDetail}`}
+                  value={formData.korimagoto}
+                  onChange={handleChange}
                 >
                   <option
                     className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -344,13 +374,13 @@ const AddData = () => {
                   >
                     เลือก Komarigoto
                   </option>
-                  <option className={styles.labelOption} value="1">
+                  <option className={styles.labelOption} value="ตรวจสอบยาก">
                     ตรวจสอบยาก
                   </option>
-                  <option className={styles.labelOption} value="2">
+                  <option className={styles.labelOption} value="4S ยาก">
                     4S ยาก
                   </option>
-                  <option className={styles.labelOption} value="3">
+                  <option className={styles.labelOption} value="ทำงานยาก">
                     ทำงานยาก
                   </option>
                 </select>
@@ -361,34 +391,41 @@ const AddData = () => {
             <div
               className={`${styles.formGroupProblemTitle} ${styles.formGroup}`}
             >
-              <label htmlFor="problemTitle" className={styles.formLabel}>
+              <label htmlFor="problemTopic" className={styles.formLabel}>
                 หัวข้อปัญหา
               </label>
               <textarea
-                id="problemTitle"
+                id="problemTopic"
                 className={styles.formTextarea}
-                value={getProblemTopic}
-                onChange={(e) => setGetProblemTopic(e.target.value)}
+                value={formData.problemTopic}
+                onChange={handleChange}
               />
             </div>
 
             {/* แนวทางการแก้ปัญหา */}
             <div className={`${styles.formGroupSolution} ${styles.formGroup}`}>
-              <label htmlFor="solution" className={styles.formLabel}>
+              <label htmlFor="CounterMeasure" className={styles.formLabel}>
                 แนวทางการแก้ปัญหา
               </label>
-              <textarea id="solution" className={styles.formTextarea} />
+              <textarea
+                id="CounterMeasure"
+                className={styles.formTextarea}
+                value={formData.counterMeasure}
+                onChange={handleChange}
+              />
             </div>
 
             {/* ผู้แจ้งปัญหา */}
             <div className={`${styles.formGroupReporter} ${styles.formGroup}`}>
-              <label htmlFor="reporter" className={styles.formLabel}>
+              <label htmlFor="createdBy" className={styles.formLabel}>
                 <span className={styles.signStarReporter}>*</span> ผู้แจ้งปัญหา
               </label>
               <input
                 type="text"
-                id="reporter"
+                id="createdBy"
                 className={styles.formInput}
+                value={formData.createdBy}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -401,6 +438,8 @@ const AddData = () => {
               <select
                 id="shift"
                 className={`${styles.formSelect} ${styles.labelSelectShift}`}
+                value={formData.shift}
+                onChange={handleChange}
               >
                 <option
                   className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -421,22 +460,30 @@ const AddData = () => {
             <div
               className={`${styles.formGroupResponsibleType} ${styles.formGroup}`}
             >
-              <label htmlFor="responsibleType" className={styles.formLabel}>
+              <label htmlFor="groupPIC" className={styles.formLabel}>
                 ประเภทผู้รับผิดชอบ
               </label>
               <input
                 type="text"
-                id="responsibleType"
+                id="groupPIC"
                 className={styles.formInput}
+                value={formData.groupPIC}
+                onChange={handleChange}
               />
             </div>
 
             {/* ผู้แก้ไขปัญหา */}
             <div className={`${styles.formGroupResolver} ${styles.formGroup}`}>
-              <label htmlFor="resolver" className={styles.formLabel}>
+              <label htmlFor="editorPIC" className={styles.formLabel}>
                 ผู้แก้ไขปัญหา
               </label>
-              <input type="text" id="resolver" className={styles.formInput} />
+              <input
+                type="text"
+                id="editorPIC"
+                className={styles.formInput}
+                value={formData.editorPIC}
+                onChange={handleChange}
+              />
             </div>
 
             {/* วันที่กำหนดเสร็จ */}
@@ -444,20 +491,28 @@ const AddData = () => {
               <label htmlFor="endDate" className={styles.formLabel}>
                 วันที่กำหนดเสร็จ
               </label>
-              <input type="date" id="endDate" className={styles.formInput} />
+              <input
+                type="date"
+                id="endDate"
+                className={styles.formInput}
+                value={formData.endDate}
+                onChange={handleChange}
+              />
             </div>
 
             {/* วันที่แจ้งปัญหา */}
             <div
               className={`${styles.formGroupReceiveDate} ${styles.formGroup}`}
             >
-              <label htmlFor="receiveDate" className={styles.formLabel}>
+              <label htmlFor="startDate" className={styles.formLabel}>
                 วันที่แจ้งปัญหา
               </label>
               <input
                 type="date"
-                id="receiveDate"
+                id="startDate"
                 className={styles.formInput}
+                value={formData.startDate}
+                onChange={handleChange}
               />
             </div>
 
@@ -468,7 +523,13 @@ const AddData = () => {
               <label htmlFor="finishDate" className={styles.formLabel}>
                 วันที่เสร็จ
               </label>
-              <input type="date" id="finishDate" className={styles.formInput} />
+              <input
+                type="date"
+                id="finishDate"
+                className={styles.formInput}
+                value={formData.finishDate}
+                onChange={handleChange}
+              />
             </div>
 
             {/* จำนวนรูปและ Icon กล้อง */}

@@ -101,7 +101,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // INSERT: เพิ่มข้อมูลใหม่
-router.post("/InsertTransaction", async (req, res) => {
+router.post("/inserttransaction_logs", async (req, res) => {
   const {
     machine_no,
     operation_no,
@@ -181,7 +181,7 @@ router.post("/InsertTransaction", async (req, res) => {
 });
 
 // UPDATE: อัปเดตข้อมูล
-router.put("/:id", async (req, res) => {
+router.put("/updatetransaction_logs/:id", async (req, res) => {
   const { id } = req.params;
   const {
     machine_no,
@@ -263,7 +263,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE: ลบข้อมูล
-router.delete("/:id", async (req, res) => {
+router.delete("/deletetransaction_logs/:id", async (req, res) => {
   const { id } = req.params;
 
   try {

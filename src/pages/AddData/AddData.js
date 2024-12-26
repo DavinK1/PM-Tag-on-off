@@ -80,6 +80,7 @@ const AddData = () => {
         korimagoto: "",
         problemTopic: "",
         counterMeasure: "",
+        createdBy: "",
         shift: "",
         groupPIC: "",
         editorPIC: "",
@@ -365,7 +366,7 @@ const AddData = () => {
                 <select
                   id="komarigotoDetail"
                   className={`${styles.formSelect} ${styles.labelSelectKomarigotoDetail}`}
-                  value={formData.korimagoto}
+                  value={formData.komarigoto}
                   onChange={handleChange}
                 >
                   <option
@@ -404,11 +405,11 @@ const AddData = () => {
 
             {/* แนวทางการแก้ปัญหา */}
             <div className={`${styles.formGroupSolution} ${styles.formGroup}`}>
-              <label htmlFor="CounterMeasure" className={styles.formLabel}>
+              <label htmlFor="counterMeasure" className={styles.formLabel}>
                 แนวทางการแก้ปัญหา
               </label>
               <textarea
-                id="CounterMeasure"
+                id="counterMeasure"
                 className={styles.formTextarea}
                 value={formData.counterMeasure}
                 onChange={handleChange}

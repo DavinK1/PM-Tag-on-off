@@ -220,8 +220,8 @@ const EditData = () => {
                   </div>
                   <div className={styles.formSubGroup1Section3Row3}>
                     <div className={styles.formSubGroup1Section3Row3SubRow1}>
-                      <p>TEXT</p>
-                      <p>TEXT</p>
+                      <p className={styles.formLabelTestText}>TAG</p>
+                      <p className={styles.formLabelTestDisplay}>TEXT</p>
                     </div>
                   </div>
                 </div>

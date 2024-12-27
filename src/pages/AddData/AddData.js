@@ -11,15 +11,17 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const AddData = () => {
   const navigate = useNavigate();
+
   // สำหรับเรียกใช้ API ทั้งหมด
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // สำหรับแสดงและซ่อนฟอร์ม Komarigoto และ Challenge
-  const [ShowKomarigoto, setShowKomarigoto] = useState("");
-  const [ShowTagLevel, setShowTagLevel] = useState("");
+  const [showKomarigoto, setShowKomarigoto] = useState(false);
+  const [showTagLevel, setShowTagLevel] = useState(false);
 
   // สำหรับดึงข้อมูลในตาราง master_mc_g6m ในการเช็คข้อมูล
-  const [getlineTitleData, setLineTitleData] = useState([]);
+  const [lineTitleData, setLineTitleData] = useState([]);
 
   // ใช้สำหรับการเก็บข้อมูลใน INPUT เพื่อนำไป Insert ใน DATABASE POSTGRES
 
@@ -60,6 +62,19 @@ const AddData = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
+    // Validate Input Machine No. และ Created_by ในกรณีที่ไม่ได้กรอกค่า
+    if (!formData.machine_no) {
+      alert("กรุณากรอกข้อมูลในช่อง Machine No.");
+      return; // Prevent form submission if validation fails
+    }
+
+    if (!formData.created_by) {
+      alert("กรุณากรอกข้อมูลในช่อง ผู้แจ้งปัญหา");
+      return; // Prevent form submission if validation fails
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:4000/transaction_logs/inserttransaction_logs",
@@ -90,8 +105,13 @@ const AddData = () => {
         end_date: "",
       });
     } catch (error) {
-      console.error("Error submitting data:", error);
-      alert("Error submitting data");
+      console.error("Error adding data:", error);
+      const errorMessage = error.response
+        ? error.response.data.message || "เกิดข้อผิดพลาดที่เซิร์ฟเวอร์"
+        : "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้";
+      alert(`Error: ${errorMessage}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -100,12 +120,11 @@ const AddData = () => {
     axios
       .get("http://localhost:4000/master_mc_g6m/line_title_g6_main")
       .then((response) => {
-        console.log("API Response:", response.data); // Debugging
         setData(response.data);
         setLineTitleData(response.data);
       })
       .catch((error) => {
-        console.error("เกิดปัญในการเรียกใช้ข้อมูล:", error);
+        console.error("Error fetching data:", error);
       });
   }, []);
 
@@ -122,7 +141,7 @@ const AddData = () => {
   // เมื่อเลือก machineNo ให้ทำการตรวจสอบว่า line_title ตรงกับเครื่องที่เลือกหรือไม่
   useEffect(() => {
     if (formData.machine_no) {
-      const lineData = getlineTitleData.find(
+      const lineData = lineTitleData.find(
         (item) => item.line_name === formData.machine_no
       );
       setFormData((prevData) => ({
@@ -132,7 +151,12 @@ const AddData = () => {
     } else {
       setFormData((prevData) => ({ ...prevData, line: "" }));
     }
-  }, [formData.machine_no, getlineTitleData]);
+  }, [formData.machine_no, lineTitleData]);
+
+  useEffect(() => {
+    setShowKomarigoto(formData.problem_type === "Komarigoto");
+    setShowTagLevel(formData.tag_type === "Challenge");
+  }, [formData.problem_type, formData.tag_type]);
 
   return (
     <div className={styles.container}>
@@ -158,6 +182,7 @@ const AddData = () => {
               className={styles.gridHeaderButton}
               onClick={handleSubmit}
               type="button"
+              disabled={isLoading}
             >
               <FontAwesomeIcon icon={faSave} size="2x" />
             </button>
@@ -197,6 +222,7 @@ const AddData = () => {
                 className={`${styles.formSelect} ${styles.labelSelectMachineNo}`}
                 value={formData.machine_no}
                 onChange={handleChange}
+                required
               >
                 <option
                   className={`${styles.labelOption} ${styles.placeholderOption}`}
@@ -295,7 +321,7 @@ const AddData = () => {
             </div>
 
             {/* C Tag */}
-            {ShowTagLevel === "Challenge" && (
+            {showTagLevel === "Challenge" && (
               <div
                 className={`${styles.formGroupChallenge} ${styles.formGroup}`}
               >
@@ -356,7 +382,7 @@ const AddData = () => {
             </div>
 
             {/* แสดงฟอร์ม Komarigoto */}
-            {ShowKomarigoto === "Komarigoto" && (
+            {showKomarigoto === "Komarigoto" && (
               <div
                 className={`${styles.formGroupKomarigotoDetail} ${styles.formGroup}`}
               >

@@ -130,6 +130,16 @@ router.post("/inserttransaction_logs", async (req, res) => {
     created_by,
   } = req.body;
 
+  // Validate ตัว Machine_no
+  if (!machine_no) {
+    return res.status(400).json({ message: "กรุณากรอกข้อมูลรหัสเครื่องจักร!" });
+  }
+
+  // Validate ตัว Machine_no
+  if (!created_by) {
+    return res.status(400).json({ message: "กรุณากรอกข้อมูลผู้แจ้งปัญหา!" });
+  }
+
   try {
     const query = `
       INSERT INTO transaction_logs (
@@ -142,6 +152,17 @@ router.post("/inserttransaction_logs", async (req, res) => {
         $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25
       ) RETURNING *;
     `;
+    const formatDate = (date) => {
+      if (date && date.trim() !== "") {
+        const dateObj = new Date(date);
+        if (!isNaN(dateObj.getTime())) {
+          return dateObj.toISOString().split("T")[0].replace(/-/g, "/");
+        } else {
+          return null;
+        }
+      }
+      return null;
+    };
     const values = [
       machine_no,
       operation_no,
@@ -156,17 +177,17 @@ router.post("/inserttransaction_logs", async (req, res) => {
       shift,
       group_pic,
       editor_pic,
-      receive_date,
-      start_date,
-      finish_date,
-      end_date,
+      formatDate(receive_date),
+      formatDate(start_date),
+      formatDate(finish_date),
+      formatDate(end_date),
       gl_mt2,
       gl_prod2,
       attachment,
       test,
       cal_status,
-      date_mtsign,
-      date_prosign,
+      formatDate(date_mtsign),
+      formatDate(date_prosign),
       created_by,
     ];
 
@@ -175,8 +196,11 @@ router.post("/inserttransaction_logs", async (req, res) => {
       .status(201)
       .json({ message: "เพิ่มข้อมูลสำเร็จ", data: result.rows[0] });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("เซิร์ฟเวอร์เกิดข้อผิดพลาด!");
+    console.error("ฐานข้อมูเกิดข้อผิดพลาด:", err);
+    res.status(500).json({
+      message: "เกิดข้อผิดพลาดขณะส่งข้อมูล โปรดลองใหม่อีกครั้ง",
+      error: err.message,
+    });
   }
 });
 

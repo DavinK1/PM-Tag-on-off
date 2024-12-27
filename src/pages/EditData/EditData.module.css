@@ -1,20 +1,3 @@
-/* Input */
-.formInput {
-  padding: 10px 12px;
-  font-size: 16px;
-  border: 1.5px solid #ccd6dd;
-  border-radius: 8px;
-  background-color: #f9fafb;
-  outline: none;
-  transition: all 0.3s ease;
-
-  /* ขนาดที่ยืดหยุ่น */
-  width: 100%; /* ยืดเต็มพื้นที่ของคอนเทนเนอร์ */
-  max-width: 400px; /* กำหนดความกว้างสูงสุด */
-  min-width: 200px; /* กำหนดความกว้างขั้นต่ำ */
-  box-sizing: border-box; /* ให้ padding รวมอยู่ใน width */
-}
-
 /* สำหรับ header */
 .header {
   background-color: #1a2574;
@@ -274,7 +257,7 @@
 .formSubGroup4Section1Row1,
 .formSubGroup4Section1Row2 {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   padding: 0.5rem;
   border: 2px solid #00175c15;
@@ -284,13 +267,12 @@
 
 .formSubGroup4Section1Row1 .textLabel,
 .formSubGroup4Section1Row2 .textLabel {
-  text-align: right;
-  padding: 0.5rem;
+  text-align: center;
   font-size: 16px;
   font-weight: 700;
   background-color: #ffdf51;
   color: #101010;
-  border-radius: 5px;
+  width: 100%;
 }
 
 .formSubGroup5Section1Row1,
@@ -344,9 +326,12 @@
   align-items: center;
   padding: 0.5rem;
   border: 2px solid #00175c15;
+  border-radius: 8px;
   flex-direction: row;
   border: 1.5px;
   min-height: 150px;
+  resize: none;
+  border: 1.5px solid #ccd6dd;
 }
 
 .textLabel {
@@ -363,6 +348,21 @@
 .textData {
   width: fit-content;
   height: auto;
+}
+
+.formInput {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccd6dd;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  outline: none;
+  transition: all 0.3s ease;
+
+  width: 100%;
+  max-width: 400px;
+  min-width: 200px;
+  box-sizing: border-box;
 }
 
 /* Horizontal */

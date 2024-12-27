@@ -281,7 +281,7 @@ const EditData = () => {
                       id="finish_date"
                       className={` ${styles.formInput}`}
                       value={item.finish_date || "ไม่มีข้อมูล"}
-                      type="text"
+                      type="date"
                     />
                   </div>
                 </div>
@@ -293,7 +293,7 @@ const EditData = () => {
                       id="end_date"
                       className={` ${styles.formInput}`}
                       value={item.end_date || "ไม่มีข้อมูล"}
-                      type="text"
+                      type="date"
                     />
                   </div>
                   <div className={styles.formSubGroup8Section1Row2}></div>

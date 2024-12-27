@@ -222,12 +222,13 @@
 .textDataProblemImage {
   width: fit-content;
   height: fit-content;
-  padding: 5px;
+  padding: 5px 10px;
   font-size: 16px;
   font-weight: 400;
   margin: 0px 10px 0px 0px;
-  background-color: #ffd63380;
+  background-color: #fcff3352;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .searchProblemIcon {

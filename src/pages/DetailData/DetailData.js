@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import SignPic from "../../assets/images/sign/sign-example.png";
 
@@ -19,6 +20,10 @@ const EditData = () => {
   const [data, setData] = useState(null); // สถานะเพื่อเก็บข้อมูลที่ดึงมา
   const [loading, setLoading] = useState(true); // สถานะการโหลด
   const [error, setError] = useState(true); // สถานะการโหลด
+
+  // สำหรับ Show รูปภาพ Problem Image
+  const [showImage, setShowImage] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +49,14 @@ const EditData = () => {
     fetchData();
   }, [id]);
 
+  const handleClickShowImage = () => {
+    setShowModal(true); // เปิด modal เมื่อคลิก
+  };
+
+  const handleCloseShowImage = () => {
+    setShowModal(false); // ปิด modal เมื่อคลิกปุ่ม "X"
+  };
+
   // ตรวจสอบว่า data เป็น Array หรือไม่
   if (!Array.isArray(data)) {
     return <div>ข้อมูลไม่ถูกต้อง</div>;
@@ -62,31 +75,34 @@ const EditData = () => {
   return (
     <>
       {/* Header */}
+
       <header className={styles.header}>
-        <div className={styles.gridHeader}>
-          <div className={styles.gridHeaderItem1}>
-            <button
-              className={styles.gridHeaderButton}
-              onClick={() => navigate(-1)}
-              aria-label="กลับไปที่หน้าก่อนหน้า"
-            >
-              <FontAwesomeIcon icon={faCircleLeft} size="2x" />
-            </button>
-          </div>
+        {data.map((item) => (
+          <div className={styles.gridHeader}>
+            <div className={styles.gridHeaderItem1}>
+              <button
+                className={styles.gridHeaderButton}
+                onClick={() => navigate(-1)}
+                aria-label="กลับไปที่หน้าก่อนหน้า"
+              >
+                <FontAwesomeIcon icon={faCircleLeft} size="2x" />
+              </button>
+            </div>
 
-          <div className={styles.gridHeaderItem2}>
-            <p>แจ้งปัญหาและปรับปรุงเครื่องจักร</p>
-          </div>
+            <div className={styles.gridHeaderItem2}>
+              <p>แจ้งปัญหาและปรับปรุงเครื่องจักร</p>
+            </div>
 
-          <div className={styles.gridHeaderItem3}>
-            <button
-              className={styles.gridHeaderButton}
-              onClick={() => navigate("/")}
-            >
-              <FontAwesomeIcon icon={faEdit} size="2x" />
-            </button>
+            <div className={styles.gridHeaderItem3}>
+              <button
+                className={styles.gridHeaderButton}
+                onClick={() => navigate(`/editdata/${item.id}`)}
+              >
+                <FontAwesomeIcon icon={faEdit} size="2x" />
+              </button>
+            </div>
           </div>
-        </div>
+        ))}
       </header>
 
       <main className={styles.main}>
@@ -161,13 +177,43 @@ const EditData = () => {
                 <div className={styles.formSubGroup5Section1}>
                   <div className={styles.formSubGroup5Section1Row1}>
                     <p className={styles.textLabel}>รูปภาพปัญหา : </p>
-                    <p className={styles.textDataProblemImage}>
+                    <button
+                      className={styles.textDataProblemImage}
+                      onClick={(e) => {
+                        e.preventDefault(); // ป้องกันไม่ให้หน้ารีเฟรช
+                        handleClickShowImage();
+                      }}
+                    >
                       {item.attachment || "ไม่มีข้อมูล"}
                       <FontAwesomeIcon
                         className={styles.searchProblemIcon}
                         icon={faSearch}
                       />
-                    </p>
+                    </button>
+                    {showModal && item.attachment && (
+                      <div
+                        className={styles.modalOverlay}
+                        onClick={handleCloseShowImage}
+                      >
+                        <div className={styles.modalContent}>
+                          <FontAwesomeIcon
+                            icon={faXmark}
+                            onClick={handleCloseShowImage}
+                            className={styles.closeButton}
+                            size="2x"
+                          />
+                          <img
+                            src={
+                              item.attachment
+                                ? require(`../../assets/images/test/${item.attachment}`)
+                                : "ไม่มีข้อมูลรูปภาพ"
+                            }
+                            alt="Attached"
+                            className={styles.modalImage}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

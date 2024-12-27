@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 const AddData = () => {
   const navigate = useNavigate();
@@ -23,8 +24,6 @@ const AddData = () => {
 
   // สำหรับดึงข้อมูลในตาราง master_mc_g6m ในการเช็คข้อมูล
   const [lineTitleData, setLineTitleData] = useState([]);
-
-  // ใช้สำหรับการเก็บข้อมูลใน INPUT เพื่อนำไป Insert ใน DATABASE POSTGRES
 
   // State สำหรับ form
   const [formData, setFormData] = useState({
@@ -446,7 +445,7 @@ const AddData = () => {
               </label>
               <textarea
                 id="problem_topic"
-                className={styles.formTextarea}
+                className={styles.textData}
                 value={formData.problem_topic}
                 onChange={handleChange}
               />
@@ -459,7 +458,7 @@ const AddData = () => {
               </label>
               <textarea
                 id="counter_measure"
-                className={styles.formTextarea}
+                className={`${styles.textData} ${styles.textDataArea}`}
                 value={formData.counter_measure}
                 onChange={handleChange}
               />

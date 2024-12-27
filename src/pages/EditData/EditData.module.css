@@ -1,3 +1,26 @@
+/* Input */
+.formInput {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccd6dd; /* ใช้สีอ่อนเพื่อความมินิมอล */
+  border-radius: 8px;
+  background-color: #f9fafb; /* พื้นหลังสีอ่อนเพื่อความสะอาดตา */
+  outline: none;
+  transition: all 0.3s ease; /* เพิ่ม transition เพื่อความนุ่มนวล */
+  width: fit-content;
+  box-sizing: border-box;
+}
+
+.formInput:focus {
+  border-color: #4a90e2;
+  background-color: #ffffff;
+}
+
+.formInput::placeholder {
+  color: #adb5bd; /* สี placeholder ให้ดูเป็นธรรมชาติ */
+  font-style: italic; /* เพิ่มความแตกต่างเล็กน้อย */
+}
+
 /* สำหรับ header */
 .header {
   background-color: #1a2574;
@@ -98,8 +121,23 @@
   width: 100%;
   justify-content: center;
   padding: 10px;
-  background-color: #000737;
   border-radius: 25px;
+}
+
+.textTitleHeader {
+  color: #101010;
+  font-size: 30px;
+  font-weight: 700;
+  padding: 10px 20px;
+}
+
+.textTitleHeaderDisplay {
+  background-color: #ffed9f;
+  color: #101010;
+  font-size: 30px;
+  font-weight: 700;
+  padding: 0px 10px;
+  border-radius: 15px;
 }
 
 .gridContainer {
@@ -132,7 +170,7 @@
 .formSubGroup1Section1 {
   display: grid;
   justify-content: center;
-  grid-template-columns: 3fr 1.2fr;
+  grid-template-columns: auto 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -142,7 +180,7 @@
 .formSubGroup2Section1 {
   display: grid;
   justify-content: center;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -151,7 +189,7 @@
 .formSubGroup3Section1 {
   display: grid;
   justify-content: center;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -160,7 +198,8 @@
 .formSubGroup4Section1 {
   display: grid;
   justify-content: center;
-  grid-template-columns: 3fr;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -170,7 +209,11 @@
 .formSubGroup5Section1 {
   display: grid;
   place-content: center;
-  grid-template-columns: 3fr;
+  flex-direction: column;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
   gap: 5px;
 }
 
@@ -179,8 +222,7 @@
 .formSubGroup2Section1Row1,
 .formSubGroup2Section1Row2,
 .formSubGroup3Section1Row1,
-.formSubGroup3Section1Row2,
-.formSubGroup4Section1Row1 {
+.formSubGroup3Section1Row2 {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -188,7 +230,56 @@
   border: 2px solid #00175c15;
   flex-direction: row;
 }
-.formSubGroup5Section1Row1 {
+
+.formSubGroup4Section1Row1,
+.formSubGroup4Section1Row2 {
+  display: grid;
+  align-items: center;
+  padding: 0.5rem;
+  border: 2px solid #00175c15;
+  flex-direction: row;
+  border: 1.5px solid #adb5bd;
+  height: 100%;
+}
+
+.formSubGroup4Section1Row1 .textLabel,
+.formSubGroup4Section1Row2 .textLabel {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  padding: 0.5rem;
+  border: 2px solid #00175c15;
+  flex-direction: row;
+  border: 1.5px;
+  text-align: center;
+  width: 100%;
+}
+
+.formSubGroup4Section1Row1 .textDataArea,
+.formSubGroup4Section1Row2 .textDataArea {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  padding: 0.5rem;
+  border: 2px solid #00175c15;
+  flex-direction: row;
+  border: 1.5px;
+  min-height: 150px;
+}
+
+.formSubGroup5Section1Row1,
+.formSubGroup5Section1Row2 {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding: 0.5rem;
+  height: 100%;
+  min-height: auto;
+  border: 2px solid #00175c15;
+}
+.formSubGroup6Section1Row1,
+.formSubGroup6Section1Row2 {
   display: grid;
   flex-direction: row;
   grid-template-columns: auto 1fr;
@@ -210,7 +301,7 @@
   margin: 0px 10px 0px 0px;
 }
 
-.formSubGroup1Section3 .textData p {
+.textDataArea .formSubGroup1Section3 .textData p {
   width: fit-content;
   height: fit-content;
   padding: 5px;

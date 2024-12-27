@@ -19,6 +19,28 @@ const EditData = () => {
   const [loading, setLoading] = useState(true); // สถานะการโหลด
   const [error, setError] = useState(true); // สถานะการโหลด
 
+  // State สำหรับ form
+  const [formData, setFormData] = useState({
+    line: "",
+    machine_no: "",
+    operation_no: "",
+    activity: "",
+    tag_type: "",
+    ctag_level: "",
+    problem_type: "",
+    komarigoto: "",
+    problem_topic: "",
+    counter_measure: "",
+    created_by: "",
+    shift: "",
+    group_pic: "",
+    editor_pic: "",
+    receive_date: "",
+    start_date: "",
+    finish_date: "",
+    end_date: "",
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -91,6 +113,12 @@ const EditData = () => {
       <main className={styles.main}>
         {Object.entries(data).map(([key, item], index) => (
           <div key={index} className={styles.formContainer}>
+            <p className={styles.textTitleHeader}>
+              แก้ไขข้อมูล{" "}
+              <span className={styles.textTitleHeaderDisplay}>
+                No. {item.id}
+              </span>
+            </p>
             <form
               className={`${styles.gridContainer} ${
                 item.tag_type === "RED" ? styles.forRedBackgroundColor : ""
@@ -100,74 +128,107 @@ const EditData = () => {
               <div className={styles.formGroupSection1}>
                 <div className={styles.formSubGroup1Section1}>
                   <div className={styles.formSubGroup1Section1Row1}>
-                    <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
-                    <p className={styles.textData}>
-                      {item.tag_type || "ไม่มีข้อมูล"}
-                    </p>
+                    <p className={styles.textLabel}>Machine No : </p>
+                    <input
+                      id="tag_type"
+                      className={`${styles.textData} ${styles.formInput}`}
+                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      type="text"
+                    />
                   </div>
                   <div className={styles.formSubGroup1Section1Row2}>
-                    <p className={styles.textLabel}>No. : </p>
+                    <p className={styles.textLabel}>Activity : </p>
                     <p className={styles.textData}>
-                      {item.id || "ไม่มีข้อมูล"}
+                      {item.activity || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                 </div>
                 <div className={styles.formSubGroup2Section1}>
                   <div className={styles.formSubGroup2Section1Row1}>
-                    <p className={styles.textLabel}>วันที่พบ : </p>
-                    <p className={styles.textData}>
-                      {item.receive_date || "ไม่มีข้อมูล"}
-                    </p>
+                    <p className={styles.textLabel}>ประเภท TAG: </p>
                   </div>
                   <div className={styles.formSubGroup2Section1Row2}>
-                    <p className={styles.textLabel}>Line : </p>
+                    <p className={styles.textLabel}>TAG Level : </p>
                     <p className={styles.textData}>
-                      {item.line || "ไม่มีข้อมูล"}
+                      {item.ctag_level || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                 </div>
                 <div className={styles.formSubGroup3Section1}>
                   <div className={styles.formSubGroup3Section1Row1}>
-                    <p className={styles.textLabel}>ชื่อผู้แจ้ง : </p>
+                    <p className={styles.textLabel}>ประเภทปัญหา : </p>
                     <p className={styles.textData}>
-                      {item.created_by || "ไม่มีข้อมูล"}
+                      {item.tag_type || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                   <div className={styles.formSubGroup3Section1Row2}>
-                    <p className={styles.textLabel}>ประเภท : </p>
+                    <p className={styles.textLabel}>Komarigoto : </p>
                     <p className={styles.textData}>
-                      {item.group_pic || "ไม่มีข้อมูล"}
+                      {item.komarigoto || "ไม่มีข้อมูล"}
                     </p>
                   </div>
                 </div>
                 <div className={styles.formSubGroup4Section1}>
                   <div className={styles.formSubGroup4Section1Row1}>
-                    <p className={styles.textLabel}>รายละเอียด : </p>
-                    <p className={styles.textData}>
-                      <span
-                        style={{
-                          fontWeight: "900",
-                          textDecoration: "underline",
-                          textUnderlineOffset: "2px",
-                        }}
-                      >
-                        {item.machine_no || "ไม่มีข้อมูล"}
-                      </span>{" "}
-                      <span>{item.problem_topic || "ไม่มีข้อมูล"}</span>
-                    </p>
+                    <p className={styles.textLabel}>หัวข้อปัญหา : </p>
+                    <textarea
+                      id="problem_topic"
+                      className={styles.textDataArea}
+                      value={item.problem_topic}
+                    />
+                  </div>
+                  <div className={styles.formSubGroup4Section1Row2}>
+                    <p className={styles.textLabel}>แนวทางการแก้ปัญหา : </p>
+                    <textarea
+                      id="counter_measure"
+                      className={styles.textDataArea}
+                      value={item.counter_measure}
+                    />
                   </div>
                 </div>
                 <div className={styles.formSubGroup5Section1}>
                   <div className={styles.formSubGroup5Section1Row1}>
-                    <p className={styles.textLabel}>รูปภาพปัญหา : </p>
-                    <p className={styles.textData}>
-                      {item.attachment || "ไม่มีข้อมูล"}
-                    </p>
+                    <p className={styles.textLabel}>Machine No : </p>
+                    <input
+                      id="tag_type"
+                      className={`${styles.textData} ${styles.formInput}`}
+                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      type="text"
+                    />
+                  </div>
+                  <div className={styles.formSubGroup5Section1Row2}>
+                    <p className={styles.textLabel}>วันที่แจ้งปัญหา : </p>
+                    <input
+                      id="start_date"
+                      className={`${styles.textData} ${styles.formInput}`}
+                      value={item.start_date || "ไม่มีข้อมูล"}
+                      type="date"
+                    />
+                  </div>
+                </div>
+                <div className={styles.formSubGroup6Section1}>
+                  <div className={styles.formSubGroup6Section1Row1}>
+                    <p className={styles.textLabel}>ประเภทผู้รับผิดชอบ : </p>
+                    <input
+                      id="tag_type"
+                      className={`${styles.textData} ${styles.formInput}`}
+                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      type="text"
+                    />
+                  </div>
+                  <div className={styles.formSubGroup6Section1Row2}>
+                    <p className={styles.textLabel}>ผู้แก้ไขปัญหา : </p>
+                    <input
+                      id="start_date"
+                      className={`${styles.textData} ${styles.formInput}`}
+                      value={item.start_date || "ไม่มีข้อมูล"}
+                      type="date"
+                    />
                   </div>
                 </div>
               </div>
 
-              {/* Section 2 */}
+              {/* Section 2
               <div className={styles.formGroupSection2}>
                 {item.tag_type === "RED" && (
                   <div className={styles.formSubGroup1Section2}>
@@ -205,7 +266,7 @@ const EditData = () => {
                     <p className={styles.textData}>--------</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <hr className={styles.LineHrSection1_2} />
 
@@ -223,7 +284,7 @@ const EditData = () => {
                         />
                       </div>
                       <div className={styles.formGlProdDate}>
-                        {item.date_prosign || "ไม่มีข้อมูล"}
+                        {item.date_prosign || "ไม่มีข้อมูลวันที่"}
                       </div>
                     </div>
                   </div>
@@ -238,7 +299,7 @@ const EditData = () => {
                         />
                       </div>
                       <div className={styles.formGlmtDate}>
-                        {item.date_mtsign || "ไม่มีข้อมูล"}
+                        {item.date_mtsign || "ไม่มีข้อมูลวันที่"}
                       </div>
                     </div>
                   </div>

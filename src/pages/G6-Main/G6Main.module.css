@@ -122,7 +122,7 @@
   width: 700px;
   height: 100%;
   border-radius: 10px;
-  background: #5a5a5a60;
+  background-color: #5a5a5a60;
   padding: 10px 15px;
 }
 
@@ -256,5 +256,5 @@
 }
 .mainForDetail .faAngleRight:hover {
   transform: translateX(2px);
-  background-color: #ffd633;
+  background-color: #ffd83c79;
 }

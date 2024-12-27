@@ -127,76 +127,88 @@ const EditData = () => {
               {/* Section 1 */}
               <div className={styles.formGroupSection1}>
                 <div className={styles.formSubGroup1Section1}>
+                  {/* machine_no */}
                   <div className={styles.formSubGroup1Section1Row1}>
-                    <p className={styles.textLabel}>Machine No : </p>
+                    <p className={styles.textLabel}>
+                      <span style={{ color: "crimson" }}>* </span>Machine No :{" "}
+                    </p>
                     <input
-                      id="tag_type"
+                      id="machine_no"
                       className={` ${styles.formInput}`}
                       value={item.machine_no || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
+                  {/* Activity */}
                   <div className={styles.formSubGroup1Section1Row2}>
                     <p className={styles.textLabel}>Activity : </p>
                     <input
-                      id="tag_type"
+                      id="activity"
                       className={` ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      value={item.activity || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
                 </div>
                 <div className={styles.formSubGroup2Section1}>
+                  {/* Tag Type */}
                   <div className={styles.formSubGroup2Section1Row1}>
                     <p className={styles.textLabel}>ประเภท TAG: </p>
                     <input
                       id="tag_type"
                       className={` ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      value={item.tag_type || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
+                  {/* C TAG level */}
                   <div className={styles.formSubGroup2Section1Row2}>
                     <p className={styles.textLabel}>TAG Level : </p>
                     <input
-                      id="tag_type"
+                      id="ctag_level"
                       className={` ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      value={item.ctag_level || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
                 </div>
                 <div className={styles.formSubGroup3Section1}>
+                  {/* problem_type */}
                   <div className={styles.formSubGroup3Section1Row1}>
                     <p className={styles.textLabel}>ประเภทปัญหา : </p>
                     <input
-                      id="tag_type"
+                      id="problem_type"
                       className={` ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      value={item.problem_type || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
+                  {/* Komarigoto */}
                   <div className={styles.formSubGroup3Section1Row2}>
                     <p className={styles.textLabel}>Komarigoto : </p>
                     <input
-                      id="tag_type"
+                      id="komarigoto"
                       className={` ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      value={item.komarigoto || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
                 </div>
                 <div className={styles.formSubGroup4Section1}>
+                  {/* Problem Topic */}
                   <div className={styles.formSubGroup4Section1Row1}>
-                    <p className={styles.textLabel}>หัวข้อปัญหา : </p>
+                    <p className={styles.textGroup4Label}>หัวข้อปัญหา : </p>
                     <textarea
                       id="problem_topic"
                       className={styles.textDataArea}
                       value={item.problem_topic}
                     />
                   </div>
+                  {/* Counter Measure */}
                   <div className={styles.formSubGroup4Section1Row2}>
-                    <p className={styles.textLabel}>แนวทางการแก้ปัญหา : </p>
+                    <p className={styles.textGroup4Label}>
+                      แนวทางการแก้ปัญหา :{" "}
+                    </p>
                     <textarea
                       id="counter_measure"
                       className={styles.textDataArea}
@@ -205,73 +217,83 @@ const EditData = () => {
                   </div>
                 </div>
                 <div className={styles.formSubGroup5Section1}>
+                  {/* Created By */}
                   <div className={styles.formSubGroup5Section1Row1}>
-                    <p className={styles.textLabel}>Machine No : </p>
+                    <p className={styles.textLabel}>
+                      <span style={{ color: "crimson" }}>* </span>
+                      ผู้แจ้งปัญหา :{" "}
+                    </p>
                     <input
-                      id="tag_type"
-                      className={`${styles.textData} ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      id="created_by"
+                      className={` ${styles.formInput}`}
+                      style={{ color: item.created_by ? "black" : "red" }}
+                      value={item.created_by || "-"}
                       type="text"
                     />
                   </div>
+                  {/* Start Date */}
                   <div className={styles.formSubGroup5Section1Row2}>
                     <p className={styles.textLabel}>วันที่แจ้งปัญหา : </p>
                     <input
                       id="start_date"
-                      className={`${styles.textData} ${styles.formInput}`}
+                      className={` ${styles.formInput}`}
                       value={item.start_date || "ไม่มีข้อมูล"}
                       type="date"
                     />
                   </div>
                 </div>
                 <div className={styles.formSubGroup6Section1}>
+                  {/* Group Pic */}
                   <div className={styles.formSubGroup6Section1Row1}>
                     <p className={styles.textLabel}>ประเภทผู้รับผิดชอบ : </p>
                     <input
-                      id="tag_type"
-                      className={`${styles.textData} ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      id="group_pic"
+                      className={` ${styles.formInput}`}
+                      value={item.group_pic || "ไม่มีข้อมูล"}
                       type="text"
                     />
                   </div>
                   <div className={styles.formSubGroup6Section1Row2}>
                     <p className={styles.textLabel}>ผู้แก้ไขปัญหา : </p>
                     <input
-                      id="start_date"
-                      className={`${styles.textData} ${styles.formInput}`}
-                      value={item.start_date || "ไม่มีข้อมูล"}
-                      type="date"
+                      id="editor_pic"
+                      className={` ${styles.formInput}`}
+                      value={item.editor_pic || "ไม่มีข้อมูล"}
+                      type="text"
                     />
                   </div>
                 </div>
                 <div className={styles.formSubGroup7Section1}>
+                  {/* Receive Date */}
                   <div className={styles.formSubGroup7Section1Row1}>
                     <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
                     <input
-                      id="tag_type"
-                      className={`${styles.textData} ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      id="receive_date"
+                      className={` ${styles.formInput}`}
+                      value={item.receive_date || "ไม่มีข้อมูล"}
                       type="date"
                     />
                   </div>
+                  {/* End Date */}
                   <div className={styles.formSubGroup7Section1Row2}>
                     <p className={styles.textLabel}>วันที่กำหนดเสร็จ : </p>
                     <input
-                      id="start_date"
-                      className={`${styles.textData} ${styles.formInput}`}
-                      value={item.start_date || "ไม่มีข้อมูล"}
-                      type="date"
+                      id="finish_date"
+                      className={` ${styles.formInput}`}
+                      value={item.finish_date || "ไม่มีข้อมูล"}
+                      type="text"
                     />
                   </div>
                 </div>
                 <div className={styles.formSubGroup8Section1}>
+                  {/* End Date */}
                   <div className={styles.formSubGroup8Section1Row1}>
-                    <p className={styles.textLabel}>วันที่รับเรื่อง : </p>
+                    <p className={styles.textLabel}>วันที่เสร็จ : </p>
                     <input
-                      id="tag_type"
-                      className={`${styles.textData} ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
-                      type="date"
+                      id="end_date"
+                      className={` ${styles.formInput}`}
+                      value={item.end_date || "ไม่มีข้อมูล"}
+                      type="text"
                     />
                   </div>
                   <div className={styles.formSubGroup8Section1Row2}></div>
@@ -334,7 +356,12 @@ const EditData = () => {
                         />
                       </div>
                       <div className={styles.formGlProdDate}>
-                        {item.date_prosign || "ไม่มีข้อมูลวันที่"}
+                        <input
+                          id="date_prosign"
+                          className={` ${styles.formInput}`}
+                          value={item.date_prosign || "ไม่มีข้อมูล"}
+                          type="date"
+                        />
                       </div>
                     </div>
                   </div>
@@ -349,7 +376,12 @@ const EditData = () => {
                         />
                       </div>
                       <div className={styles.formGlmtDate}>
-                        {item.date_mtsign || "ไม่มีข้อมูลวันที่"}
+                        <input
+                          id="date_mtsign"
+                          className={` ${styles.formInput}`}
+                          value={item.date_mtsign || "ไม่มีข้อมูล"}
+                          type="date"
+                        />
                       </div>
                     </div>
                   </div>

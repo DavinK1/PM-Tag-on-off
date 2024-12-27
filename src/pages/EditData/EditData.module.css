@@ -265,16 +265,6 @@
   box-sizing: border-box;
 }
 
-.formSubGroup4Section1Row1 .textLabel,
-.formSubGroup4Section1Row2 .textLabel {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 700;
-  background-color: #ffdf51;
-  color: #101010;
-  width: 100%;
-}
-
 .formSubGroup5Section1Row1,
 .formSubGroup5Section1Row2 {
   display: grid;
@@ -335,7 +325,7 @@
 }
 
 .textLabel {
-  background-color: #ffdf51;
+  background-color: #ffed9f;
   width: max-content;
   height: max-content;
   color: #101010;
@@ -350,6 +340,17 @@
   height: auto;
 }
 
+.textGroup4Label,
+.textGroup4Label {
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+  font-weight: 700;
+  background-color: #ffed9f;
+  color: #101010;
+  width: 100%;
+}
+
 .formInput {
   padding: 10px 12px;
   font-size: 16px;
@@ -361,7 +362,7 @@
 
   width: 100%;
   max-width: 400px;
-  min-width: 200px;
+  min-width: auto;
   box-sizing: border-box;
 }
 

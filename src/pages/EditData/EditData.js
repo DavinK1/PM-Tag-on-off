@@ -189,7 +189,8 @@ const EditData = () => {
                     <input
                       id="komarigoto"
                       className={` ${styles.formInput}`}
-                      value={item.komarigoto || "ไม่มีข้อมูล"}
+                      style={{ color: item.komarigoto ? "black" : "red" }}
+                      value={item.komarigoto || "-"}
                       type="text"
                     />
                   </div>
@@ -212,7 +213,8 @@ const EditData = () => {
                     <textarea
                       id="counter_measure"
                       className={styles.textDataArea}
-                      value={item.counter_measure}
+                      style={{ color: item.counter_measure ? "black" : "red" }}
+                      value={item.counter_measure || "-"}
                     />
                   </div>
                 </div>
@@ -258,7 +260,8 @@ const EditData = () => {
                     <input
                       id="editor_pic"
                       className={` ${styles.formInput}`}
-                      value={item.editor_pic || "ไม่มีข้อมูล"}
+                      style={{ color: item.editor_pic ? "black" : "red" }}
+                      value={item.editor_pic || "-"}
                       type="text"
                     />
                   </div>

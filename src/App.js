@@ -10,6 +10,7 @@ import G6Crank from "./pages/G6-Crank/G6Crank";
 import G6Camshaft from "./pages/G6-Camshaft/G6Camshaft";
 import AddData from "./pages/AddData/AddData";
 import EditData from "./pages/EditData/EditData";
+import DetailData from "./pages/DetailData/DetailData";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/g6camshaft" element={<G6Camshaft />} />
       <Route path="/adddata" element={<AddData />} />
       <Route path="/editdata/:id" element={<EditData />} />
+      <Route path="/detaildata/:id" element={<DetailData />} />
     </Routes>
   );
 }

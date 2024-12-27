@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./AddData.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
@@ -47,6 +48,10 @@ const AddData = () => {
     end_date: "",
   });
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   // ฟังก์ชันสำหรับ handle การเปลี่ยนแปลงใน form
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -60,20 +65,27 @@ const AddData = () => {
   console.log("FormData: ", formData);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setIsLoading(true);
-
-    // Validate Input Machine No. และ Created_by ในกรณีที่ไม่ได้กรอกค่า
     if (!formData.machine_no) {
-      alert("กรุณากรอกข้อมูลในช่อง Machine No.");
-      return; // Prevent form submission if validation fails
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "กรุณากรอกข้อมูลในช่อง Machine No.",
+      });
+      return;
     }
 
     if (!formData.created_by) {
-      alert("กรุณากรอกข้อมูลในช่อง ผู้แจ้งปัญหา");
-      return; // Prevent form submission if validation fails
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "กรุณากรอกข้อมูลในช่อง ผู้แจ้งปัญหา",
+      });
+      return;
     }
+
+    e.preventDefault();
+
+    setIsLoading(true);
 
     try {
       const response = await axios.post(
@@ -83,7 +95,14 @@ const AddData = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      alert("ข้อมูลถูกเพิ่มเรียบร้อย!");
+
+      Swal.fire({
+        icon: "success",
+        title: "สำเร็จ!",
+        text: "ข้อมูลถูกเพิ่มเรียบร้อย!",
+        confirmButtonColor: "#3085d6",
+      });
+
       setFormData({
         line: "",
         machine_no: "",
@@ -109,7 +128,11 @@ const AddData = () => {
       const errorMessage = error.response
         ? error.response.data.message || "เกิดข้อผิดพลาดที่เซิร์ฟเวอร์"
         : "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้";
-      alert(`Error: ${errorMessage}`);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `Error: ${errorMessage}`,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -166,8 +189,8 @@ const AddData = () => {
           <div className={styles.gridHeaderItem1}>
             <button
               className={styles.gridHeaderButton}
-              onClick={() => navigate(-1)}
-              aria-label="Go back to the previous page"
+              onClick={handleGoBack}
+              aria-label="กลับไปที่หน้า Page ก่อนหน้า!"
             >
               <FontAwesomeIcon icon={faCircleLeft} size="2x" />
             </button>
@@ -474,10 +497,10 @@ const AddData = () => {
                 >
                   เลือกกะทำงาน
                 </option>
-                <option className={styles.labelOption} value="1">
+                <option className={styles.labelOption} value="W">
                   W
                 </option>
-                <option className={styles.labelOption} value="2">
+                <option className={styles.labelOption} value="Y">
                   Y
                 </option>
               </select>

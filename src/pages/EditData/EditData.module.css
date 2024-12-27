@@ -2,23 +2,17 @@
 .formInput {
   padding: 10px 12px;
   font-size: 16px;
-  border: 1.5px solid #ccd6dd; /* ใช้สีอ่อนเพื่อความมินิมอล */
+  border: 1.5px solid #ccd6dd;
   border-radius: 8px;
-  background-color: #f9fafb; /* พื้นหลังสีอ่อนเพื่อความสะอาดตา */
+  background-color: #f9fafb;
   outline: none;
-  transition: all 0.3s ease; /* เพิ่ม transition เพื่อความนุ่มนวล */
-  width: fit-content;
-  box-sizing: border-box;
-}
+  transition: all 0.3s ease;
 
-.formInput:focus {
-  border-color: #4a90e2;
-  background-color: #ffffff;
-}
-
-.formInput::placeholder {
-  color: #adb5bd; /* สี placeholder ให้ดูเป็นธรรมชาติ */
-  font-style: italic; /* เพิ่มความแตกต่างเล็กน้อย */
+  /* ขนาดที่ยืดหยุ่น */
+  width: 100%; /* ยืดเต็มพื้นที่ของคอนเทนเนอร์ */
+  max-width: 400px; /* กำหนดความกว้างสูงสุด */
+  min-width: 200px; /* กำหนดความกว้างขั้นต่ำ */
+  box-sizing: border-box; /* ให้ padding รวมอยู่ใน width */
 }
 
 /* สำหรับ header */
@@ -170,7 +164,7 @@
 .formSubGroup1Section1 {
   display: grid;
   justify-content: center;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -210,7 +204,38 @@
   display: grid;
   place-content: center;
   flex-direction: column;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+
+.formSubGroup6Section1 {
+  display: grid;
+  place-content: center;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+.formSubGroup7Section1 {
+  display: grid;
+  place-content: center;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 5px;
+}
+.formSubGroup8Section1 {
+  display: grid;
+  place-content: center;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -218,9 +243,24 @@
 }
 
 .formSubGroup1Section1Row1,
-.formSubGroup1Section1Row2,
+.formSubGroup1Section1Row2 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding: 0.5rem;
+  border: 2px solid #00175c15;
+  flex-direction: row;
+}
+
 .formSubGroup2Section1Row1,
-.formSubGroup2Section1Row2,
+.formSubGroup2Section1Row2 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding: 0.5rem;
+  border: 2px solid #00175c15;
+  flex-direction: row;
+}
 .formSubGroup3Section1Row1,
 .formSubGroup3Section1Row2 {
   display: grid;
@@ -234,37 +274,23 @@
 .formSubGroup4Section1Row1,
 .formSubGroup4Section1Row2 {
   display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   padding: 0.5rem;
   border: 2px solid #00175c15;
-  flex-direction: row;
-  border: 1.5px solid #adb5bd;
-  height: 100%;
+  gap: 10px;
+  box-sizing: border-box;
 }
 
 .formSubGroup4Section1Row1 .textLabel,
 .formSubGroup4Section1Row2 .textLabel {
-  display: grid;
-  grid-template-columns: auto;
-  align-items: center;
+  text-align: right;
   padding: 0.5rem;
-  border: 2px solid #00175c15;
-  flex-direction: row;
-  border: 1.5px;
-  text-align: center;
-  width: 100%;
-}
-
-.formSubGroup4Section1Row1 .textDataArea,
-.formSubGroup4Section1Row2 .textDataArea {
-  display: grid;
-  grid-template-columns: auto;
-  align-items: center;
-  padding: 0.5rem;
-  border: 2px solid #00175c15;
-  flex-direction: row;
-  border: 1.5px;
-  min-height: 150px;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #ffdf51;
+  color: #101010;
+  border-radius: 5px;
 }
 
 .formSubGroup5Section1Row1,
@@ -289,81 +315,54 @@
   min-height: auto;
   border: 2px solid #00175c15;
 }
+.formSubGroup7Section1Row1,
+.formSubGroup7Section1Row2 {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: auto auto;
+  align-items: center;
+  padding: 0.5rem;
+  height: 100%;
+  min-height: auto;
+  border: 2px solid #00175c15;
+}
+.formSubGroup8Section1Row1,
+.formSubGroup8Section1Row2 {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: auto auto;
+  align-items: center;
+  padding: 0.5rem;
+  height: 100%;
+  min-height: auto;
+  border: 2px solid #00175c15;
+}
+
+.textDataArea {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  padding: 0.5rem;
+  border: 2px solid #00175c15;
+  flex-direction: row;
+  border: 1.5px;
+  min-height: 150px;
+}
 
 .textLabel {
-  background-color: #1a2574;
-  width: fit-content;
-  height: fit-content;
-  color: #fff;
+  background-color: #ffdf51;
+  width: max-content;
+  height: max-content;
+  color: #101010;
   padding: 5px;
   font-size: 14px;
   font-weight: 700;
   margin: 0px 10px 0px 0px;
 }
 
-.textDataArea .formSubGroup1Section3 .textData p {
+.textData {
   width: fit-content;
-  height: fit-content;
-  padding: 5px;
-  font-size: 14px;
-  font-weight: 400;
-  margin: 0px 10px 0px 0px;
-}
-
-/* section 2 */
-.formGroupSection2 {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  border: 5px solid #00175c15;
-  background-color: #ffffff;
-  padding: 15px;
-  gap: 5px;
-  width: auto;
-}
-
-.formSubGroup1Section2 {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  gap: 5px;
-}
-.formSubGroup2Section2 {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 3fr 2fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  gap: 5px;
-}
-
-.formSubGroup3Section2 {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 2fr 2fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  gap: 5px;
-}
-
-.formSubGroup1Section2Row1,
-.formSubGroup1Section2Row2,
-.formSubGroup2Section2Row1,
-.formSubGroup2Section2Row2,
-.formSubGroup3Section2Row1,
-.formSubGroup3Section2Row2 {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  padding: 0.5rem;
-  border: 2px solid #00175c15;
-  flex-direction: row;
+  height: auto;
 }
 
 /* Horizontal */
@@ -391,7 +390,7 @@
 
 .formSubGroup1Section3 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
   gap: 10px;

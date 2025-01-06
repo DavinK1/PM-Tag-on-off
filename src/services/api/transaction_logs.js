@@ -31,17 +31,17 @@ router.get("/", async (req, res) => {
         shift,
         group_pic,
         editor_pic,
-        TO_CHAR(receive_Date, 'DD/MM/YY') AS receive_date,
-        start_date,
-        finish_date,
-        end_date,
+        TO_CHAR(receive_Date, 'YYYY-MM-DD') AS receive_date,
+        TO_CHAR(start_Date, 'YYYY-MM-DD') AS start_date,
+        TO_CHAR(finish_Date, 'YYYY-MM-DD') AS finish_date,
+        TO_CHAR(end_date, 'YYYY-MM-DD') AS end_date,
         gl_mt2,
         gl_prod2,
         attachment,
         test,
         cal_status,
-        date_mtsign,
-        date_prosign,
+        TO_CHAR(date_mtsign, 'YYYY-MM-DD') AS date_mtsign,
+        TO_CHAR(date_prosign, 'YYYY-MM-DD') AS date_prosign,
         created_by
       FROM transaction_logs;
     `);
@@ -235,6 +235,14 @@ router.put("/updatetransaction_logs/:id", async (req, res) => {
     created_by,
   } = req.body;
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   try {
     const query = `
       UPDATE transaction_logs SET
@@ -261,17 +269,17 @@ router.put("/updatetransaction_logs/:id", async (req, res) => {
       shift,
       group_pic,
       editor_pic,
-      receive_date,
-      start_date,
-      finish_date,
-      end_date,
+      formatDate(receive_date), // Format date before passing to SQL
+      formatDate(start_date),
+      formatDate(finish_date),
+      formatDate(end_date),
       gl_mt2,
       gl_prod2,
       attachment,
       test,
       cal_status,
-      date_mtsign,
-      date_prosign,
+      formatDate(date_mtsign),
+      formatDate(date_prosign),
       created_by,
       id,
     ];

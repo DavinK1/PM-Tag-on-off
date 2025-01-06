@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { text } from "@fortawesome/fontawesome-svg-core";
 
 const AddData = () => {
   const navigate = useNavigate();
@@ -108,9 +107,7 @@ const AddData = () => {
         operation_no: "",
         activity: "",
         tag_type: "",
-        ctag_level: "",
         problem_type: "",
-        komarigoto: "",
         problem_topic: "",
         counter_measure: "",
         created_by: "",
@@ -150,15 +147,12 @@ const AddData = () => {
       });
   }, []);
 
-  // ทำให้ receiveDate มีค่าเท่ากับ startDate
+  // ทำให้ receive_date เป็นค่าปัจจุบัน
   useEffect(() => {
-    if (formData.start_date) {
-      setFormData((prevData) => ({
-        ...prevData,
-        receiveDate: prevData.start_date,
-      }));
-    }
-  }, [formData.start_date]);
+    // กำหนดวันที่ปัจจุบันในรูปแบบ YYYY-MM-DD
+    const currentDate = new Date().toISOString().split("T")[0];
+    setFormData((prev) => ({ ...prev, receive_date: currentDate }));
+  }, []);
 
   // เมื่อเลือก machineNo ให้ทำการตรวจสอบว่า line_title ตรงกับเครื่องที่เลือกหรือไม่
   useEffect(() => {
@@ -343,7 +337,7 @@ const AddData = () => {
             </div>
 
             {/* C Tag */}
-            {showTagLevel === "Challenge" && (
+            {formData.tag_type === "Challenge" && (
               <div
                 className={`${styles.formGroupChallenge} ${styles.formGroup}`}
               >
@@ -404,12 +398,12 @@ const AddData = () => {
             </div>
 
             {/* แสดงฟอร์ม Komarigoto */}
-            {showKomarigoto === "Komarigoto" && (
+            {formData.problem_type === "Komarigoto" && (
               <div
                 className={`${styles.formGroupKomarigotoDetail} ${styles.formGroup}`}
               >
                 <label htmlFor="komarigoto" className={styles.formLabel}>
-                  Komarikoto
+                  Komarigoto
                 </label>
                 <select
                   id="komarigoto"
@@ -445,7 +439,7 @@ const AddData = () => {
               </label>
               <textarea
                 id="problem_topic"
-                className={styles.textData}
+                className={`${styles.textData} ${styles.formTextarea}`}
                 value={formData.problem_topic}
                 onChange={handleChange}
               />
@@ -458,7 +452,7 @@ const AddData = () => {
               </label>
               <textarea
                 id="counter_measure"
-                className={`${styles.textData} ${styles.textDataArea}`}
+                className={`${styles.textData} ${styles.formTextarea}`}
                 value={formData.counter_measure}
                 onChange={handleChange}
               />
@@ -534,6 +528,13 @@ const AddData = () => {
                 onChange={handleChange}
               />
             </div>
+
+            {/* สำหรับค่า receive_date (ซ่อนเอาไว้แค่ ส่งแค่ค่า) */}
+            <input
+              type="hidden"
+              id="receive_date"
+              value={formData.receive_date}
+            />
 
             {/* วันที่กำหนดเสร็จ */}
             <div className={`${styles.formaGroupEndDate} ${styles.formGroup}`}>

@@ -366,6 +366,24 @@
   box-sizing: border-box;
 }
 
+.formSelect {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccd6dd;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  outline: none;
+  transition: all 0.3s ease;
+
+  width: 100%;
+  max-width: 400px;
+  min-width: auto;
+  height: 100%;
+  max-height: 400px;
+  min-height: auto;
+  box-sizing: border-box;
+}
+
 /* Horizontal */
 .LineHrSection1_2 {
   border: 2px solid #00175c15;

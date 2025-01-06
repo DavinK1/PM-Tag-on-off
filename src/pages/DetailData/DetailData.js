@@ -10,7 +10,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import SignPic from "../../assets/images/sign/sign-example.png";
+import noSignPic from "../../assets/images/sign/no-sign-example.jpg";
 
 const EditData = () => {
   const navigate = useNavigate();
@@ -122,7 +122,9 @@ const EditData = () => {
                       className={`${styles.textData} ${
                         item.tag_type === "RED" ? styles.forColorTagTypeRed : ""
                       } ${
-                        item.tag_type === "YELLOW" ? styles.forColorTagTypeYellow : ""
+                        item.tag_type === "YELLOW"
+                          ? styles.forColorTagTypeYellow
+                          : ""
                       }`}
                     >
                       {item.tag_type || "ไม่มีข้อมูล"}
@@ -275,8 +277,12 @@ const EditData = () => {
                       <div className={styles.formGlProdSign}>
                         <img
                           className={styles.imgGlProdSign}
-                          src={SignPic}
-                          alt={SignPic}
+                          src={
+                            item.gl_prod2
+                              ? require(`../../assets/images/sign/${item.gl_prod2}`)
+                              : noSignPic
+                          }
+                          alt={"gl_prod2 Sign"}
                         />
                       </div>
                       <div className={styles.formGlProdDate}>
@@ -290,8 +296,12 @@ const EditData = () => {
                       <div className={styles.formGlmtSign}>
                         <img
                           className={styles.imgGlmtSign}
-                          src={SignPic}
-                          alt={SignPic}
+                          src={
+                            item.gl_mt2
+                              ? require(`../../assets/images/sign/${item.gl_mt2}`)
+                              : noSignPic
+                          }
+                          alt={"gl_mt2 Sign"}
                         />
                       </div>
                       <div className={styles.formGlmtDate}>

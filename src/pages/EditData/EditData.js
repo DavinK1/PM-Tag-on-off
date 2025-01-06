@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 
-import noSignPic from "../../assets/images/sign/noSign-example.jpg";
+import noSignPic from "../../assets/images/sign/no-sign-example.jpg";
 
 const EditData = () => {
   const navigate = useNavigate();
@@ -23,8 +23,10 @@ const EditData = () => {
 
   // State สำหรับ form
   const [formData, setFormData] = useState({
+    id: "",
     machine_no: "",
     operation_no: "",
+    line: "",
     activity: "",
     tag_type: "",
     ctag_level: "",
@@ -42,62 +44,68 @@ const EditData = () => {
     end_date: "",
     gl_mt2: "",
     gl_prod2: "",
+    date_prosign: "",
+    date_mtsign: "",
   });
 
-  // ฟังก์ชันสำหรับ handle การเปลี่ยนแปลงใน form
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+  // สำหรับ format date input ที่มาจาก API ให้แสดงใน Input ของ Form ได้
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   };
 
+  // ฟังก์ชันสำหรับอัปเดตค่าใน form
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+
+    // ปรับค่าของ formData ตาม input ที่เปลี่ยน
+    setFormData((prevData) => {
+      let newFormData = {
+        ...prevData,
+        [id]: value,
+      };
+
+      // ถ้า tag_type ไม่ใช่ "Challenge ให้ ctag_level เป็น null"
+      if (id === "tag_type" && value !== "Challenge") {
+        newFormData.ctag_level = null;
+      }
+
+      // ถ้า problem_type ไม่ใช่ "Komarigoto" ให้ komarigoto เป็น null
+      if (id === "problem_type" && value !== "Komarigoto") {
+        newFormData.komarigoto = null;
+      }
+
+      return newFormData;
+    });
+  };
+
+  // ฟังก์ชันส่งข้อมูลไปอัพเดตใน API
   const handleSubmit = async (e) => {
-    if (!formData.machine_no) {
-      Swal.fire({
-        icon: "warning",
-        title: "Warning",
-        text: "กรุณากรอกข้อมูลในช่อง Machine No.",
-      });
-      return;
-    }
-
-    if (!formData.created_by) {
-      Swal.fire({
-        icon: "warning",
-        title: "Warning",
-        text: "กรุณากรอกข้อมูลในช่อง ผู้แจ้งปัญหา",
-      });
-      return;
-    }
-
-    e.preventDefault(); // ป้องกันการรีเฟรชหน้า
-
-    setIsLoading(true);
-
+    e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:4000/updatetransaction_logs/${id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        `http://localhost:4000/transaction_logs/updatetransaction_logs/${formData.id}`,
+        formData
       );
+      if (response.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "สำเร็จ!",
+          text: "ข้อมูลถูกอัปเดตเรียบร้อย!",
+          confirmButtonColor: "#3085d6",
+        });
+        navigate(-1); // หรือไปยังหน้าอื่นที่ต้องการ
+      }
+    } catch (error) {
+      console.error("Error updating data:", error);
       Swal.fire({
-        icon: "success",
-        title: "สำเร็จ!",
-        text: "ข้อมูลถูกเพิ่มเรียบร้อย!",
-        confirmButtonColor: "#3085d6",
+        icon: "error",
+        title: "Error",
+        text: `Error: ${error}`,
       });
-      console.log("Update successful:", response.data);
-      alert("อัปเดตข้อมูลสำเร็จ");
-      navigate("/"); // นำทางกลับไปหน้าหลักหลังอัปเดตสำเร็จ
-    } catch (err) {
-      console.error("Error updating data:", err);
-      alert("เกิดข้อผิดพลาดในการอัปเดตข้อมูล");
     }
   };
 
@@ -109,12 +117,39 @@ const EditData = () => {
         );
         console.log("Response Data:", response.data);
 
-        // ถ้าข้อมูลที่ได้มาไม่ใช่ Array ให้แปลงหรือจัดการตามที่ต้องการ
+        // If the data is not an array, convert it to one
         if (Array.isArray(response.data)) {
           setData(response.data);
         } else {
-          setData([response.data]); // แปลงเป็น Array ถ้าเป็น Object
+          setData([response.data]); // Convert to array if it's an object
         }
+
+        // Update formData with the fetched data (assuming response.data contains the fields matching your form)
+        setFormData({
+          id: response.data.id || "",
+          machine_no: response.data.machine_no || "",
+          operation_no: response.data.operation_no || "",
+          line: response.data.line || "",
+          activity: response.data.activity || "",
+          tag_type: response.data.tag_type || "",
+          ctag_level: response.data.ctag_level || "",
+          problem_type: response.data.problem_type || "",
+          komarigoto: response.data.komarigoto || "",
+          problem_topic: response.data.problem_topic || "",
+          counter_measure: response.data.counter_measure || "",
+          created_by: response.data.created_by || "",
+          shift: response.data.shift || "",
+          group_pic: response.data.group_pic || "",
+          editor_pic: response.data.editor_pic || "",
+          receive_date: response.data.receive_date || "",
+          start_date: response.data.start_date || "",
+          finish_date: response.data.finish_date || "",
+          end_date: response.data.end_date || "",
+          gl_mt2: response.data.gl_mt2 || "",
+          gl_prod2: response.data.gl_prod2 || "",
+          date_prosign: response.data.date_prosign || "",
+          date_mtsign: response.data.date_mtsign || "",
+        });
       } catch (err) {
         setError(err.message);
       } finally {
@@ -160,10 +195,7 @@ const EditData = () => {
           </div>
 
           <div className={styles.gridHeaderItem3}>
-            <button
-              className={styles.gridHeaderButton}
-              onClick={() => navigate("/")}
-            >
+            <button className={styles.gridHeaderButton} onClick={handleSubmit}>
               <FontAwesomeIcon icon={faSave} size="2x" />
             </button>
           </div>
@@ -179,12 +211,7 @@ const EditData = () => {
                 No. {item.id}
               </span>
             </p>
-            <form
-              className={`${styles.gridContainer} ${
-                item.tag_type === "RED" ? styles.forRedBackgroundColor : ""
-              }`}
-              onSubmit={handleSubmit}
-            >
+            <form className={`${styles.gridContainer}`}>
               {/* Section 1 */}
               <div className={styles.formGroupSection1}>
                 <div className={styles.formSubGroup1Section1}>
@@ -196,87 +223,172 @@ const EditData = () => {
                     <input
                       id="machine_no"
                       className={` ${styles.formInput}`}
-                      value={item.machine_no || "ไม่มีข้อมูล"}
+                      value={formData.machine_no || "ไม่มีข้อมูล"}
                       type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, machine_no: e.target.value })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
+
+                  {/* Line */}
+                  <input
+                    id="line"
+                    className={styles.formInput}
+                    value={formData.line || "ไม่มีข้อมูล"}
+                    type="hidden"
+                    onChange={handleChange}
+                  />
+
                   {/* Activity */}
                   <div className={styles.formSubGroup1Section1Row2}>
                     <p className={styles.textLabel}>Activity : </p>
-                    <input
+                    <select
                       id="activity"
-                      className={` ${styles.formInput}`}
-                      value={item.activity || "ไม่มีข้อมูล"}
-                      type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, activity: e.target.value })
-                      }
-                    />
+                      className={`${styles.formSelect}`}
+                      value={formData.activity || ""}
+                      onChange={handleChange}
+                    >
+                      <option
+                        className={`${styles.labelOption} ${styles.placeholderOption}`}
+                        value=""
+                        disabled
+                      >
+                        เลือก Activity
+                      </option>
+                      <option
+                        className={styles.labelOption}
+                        value="Daily Check"
+                      >
+                        Daily Check
+                      </option>
+                      <option
+                        className={styles.labelOption}
+                        value="Deep Cleaning"
+                      >
+                        Deep Cleaning
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <div className={styles.formSubGroup2Section1}>
                   {/* Tag Type */}
                   <div className={styles.formSubGroup2Section1Row1}>
                     <p className={styles.textLabel}>ประเภท TAG: </p>
-                    <input
+                    <select
                       id="tag_type"
-                      className={` ${styles.formInput}`}
-                      value={item.tag_type || "ไม่มีข้อมูล"}
-                      type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, tag_type: e.target.value })
-                      }
-                    />
+                      className={`${styles.formSelect}`}
+                      value={formData.tag_type || ""}
+                      onChange={handleChange}
+                    >
+                      <option
+                        className={`${styles.labelOption} ${styles.placeholderOption}`}
+                        value=""
+                        disabled
+                      >
+                        เลือกประเภท TAG
+                      </option>
+                      <option className={styles.labelOption} value="WHITE">
+                        WHITE
+                      </option>
+                      <option className={styles.labelOption} value="RED">
+                        RED
+                      </option>
+                      <option className={styles.labelOption} value="Challenge">
+                        Challenge
+                      </option>
+                    </select>
                   </div>
+
                   {/* C TAG level */}
-                  <div className={styles.formSubGroup2Section1Row2}>
-                    <p className={styles.textLabel}>TAG Level : </p>
-                    <input
-                      id="ctag_level"
-                      className={` ${styles.formInput}`}
-                      value={item.ctag_level || "ไม่มีข้อมูล"}
-                      type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, ctag_level: e.target.value })
-                      }
-                    />
-                  </div>
+                  {formData.tag_type === "Challenge" && (
+                    <div className={styles.formSubGroup2Section1Row2}>
+                      <p className={styles.textLabel}>TAG Level : </p>
+                      <select
+                        id="ctag_level"
+                        className={`${styles.formSelect}`}
+                        value={formData.ctag_level || ""}
+                        onChange={handleChange}
+                      >
+                        <option
+                          className={`${styles.labelOption} ${styles.placeholderOption}`}
+                          value=""
+                          disabled
+                        >
+                          เลือก TAG Level
+                        </option>
+                        <option className={styles.labelOption} value="A">
+                          A
+                        </option>
+                        <option className={styles.labelOption} value="B">
+                          B
+                        </option>
+                        <option className={styles.labelOption} value="C">
+                          C
+                        </option>
+                      </select>
+                    </div>
+                  )}
                 </div>
+
                 <div className={styles.formSubGroup3Section1}>
                   {/* problem_type */}
                   <div className={styles.formSubGroup3Section1Row1}>
                     <p className={styles.textLabel}>ประเภทปัญหา : </p>
-                    <input
+                    <select
                       id="problem_type"
-                      className={` ${styles.formInput}`}
-                      value={item.problem_type || "ไม่มีข้อมูล"}
-                      type="text"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          problem_type: e.target.value,
-                        })
-                      }
-                    />
+                      className={`${styles.formSelect}`}
+                      value={formData.problem_type || ""}
+                      onChange={handleChange}
+                    >
+                      <option
+                        className={`${styles.labelOption} ${styles.placeholderOption}`}
+                        value=""
+                        disabled
+                      >
+                        ประเภทปัญหา
+                      </option>
+                      <option className={styles.labelOption} value="Fault item">
+                        Fault item
+                      </option>
+                      <option className={styles.labelOption} value="Komarigoto">
+                        Komarigoto
+                      </option>
+                    </select>
                   </div>
+
                   {/* Komarigoto */}
-                  <div className={styles.formSubGroup3Section1Row2}>
-                    <p className={styles.textLabel}>Komarigoto : </p>
-                    <input
-                      id="komarigoto"
-                      className={` ${styles.formInput}`}
-                      style={{ color: item.komarigoto ? "black" : "red" }}
-                      value={item.komarigoto || "-"}
-                      type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, komarigoto: e.target.value })
-                      }
-                    />
-                  </div>
+                  {formData.problem_type === "Komarigoto" && (
+                    <div className={styles.formSubGroup3Section1Row2}>
+                      <p className={styles.textLabel}>Komarigoto : </p>
+                      <select
+                        id="komarigoto"
+                        className={`${styles.formSelect}`}
+                        value={formData.komarigoto || ""}
+                        onChange={handleChange}
+                      >
+                        <option
+                          className={`${styles.labelOption} ${styles.placeholderOption}`}
+                          value=""
+                          disabled
+                        >
+                          Komarigoto
+                        </option>
+                        <option
+                          className={styles.labelOption}
+                          value="ตรวจสอบยาก"
+                        >
+                          ตรวจสอบยาก
+                        </option>
+                        <option className={styles.labelOption} value="4S ยาก">
+                          4S ยาก
+                        </option>
+                        <option className={styles.labelOption} value="ทำงานยาก">
+                          ทำงานยาก
+                        </option>
+                      </select>
+                    </div>
+                  )}
                 </div>
+
                 <div className={styles.formSubGroup4Section1}>
                   {/* Problem Topic */}
                   <div className={styles.formSubGroup4Section1Row1}>
@@ -284,13 +396,8 @@ const EditData = () => {
                     <textarea
                       id="problem_topic"
                       className={styles.textDataArea}
-                      value={item.problem_topic}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          problem_topic: e.target.value,
-                        })
-                      }
+                      value={formData.problem_topic}
+                      onChange={handleChange}
                     />
                   </div>
                   {/* Counter Measure */}
@@ -302,13 +409,8 @@ const EditData = () => {
                       id="counter_measure"
                       className={styles.textDataArea}
                       style={{ color: item.counter_measure ? "black" : "red" }}
-                      value={item.counter_measure || "-"}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          counter_measure: e.target.value,
-                        })
-                      }
+                      value={formData.counter_measure || "-"}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -323,11 +425,9 @@ const EditData = () => {
                       id="created_by"
                       className={` ${styles.formInput}`}
                       style={{ color: item.created_by ? "black" : "red" }}
-                      value={item.created_by || "-"}
+                      value={formData.created_by || "-"}
                       type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, created_by: e.target.value })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
                   {/* Start Date */}
@@ -336,11 +436,9 @@ const EditData = () => {
                     <input
                       id="start_date"
                       className={` ${styles.formInput}`}
-                      value={item.start_date || "ไม่มีข้อมูล"}
+                      value={formatDate(formData.start_date)}
                       type="date"
-                      onChange={(e) =>
-                        setFormData({ ...formData, start_date: e.target.value })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -351,11 +449,9 @@ const EditData = () => {
                     <input
                       id="group_pic"
                       className={` ${styles.formInput}`}
-                      value={item.group_pic || "ไม่มีข้อมูล"}
+                      value={formData.group_pic || "ไม่มีข้อมูล"}
                       type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, group_pic: e.target.value })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
                   <div className={styles.formSubGroup6Section1Row2}>
@@ -364,11 +460,9 @@ const EditData = () => {
                       id="editor_pic"
                       className={` ${styles.formInput}`}
                       style={{ color: item.editor_pic ? "black" : "red" }}
-                      value={item.editor_pic || "-"}
+                      value={formData.editor_pic || "-"}
                       type="text"
-                      onChange={(e) =>
-                        setFormData({ ...formData, editor_pic: e.target.value })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -379,30 +473,20 @@ const EditData = () => {
                     <input
                       id="receive_date"
                       className={` ${styles.formInput}`}
-                      value={item.receive_date || "ไม่มีข้อมูล"}
+                      value={formatDate(formData.receive_date)}
                       type="date"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          receive_date: e.target.value,
-                        })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
-                  {/* End Date */}
+                  {/* Finish Date */}
                   <div className={styles.formSubGroup7Section1Row2}>
                     <p className={styles.textLabel}>วันที่กำหนดเสร็จ : </p>
                     <input
                       id="finish_date"
                       className={` ${styles.formInput}`}
-                      value={item.finish_date || "ไม่มีข้อมูล"}
+                      value={formatDate(formData.finish_date)}
                       type="date"
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          finish_date: e.target.value,
-                        })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -413,11 +497,9 @@ const EditData = () => {
                     <input
                       id="end_date"
                       className={` ${styles.formInput}`}
-                      value={item.end_date || "ไม่มีข้อมูล"}
+                      value={formatDate(formData.end_date)}
                       type="date"
-                      onChange={(e) =>
-                        setFormData({ ...formData, end_date: e.target.value })
-                      }
+                      onChange={handleChange}
                     />
                   </div>
                   <div className={styles.formSubGroup8Section1Row2}></div>
@@ -476,25 +558,20 @@ const EditData = () => {
                         <img
                           className={styles.imgGlProdSign}
                           src={
-                            item.gl_prod2
-                              ? `../../assets/images/sign/${item.gl_prod2}`
-                              : { noSignPic }
+                            formData.gl_prod2
+                              ? require(`../../assets/images/sign/${formData.gl_prod2}`)
+                              : noSignPic
                           }
-                          alt={noSignPic}
+                          alt={"gl_prod2 Sign"}
                         />
                       </div>
                       <div className={styles.formGlProdDate}>
                         <input
                           id="date_prosign"
                           className={` ${styles.formInput}`}
-                          value={item.date_prosign || "ไม่มีข้อมูล"}
+                          value={formatDate(formData.date_prosign)}
                           type="date"
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              date_prosign: e.target.value,
-                            })
-                          }
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -506,25 +583,20 @@ const EditData = () => {
                         <img
                           className={styles.imgGlmtSign}
                           src={
-                            item.gl_mt2
-                              ? `../../assets/images/sign/${item.gl_mt2}`
-                              : { noSignPic }
+                            formData.gl_mt2
+                              ? require(`../../assets/images/sign/${formData.gl_mt2}`)
+                              : noSignPic
                           }
-                          alt={noSignPic}
+                          alt={"gl_mt2 Sign"}
                         />
                       </div>
                       <div className={styles.formGlmtDate}>
                         <input
                           id="date_mtsign"
                           className={` ${styles.formInput}`}
-                          value={item.date_mtsign || "ไม่มีข้อมูล"}
+                          value={formatDate(formData.date_mtsign)}
                           type="date"
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              date_mtsign: e.target.value,
-                            })
-                          }
+                          onChange={handleChange}
                         />
                       </div>
                     </div>

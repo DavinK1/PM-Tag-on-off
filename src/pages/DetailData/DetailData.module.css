@@ -115,6 +115,26 @@
   background-color: #ffd3d3;
 }
 
+.forColorTagTypeRed {
+  background-color: #ffd3d3;
+  border-radius: 5px;
+  color: crimson;
+  font-weight: 700;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: fit-content;
+}
+
+.forColorTagTypeYellow {
+  background-color: #fff8d3;
+  border-radius: 5px;
+  color: #ffbf00;
+  font-weight: 700;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: fit-content;
+}
+
 /* Section 1 */
 .formGroupSection1 {
   display: grid;

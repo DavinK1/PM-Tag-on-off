@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import styles from "./EditData.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 
-import SignPic from "../../assets/images/sign/sign-example.png";
+import noSignPic from "../../assets/images/sign/noSign-example.jpg";
 
 const EditData = () => {
   const navigate = useNavigate();
@@ -17,11 +18,11 @@ const EditData = () => {
   const { id } = useParams(); // ดึง id จาก URL params
   const [data, setData] = useState(null); // สถานะเพื่อเก็บข้อมูลที่ดึงมา
   const [loading, setLoading] = useState(true); // สถานะการโหลด
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(true); // สถานะการโหลด
 
   // State สำหรับ form
   const [formData, setFormData] = useState({
-    line: "",
     machine_no: "",
     operation_no: "",
     activity: "",
@@ -39,7 +40,66 @@ const EditData = () => {
     start_date: "",
     finish_date: "",
     end_date: "",
+    gl_mt2: "",
+    gl_prod2: "",
   });
+
+  // ฟังก์ชันสำหรับ handle การเปลี่ยนแปลงใน form
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    if (!formData.machine_no) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "กรุณากรอกข้อมูลในช่อง Machine No.",
+      });
+      return;
+    }
+
+    if (!formData.created_by) {
+      Swal.fire({
+        icon: "warning",
+        title: "Warning",
+        text: "กรุณากรอกข้อมูลในช่อง ผู้แจ้งปัญหา",
+      });
+      return;
+    }
+
+    e.preventDefault(); // ป้องกันการรีเฟรชหน้า
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/updatetransaction_logs/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      Swal.fire({
+        icon: "success",
+        title: "สำเร็จ!",
+        text: "ข้อมูลถูกเพิ่มเรียบร้อย!",
+        confirmButtonColor: "#3085d6",
+      });
+      console.log("Update successful:", response.data);
+      alert("อัปเดตข้อมูลสำเร็จ");
+      navigate("/"); // นำทางกลับไปหน้าหลักหลังอัปเดตสำเร็จ
+    } catch (err) {
+      console.error("Error updating data:", err);
+      alert("เกิดข้อผิดพลาดในการอัปเดตข้อมูล");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,7 +149,7 @@ const EditData = () => {
             <button
               className={styles.gridHeaderButton}
               onClick={() => navigate(-1)}
-              aria-label="Go back to the previous page"
+              aria-label="กลับไปที่หน้าก่อนหน้า"
             >
               <FontAwesomeIcon icon={faCircleLeft} size="2x" />
             </button>
@@ -104,7 +164,7 @@ const EditData = () => {
               className={styles.gridHeaderButton}
               onClick={() => navigate("/")}
             >
-              <FontAwesomeIcon icon={faEdit} size="2x" />
+              <FontAwesomeIcon icon={faSave} size="2x" />
             </button>
           </div>
         </div>
@@ -123,6 +183,7 @@ const EditData = () => {
               className={`${styles.gridContainer} ${
                 item.tag_type === "RED" ? styles.forRedBackgroundColor : ""
               }`}
+              onSubmit={handleSubmit}
             >
               {/* Section 1 */}
               <div className={styles.formGroupSection1}>
@@ -137,6 +198,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.machine_no || "ไม่มีข้อมูล"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, machine_no: e.target.value })
+                      }
                     />
                   </div>
                   {/* Activity */}
@@ -147,6 +211,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.activity || "ไม่มีข้อมูล"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, activity: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -159,6 +226,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.tag_type || "ไม่มีข้อมูล"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, tag_type: e.target.value })
+                      }
                     />
                   </div>
                   {/* C TAG level */}
@@ -169,6 +239,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.ctag_level || "ไม่มีข้อมูล"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, ctag_level: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -181,6 +254,12 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.problem_type || "ไม่มีข้อมูล"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          problem_type: e.target.value,
+                        })
+                      }
                     />
                   </div>
                   {/* Komarigoto */}
@@ -192,6 +271,9 @@ const EditData = () => {
                       style={{ color: item.komarigoto ? "black" : "red" }}
                       value={item.komarigoto || "-"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, komarigoto: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -203,6 +285,12 @@ const EditData = () => {
                       id="problem_topic"
                       className={styles.textDataArea}
                       value={item.problem_topic}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          problem_topic: e.target.value,
+                        })
+                      }
                     />
                   </div>
                   {/* Counter Measure */}
@@ -215,6 +303,12 @@ const EditData = () => {
                       className={styles.textDataArea}
                       style={{ color: item.counter_measure ? "black" : "red" }}
                       value={item.counter_measure || "-"}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          counter_measure: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -231,6 +325,9 @@ const EditData = () => {
                       style={{ color: item.created_by ? "black" : "red" }}
                       value={item.created_by || "-"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, created_by: e.target.value })
+                      }
                     />
                   </div>
                   {/* Start Date */}
@@ -241,6 +338,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.start_date || "ไม่มีข้อมูล"}
                       type="date"
+                      onChange={(e) =>
+                        setFormData({ ...formData, start_date: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -253,6 +353,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.group_pic || "ไม่มีข้อมูล"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, group_pic: e.target.value })
+                      }
                     />
                   </div>
                   <div className={styles.formSubGroup6Section1Row2}>
@@ -263,6 +366,9 @@ const EditData = () => {
                       style={{ color: item.editor_pic ? "black" : "red" }}
                       value={item.editor_pic || "-"}
                       type="text"
+                      onChange={(e) =>
+                        setFormData({ ...formData, editor_pic: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -275,6 +381,12 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.receive_date || "ไม่มีข้อมูล"}
                       type="date"
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          receive_date: e.target.value,
+                        })
+                      }
                     />
                   </div>
                   {/* End Date */}
@@ -285,6 +397,12 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.finish_date || "ไม่มีข้อมูล"}
                       type="date"
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          finish_date: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -297,6 +415,9 @@ const EditData = () => {
                       className={` ${styles.formInput}`}
                       value={item.end_date || "ไม่มีข้อมูล"}
                       type="date"
+                      onChange={(e) =>
+                        setFormData({ ...formData, end_date: e.target.value })
+                      }
                     />
                   </div>
                   <div className={styles.formSubGroup8Section1Row2}></div>
@@ -354,8 +475,12 @@ const EditData = () => {
                       <div className={styles.formGlProdSign}>
                         <img
                           className={styles.imgGlProdSign}
-                          src={SignPic}
-                          alt={SignPic}
+                          src={
+                            item.gl_prod2
+                              ? `../../assets/images/sign/${item.gl_prod2}`
+                              : { noSignPic }
+                          }
+                          alt={noSignPic}
                         />
                       </div>
                       <div className={styles.formGlProdDate}>
@@ -364,6 +489,12 @@ const EditData = () => {
                           className={` ${styles.formInput}`}
                           value={item.date_prosign || "ไม่มีข้อมูล"}
                           type="date"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              date_prosign: e.target.value,
+                            })
+                          }
                         />
                       </div>
                     </div>
@@ -374,8 +505,12 @@ const EditData = () => {
                       <div className={styles.formGlmtSign}>
                         <img
                           className={styles.imgGlmtSign}
-                          src={SignPic}
-                          alt={SignPic}
+                          src={
+                            item.gl_mt2
+                              ? `../../assets/images/sign/${item.gl_mt2}`
+                              : { noSignPic }
+                          }
+                          alt={noSignPic}
                         />
                       </div>
                       <div className={styles.formGlmtDate}>
@@ -384,6 +519,12 @@ const EditData = () => {
                           className={` ${styles.formInput}`}
                           value={item.date_mtsign || "ไม่มีข้อมูล"}
                           type="date"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              date_mtsign: e.target.value,
+                            })
+                          }
                         />
                       </div>
                     </div>

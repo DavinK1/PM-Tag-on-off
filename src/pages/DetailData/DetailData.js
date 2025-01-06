@@ -118,7 +118,13 @@ const EditData = () => {
                 <div className={styles.formSubGroup1Section1}>
                   <div className={styles.formSubGroup1Section1Row1}>
                     <p className={styles.textLabel}>TAG แจ้งปัญหา : </p>
-                    <p className={styles.textData}>
+                    <p
+                      className={`${styles.textData} ${
+                        item.tag_type === "RED" ? styles.forColorTagTypeRed : ""
+                      } ${
+                        item.tag_type === "YELLOW" ? styles.forColorTagTypeYellow : ""
+                      }`}
+                    >
                       {item.tag_type || "ไม่มีข้อมูล"}
                     </p>
                   </div>

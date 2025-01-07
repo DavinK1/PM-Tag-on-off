@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import styles from "./TakePhoto.module.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
@@ -119,8 +118,9 @@ const TakePhoto = () => {
     navigate(-1); // กลับไปหน้าก่อนหน้า
   };
 
-  const handleRefresh = () => {
-    navigate(0);
+  const handleSubmit = () => {
+    // ส่งข้อมูลไปยังหน้า AddData
+    navigate("/adddata", { state: { images } });
   };
 
   const deleteImage = (index) => {
@@ -198,7 +198,7 @@ const TakePhoto = () => {
         )}
         {images.length > 0 && (
           <div className={styles.submitButtonContainer}>
-            <button className={styles.submitButton}>
+            <button className={styles.submitButton} onClick={handleSubmit}>
               บันทึก <FontAwesomeIcon icon={faFloppyDisk} size="2x" />
             </button>
           </div>

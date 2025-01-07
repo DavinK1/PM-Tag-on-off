@@ -17,7 +17,7 @@ const Homepage = () => {
         <div className={styles.gridContainer}>
           {/* คอลัมน์ 1 */}
           <div className={styles.gridItem}>
-            <div className={styles.typeText}>( W )</div>
+            <div className={styles.typeText}>( K )</div>
             <button
               className={styles.button}
               onClick={() => navigate("/g6main")}
@@ -28,7 +28,7 @@ const Homepage = () => {
 
           {/* คอลัมน์ 2 */}
           <div className={styles.gridItem}>
-            <div className={styles.typeText}>( K )</div>
+            <div className={styles.typeText}>( M )</div>
             <button
               className={styles.button}
               onClick={() => navigate("/g6block")}

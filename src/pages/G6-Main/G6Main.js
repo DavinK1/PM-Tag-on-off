@@ -18,7 +18,8 @@ const G6Main = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  // ฟังก์ชันสำหรับเรียกข้อมูล API
+  const fetchData = () => {
     axios
       .get("http://localhost:4000/transaction_logs")
       .then((response) => {
@@ -27,7 +28,16 @@ const G6Main = () => {
       .catch((error) => {
         console.error("เกิดปัญในการเรียกใช้ข้อมูล:", error);
       });
+  };
+
+  // เรียกใช้ fetchData ครั้งแรกเมื่อ component โหลด
+  useEffect(() => {
+    fetchData();
   }, []);
+
+  const handleRefresh = () => {
+    fetchData();
+  };
 
   return (
     <div className={styles.container}>
@@ -43,10 +53,7 @@ const G6Main = () => {
             <p>รายการแจ้งซ่อม</p>
           </div>
           <div className={styles.gridHeaderItem2}>
-            <button
-              className={styles.gridHeaderButton}
-              onClick={() => navigate("/")}
-            >
+            <button className={styles.gridHeaderButton} onClick={handleRefresh}>
               <FontAwesomeIcon icon={faArrowsRotate} size="2x" />
             </button>
             <button

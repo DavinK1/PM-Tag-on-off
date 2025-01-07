@@ -22,10 +22,10 @@ client
   .catch((err) => console.error("เกิดเชื่อมต่อเกิดข้อผิดพลาด", err.stack));
 
 // ใช้ CORS เพื่อให้สามารถใช้ API ข้าม Ports ได้
-router.use(cors());
+router.use(cors({ origin: "*" }));
 router.use(express.json());
 
-// หน้า Hello เอาไว้ TEST ตัว API
+// หน้า Hello Index API
 router.get("/", (req, res) => {
   res.send("Hello World!");
 });

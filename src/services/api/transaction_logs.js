@@ -1,5 +1,6 @@
 const express = require("express");
 const { Client } = require("pg");
+const multer = require("multer");
 const router = express();
 
 // เชื่อมต่อกับ PostgreSQL

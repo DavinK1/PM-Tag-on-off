@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styles from "./AddData.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -12,6 +12,7 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const AddData = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // สำหรับเรียกใช้ API ทั้งหมด
   const [data, setData] = useState([]);
@@ -23,6 +24,10 @@ const AddData = () => {
 
   // สำหรับดึงข้อมูลในตาราง master_mc_g6m ในการเช็คข้อมูล
   const [lineTitleData, setLineTitleData] = useState([]);
+
+  // ใช้สำหรับรูปภาพ
+  const [image, setImage] = useState(null);
+  const [imageCount, setImageCount] = useState(0);
 
   // State สำหรับ form
   const [formData, setFormData] = useState({
@@ -44,7 +49,13 @@ const AddData = () => {
     start_date: "",
     finish_date: "",
     end_date: "",
+    attachment: "",
   });
+
+  // เมื่อผู้ใช้คลิกที่ไอคอนกล้อง
+  const handleCameraClick = () => {
+    navigate("/TakePhoto");
+  };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -59,8 +70,12 @@ const AddData = () => {
     }));
   };
 
-  // ตรวจสอบค่า formData ก่อนส่ง
-  console.log("FormData: ", formData);
+
+  useEffect(() => {
+    if (image) {
+      setImageCount((prevCount) => prevCount + 1);
+    }
+  }, [image]);
 
   const handleSubmit = async (e) => {
     if (!formData.machine_no) {
@@ -585,8 +600,10 @@ const AddData = () => {
 
             {/* จำนวนรูปและ Icon กล้อง */}
             <div className={`${styles.imageInfo} ${styles.formGroup}`}>
-              <span className="imageText">จำนวนรูปทั้งหมด : 0 รูป</span>
+              <span className={styles.ImageText}>จำนวนรูปทั้งหมด : 0 รูป</span>
               <FontAwesomeIcon
+                id="attachment"
+                onClick={handleCameraClick} // เรียกใช้ฟังก์ชันถ่ายภาพเมื่อคลิก
                 className={styles.cameraIcon}
                 icon={faCamera}
                 size="2x"

@@ -1,0 +1,267 @@
+.container {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  background-color: #fff;
+}
+
+/* สำหรับ header */
+.header {
+  background-color: #1a2574;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px 30px;
+}
+
+.gridheader {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.gridHeaderItem1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  gap: 40px;
+}
+
+.gridHeaderItem2 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  color: white;
+  gap: 30px;
+}
+
+.gridHeaderButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffea00;
+  color: #001a66;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gridHeaderButton:hover {
+  background-color: #ffd633;
+}
+
+.gridHeaderItem1 p,
+.gridHeaderItem2 p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+}
+
+.gridHeaderItem1 p:hover,
+.gridHeaderItem2 p:hover {
+  color: #ffd633;
+}
+
+/* สำหรับ Container กล้อง */
+.takePhotoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  height: 100%;
+}
+
+.takePhotoHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.takePhotoMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 500px;
+}
+
+.videoContainer {
+  width: 100%;
+}
+
+video {
+  width: 100%;
+}
+
+.takePhotoButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  gap: 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #001a66;
+  color: #fff;
+}
+
+.takePhotoButton:hover {
+  background-color: #00289f;
+}
+
+.photoPreview {
+  padding: 20px;
+  width: 1000px;
+}
+
+.photoPreview h2 {
+  color: #001a66;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+.imageGallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.imageItem {
+  position: relative;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.imageItem img {
+  width: auto;
+  height: auto;
+  object-fit: cover; /* รักษาอัตราส่วนของรูปภาพ */
+  border-radius: 8px;
+}
+
+.imageNumber {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: #00000099;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.deleteButton {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 14px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #d81d1d;
+}
+
+/* สำหรับ CSS สลับกล้อง */
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  gap: 10px;
+  background-color: #1a2574;
+  width: 100%;
+}
+
+.toggleSwitch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #ccc;
+  transition: background-color 0.3s;
+}
+
+.frontBackground {
+  background-color: #4caf50; /* สีเขียว */
+}
+
+.rearBackground {
+  background-color: #f44336; /* สีแดง */
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.front {
+  transform: translateX(2px);
+}
+
+.rear {
+  transform: translateX(26px);
+}
+
+.submitButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  gap: 10px;
+  margin: 10px;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2eb059;
+  gap: 10px;
+}
+.submitButton:hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2eb059;
+  gap: 10px;
+}

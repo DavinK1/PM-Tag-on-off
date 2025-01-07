@@ -11,6 +11,7 @@ import G6Camshaft from "./pages/G6-Camshaft/G6Camshaft";
 import AddData from "./pages/AddData/AddData";
 import EditData from "./pages/EditData/EditData";
 import DetailData from "./pages/DetailData/DetailData";
+import TakePhoto from "./pages/TakePhoto/TakePhoto";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/adddata" element={<AddData />} />
       <Route path="/editdata/:id" element={<EditData />} />
       <Route path="/detaildata/:id" element={<DetailData />} />
+      <Route path="/takephoto" element={<TakePhoto />} />
     </Routes>
   );
 }

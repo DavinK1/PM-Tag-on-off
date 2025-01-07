@@ -12,7 +12,6 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const AddData = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   // สำหรับเรียกใช้ API ทั้งหมด
   const [data, setData] = useState([]);
@@ -26,8 +25,8 @@ const AddData = () => {
   const [lineTitleData, setLineTitleData] = useState([]);
 
   // ใช้สำหรับรูปภาพ
-  const [image, setImage] = useState(null);
-  const [imageCount, setImageCount] = useState(0);
+  const location = useLocation();
+  const { images = [] } = location.state || [];
 
   // State สำหรับ form
   const [formData, setFormData] = useState({
@@ -70,12 +69,15 @@ const AddData = () => {
     }));
   };
 
-
+  // เมื่อได้รับข้อมูล images ให้ตั้งค่า attachment เป็นข้อมูลรูปภาพที่ถ่าย
   useEffect(() => {
-    if (image) {
-      setImageCount((prevCount) => prevCount + 1);
+    if (images && images.length > 0) {
+      setFormData((prevData) => ({
+        ...prevData,
+        attachment: images.map((image) => image.image), // เก็บ dataUrl ของรูปภาพทั้งหมดใน attachment
+      }));
     }
-  }, [image]);
+  }, [images]); // เมื่อ images เปลี่ยนแปลง
 
   const handleSubmit = async (e) => {
     if (!formData.machine_no) {
@@ -134,6 +136,7 @@ const AddData = () => {
         start_date: "",
         finish_date: "",
         end_date: "",
+        attachment: "",
       });
     } catch (error) {
       console.error("Error adding data:", error);
@@ -170,7 +173,7 @@ const AddData = () => {
     setFormData((prev) => ({ ...prev, receive_date: currentDate }));
   }, []);
 
-  // เมื่อเลือก machineNo ให้ทำการตรวจสอบว่า line_title ตรงกับเครื่องที่เลือกหรือไม่
+  // เมื่อเลือกเข้ามาที่หน้านี้ให้ Filled ตัว Line ด้วย line_title ที่ fetch มาจาก API http://localhost:4000/master_mc_g6m/line_title_g6_main
   useEffect(() => {
     if (formData.machine_no) {
       const lineData = lineTitleData.find(
@@ -238,8 +241,8 @@ const AddData = () => {
                 type="text"
                 id="line"
                 className={styles.formInput}
-                value={formData.line}
-                onChange={handleChange}
+                value={formData.line} // กรอกอัตโนมัติจาก formData.line
+                onChange={handleChange} // ใช้ในการอัปเดตค่า line หากผู้ใช้แก้ไข
                 required
               />
             </div>
@@ -600,7 +603,9 @@ const AddData = () => {
 
             {/* จำนวนรูปและ Icon กล้อง */}
             <div className={`${styles.imageInfo} ${styles.formGroup}`}>
-              <span className={styles.ImageText}>จำนวนรูปทั้งหมด : 0 รูป</span>
+              <span className={styles.ImageText}>
+                จำนวนรูปทั้งหมด : {images.length} รูป {/* อัปเดตจำนวนรูปภาพ */}
+              </span>
               <FontAwesomeIcon
                 id="attachment"
                 onClick={handleCameraClick} // เรียกใช้ฟังก์ชันถ่ายภาพเมื่อคลิก

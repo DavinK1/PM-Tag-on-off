@@ -100,6 +100,7 @@ const AddData = () => {
         text: "ข้อมูลถูกเพิ่มเรียบร้อย!",
         confirmButtonColor: "#3085d6",
       });
+      // navigate(-1); // หรือไปยังหน้าอื่นที่ต้องการ
 
       setFormData({
         line: "",

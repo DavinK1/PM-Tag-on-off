@@ -1,18 +1,8 @@
 .container {
+  height: 800px;
   background-color: #001a66;
   color: #fff;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.container .textWeclome {
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #ffffff81;
-  border-radius: 15px;
-  padding: 30px;
-  width: 1000px;
-  margin: 10px 20px;
 }

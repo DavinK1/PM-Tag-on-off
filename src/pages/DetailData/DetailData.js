@@ -192,7 +192,7 @@ const EditData = () => {
                         handleClickShowImage();
                       }}
                     >
-                      {item.attachment || "ไม่มีข้อมูล"}
+                      {item.attachment || "ไม่มีข้อมูลรูปภาพ"}
                       <FontAwesomeIcon
                         className={styles.searchProblemIcon}
                         icon={faSearch}

@@ -175,18 +175,18 @@ const AddData = () => {
 
   // เมื่อเลือกเข้ามาที่หน้านี้ให้ Filled ตัว Line ด้วย line_title ที่ fetch มาจาก API http://localhost:4000/master_mc_g6m/line_title_g6_main
   useEffect(() => {
-    if (formData.machine_no) {
-      const lineData = lineTitleData.find(
-        (item) => item.line_name === formData.machine_no
+    if (formData.line_title) {
+      const initialLineData = lineTitleData.find(
+        (item) => item.line_title === formData.line_title
       );
-      setFormData((prevData) => ({
-        ...prevData,
-        line: lineData ? lineData.line_title : "",
-      }));
-    } else {
-      setFormData((prevData) => ({ ...prevData, line: "" }));
+      if (initialLineData) {
+        setFormData((prevData) => ({
+          ...prevData,
+          machine_no: initialLineData.line_name,
+        }));
+      }
     }
-  }, [formData.machine_no, lineTitleData]);
+  }, []); // [] ทำให้ effect นี้ทำงานเพียงครั้งเดียวตอนโหลด
 
   useEffect(() => {
     setShowKomarigoto(formData.problem_type === "Komarigoto");
@@ -241,7 +241,7 @@ const AddData = () => {
                 type="text"
                 id="line"
                 className={styles.formInput}
-                value={formData.line} // กรอกอัตโนมัติจาก formData.line
+                value={"G6-Main"} // กรอกอัตโนมัติจาก formData.line
                 onChange={handleChange} // ใช้ในการอัปเดตค่า line หากผู้ใช้แก้ไข
                 required
               />
